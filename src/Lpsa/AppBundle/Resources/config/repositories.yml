@@ -1,0 +1,222 @@
+services:
+    app.direction.repository:
+        class: Lpsa\AppBundle\Repository\DirectionRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Direction']
+        lazy: true
+        
+    app.depot.repository:
+        class: Lpsa\AppBundle\Repository\DepotRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Depot']
+        lazy: true
+
+    app.gravite.repository:
+        class: Lpsa\AppBundle\Repository\GraviteRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Gravite']
+        lazy: true
+
+    app.fonction.repository:
+        class: Lpsa\AppBundle\Repository\FonctionRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Fonction']
+        lazy: true
+        
+    app.impactmediatique.repository:
+        class: Lpsa\AppBundle\Repository\ImpactMediatiqueRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\ImpactMediatique']
+        lazy: true
+
+    app.depotcategorie.repository:
+        class: Lpsa\AppBundle\Repository\DepotCategorieRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\DepotCategorie']
+        lazy: true
+
+    app.evenementstatut.repository:
+        class: Lpsa\AppBundle\Repository\EvenementStatutRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\EvenementStatut']
+        lazy: true
+        
+    app.impactclient.repository:
+        class: Lpsa\AppBundle\Repository\ImpactClientRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\ImpactClient']
+        lazy: true
+        
+    app.evenementcategorie.repository:
+        class: Lpsa\AppBundle\Repository\EvenementCategorieRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\EvenementCategorie']
+        lazy: true
+
+    app.evenement.repository:
+        class: Lpsa\AppBundle\Repository\EvenementRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Evenement']
+        lazy: true
+
+    app.evenement_action_progres.repository:
+        class: Lpsa\AppBundle\Repository\EvenementActionProgresRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\EvenementActionProgres']
+        lazy: true
+        
+    app.heuretravailcategorie.repository:
+        class: Lpsa\AppBundle\Repository\HeureTravailCategorieRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\HeureTravailCategorie']
+        lazy: true
+        
+    app.heuretravail.repository:
+        class: Lpsa\AppBundle\Repository\HeureTravailRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\HeureTravail']
+        lazy: true
+        
+    app.environnement.repository:
+        class: Lpsa\AppBundle\Repository\EnvironnementRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Environnement']
+        lazy: true
+        
+    app.dysfonctionnement.repository:
+        class: Lpsa\AppBundle\Repository\DysfonctionnementRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Dysfonctionnement']
+        lazy: true
+
+    app.responsableservice.repository:
+        class: Lpsa\AppBundle\Repository\ResponsableServiceRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\ResponsableService']
+        lazy: true
+        
+    app.typecorporel.repository:
+        class: Lpsa\AppBundle\Repository\TypeCorporelRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\TypeCorporel']
+        lazy: true
+        
+    app.corporel.repository:
+        class: Lpsa\AppBundle\Repository\CorporelRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Corporel']
+        lazy: true
+        
+    app.typemateriel.repository:
+        class: Lpsa\AppBundle\Repository\TypeMaterielRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\TypeMateriel']
+        lazy: true
+        
+    app.materiel.repository:
+        class: Lpsa\AppBundle\Repository\MaterielRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Materiel']
+        lazy: true
+        
+    app.typeenvironnement.repository:
+        class: Lpsa\AppBundle\Repository\TypeEnvironnementRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\TypeEnvironnement']
+        lazy: true
+        
+    app.evenementactionprogresstatus.repository:
+        class: Lpsa\AppBundle\Repository\EvenementActionProgresStatusRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\EvenementActionProgresStatus']
+        lazy: true
+        
+    app.departement.repository:
+        class: Lpsa\AppBundle\Repository\DepartementRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Departement']
+        lazy: true
+        
+    app.service.repository:
+        class: Lpsa\AppBundle\Repository\ServiceRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Service']
+        lazy: true
+
+    app.objectifdepot.repository:
+        class: Lpsa\AppBundle\Repository\ObjectifDepotRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\ObjectifDepot']
+        lazy: true
+        
+    app.exerciceurgence.repository:
+        class: Lpsa\AppBundle\Repository\ExerciceUrgenceRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\ExerciceUrgence']
+        lazy: true
+        
+    app.toolbox.repository:
+        class: Lpsa\AppBundle\Repository\ToolboxRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Toolbox']
+        lazy: true
+        
+    app.visite.repository:
+        class: Lpsa\AppBundle\Repository\VisiteRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Visite']
+        lazy: true
+        
+    app.objectifltirtrir.repository:
+        class: Lpsa\AppBundle\Repository\ObjectifLtirTrirRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\ObjectifLtirTrir']
+        lazy: true
+
+    app.piezometre.repository:
+        class: Lpsa\AppBundle\Repository\PiezometreRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Piezometre']
+        lazy: true
+
+    app.decanteur.repository:
+        class: Lpsa\AppBundle\Repository\DecanteurRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Decanteur']
+        lazy: true
+
+    app.laboratoire.repository:
+        class: Lpsa\AppBundle\Repository\LaboratoireRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Laboratoire']
+        lazy: true
+
+    app.indicateurTransport.repository:
+        class: Lpsa\AppBundle\Repository\IndicateurTransportRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\IndicateurTransport']
+        lazy: true
+
+    app.PAQSSSE.repository:
+        class: Lpsa\AppBundle\Repository\PAQSSSETransportRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\PAQSSSE']
+        lazy: true
+
+    app.paq3seGravite.repository:
+        class: Lpsa\AppBundle\Repository\Paq3seGraviteRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\Paq3seGravite']
+        lazy: true
+
+    app.fuiteProduit.repository:
+        class: Lpsa\AppBundle\Repository\FuiteProduitRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\FuiteProduit']
+        lazy: true
+
+    app.objectifKpihse.repository:
+        class: Lpsa\AppBundle\Repository\ObjectifKpihseRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Lpsa\AppBundle\Entity\ObjectifKpihse']
+        lazy: true

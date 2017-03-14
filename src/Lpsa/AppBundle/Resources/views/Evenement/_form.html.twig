@@ -1,0 +1,626 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+{% form_theme form 'LpsaAppBundle:Form:custom_type.html.twig' %}
+{% macro printErrors(errors) %}
+    <div>
+        <ul class="help-block list-unstyled">
+            {% for error in errors %}
+                <li class="text-danger">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}
+{% macro action_prototype(prototype,isNotProto = true) %}
+    <td>
+        {{ form_widget(prototype.action,{'attr' : {'readonly' : isNotProto }}) }} 
+        {% if prototype.action.vars.errors|length > 0 %}
+            {{ _self.printErrors(prototype.action.vars.errors) }}
+        {% endif %}
+    </td>
+    <td>
+        {% if isNotProto %}
+            {{ form_widget(prototype.responsableService,{'attr' : {'class' : 'select-readonly ' ~ prototype.responsableService.vars['attr']['class'] }}) }} 
+        {% else %}
+            {{ form_widget(prototype.responsableService) }} 
+        {% endif %}
+        {% if prototype.responsableService.vars.errors|length > 0 %}
+            {{ _self.printErrors(prototype.responsableService.vars.errors) }}
+        {% endif %}
+    </td>
+    <td>
+        {{ form_widget(prototype.delai) }} 
+        {% if prototype.delai.vars.errors|length > 0 %}
+            {{ _self.printErrors(prototype.delai.vars.errors) }}
+        {% endif %}
+    </td>
+    <td class="avancement-td">{{ form_widget(prototype.avancement) }} 
+        {% if prototype.avancement.vars.errors|length > 0 %}
+            {{ _self.printErrors(prototype.avancement.vars.errors) }}
+        {% endif %}
+    </td>
+    <td>{{ form_widget(prototype.observation) }} 
+        {% if prototype.observation.vars.errors|length > 0 %}
+            {{ _self.printErrors(prototype.observation.vars.errors) }}
+        {% endif %}
+    </td>
+    <td>{{ form_widget(prototype.evenementActionProgresStatus) }} 
+        {% if prototype.evenementActionProgresStatus.vars.errors|length > 0 %}
+            {{ _self.printErrors(prototype.evenementActionProgresStatus.vars.errors) }}
+        {% endif %}
+    </td>
+{% endmacro %}
+
+<div id="event-form">
+    {{ form_start(form,{'attr' : { 'id' : 'form-event','novalidate' : true}}) }}
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label" for="evenementRemonte">{{ 'form_label.evenement.redacteur'|trans }}</label>
+                <input type="text" id="evenementRemonte" class="form-control" value="{% if evenement.user %}{{ evenement.user.lastname ~ ' ' ~ evenement.user.firstname }}{% else %}{{ app.user.lastname ~ ' ' ~ app.user.firstname }}{% endif %}" disabled>
+            </div>
+        </div>        
+    </div>
+    {#  DEBUT BLOC EMMETRICE#}
+    <div class="block-group">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="group-field-title"><span>{{ 'form_title_group_field.evenement.entiteEmettrice'|trans }}</span></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-group">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        {{ form_row(form.userDeclarant) }} 
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        {{ form_row(form.dateEmission) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="">{{ 'form_title_group_field.evenement.depot'|trans }}</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(form.depotCategorie) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.depot) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.numeroEnregistrement) }} 
+        </div>
+    </div> 
+    {#  FIN BLOC EMMETRICE#}
+
+
+
+    {# <div class="row">
+         <div class="col-md-12"><div class="group-separator"></div></div>
+     </div> #}
+
+    {#        DEBUT FAIT#}
+    <div class="block-group">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="group-field-title"><span>{{ 'form_title_group_field.evenement.faits'|trans }}</span></h2>            
+            </div>
+        </div>
+        <div class="content-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6"> 
+                            {{ form_row(form.dateDesFaits) }}
+                        </div>
+                    </div>
+                </div>        
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_row(form.categorie) }}
+                </div>
+            </div>
+            <div class="row situation_dangereuse" {% if evenement.id and evenement.categorie.id == paramCategoriesId['situation_dangereuse'] %}style="display:block;"{% else %}style="display:none;"{% endif %}>
+                <div class="col-md-4">
+                    {{ form_row(form.typeSituationDangereuse) }}
+                </div>
+            </div>
+            <div class="row accident" {% if evenement.id and evenement.categorie.id == paramCategoriesId['accident'] %}style="display:block;"{% else %}style="display:none;"{% endif %}>
+                <div class="col-md-4">
+                    {{ form_row(form.typeAccident) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.descriptionFait) }}
+                </div>
+                <div class="col-md-6">
+                    <div class="uploadZone">
+                        <div class="list-file">
+                            <ul id="filesDescriptionFaitList" data-prototype="{{ form_widget(form.descriptionFaitPJs.vars.prototype)|e }}">
+                                {% for descriptionFaitPJ in form.descriptionFaitPJs %}
+                                    <li class="narration-li">
+                                        {% if descriptionFaitPJ.children['file'].vars.errors|length > 0 %}
+                                            <div>
+                                                <ul class="help-block list-unstyled">
+                                                    {% for error in descriptionFaitPJ.children['file'].vars.errors %}
+                                                        <li class="text-danger">
+                                                            {% if descriptionFaitPJ.children['file'].vars.data %}{{ descriptionFaitPJ.children['file'].vars.data.clientOriginalName }}<br/>{% endif %}
+                                                            <span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        {% elseif(descriptionFaitPJ.file.vars.data is null) %}
+                                            {{ form_widget(descriptionFaitPJ) }}
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="button-add-file">
+                            <label class="files-label-description">
+                                <span class="content-text"><span class="icon-upload"></span>Attacher une piéce jointe</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#        FIN FAIT#}
+
+
+    {# <div class="row">
+         <div class="col-md-12"><div class="group-separator"></div></div>
+     </div>#}
+
+
+    {#DEBUT ACTION CORRECTIVE#}
+    <div class="block-group">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="group-field-title"><span>{{ 'form_title_group_field.evenement.actionsCorrectivesImmediates'|trans }}</span></h2>
+            </div>
+        </div>
+        <div class="content-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6"> 
+                            {{ form_row(form.dateAction) }}
+                        </div>
+                    </div>
+                </div>        
+            </div> 
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.narration) }}
+                </div>
+                <div class="col-md-6">
+                    <div class="nolabel">
+                        <div class="uploadZone">
+                            <div class="list-file">
+                                <ul id="filesNarrationList" data-prototype="{{ form_widget(form.narrationPJs.vars.prototype)|e }}">
+                                    {% for narrationPJ in form.narrationPJs %}
+                                        <li class="narration-li">
+                                            {% if narrationPJ.children['file'].vars.errors|length > 0 %}
+                                                <div>
+                                                    <ul class="help-block list-unstyled">
+                                                        {% for error in narrationPJ.children['file'].vars.errors %}
+                                                            <li class="text-danger">
+                                                                {% if narrationPJ.children['file'].vars.data %}{{ narrationPJ.children['file'].vars.data.clientOriginalName }}<br/>{% endif %}
+                                                                <span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            {% elseif(narrationPJ.file.vars.data is null) %}
+                                                {{ form_widget(narrationPJ) }}
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="button-add-file">
+                                <label class="files-label-narration">
+                                    <span class="content-text"><span class="icon-upload"></span>Attacher une piéce jointe</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+
+        {#        FIN ACTION CORRECTIVE#}
+        {#<div class="row">
+            <div class="col-md-12"><div class="group-separator"></div></div>
+        </div>
+        #}
+        {#        DEBUT MATRICE#}
+        <div class="block-group">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="group-field-title"><span>{{ 'form_title_group_field.evenement.analyseParMatriceGravite'|trans }}</span></h2>
+                </div>
+            </div>
+            <div class="content-group">
+                {% set corporel = evenement.corporel %}
+                {% set isFatalite = false %}
+                {% set isAvecArretLti = false %}
+                {% set isSansArret = false %}
+                {% for key,corpId in lpsa_typecorporel_ids %}
+                    {% if corporel and corporel.typeCorporel.id == corpId['id'] and key == 'fatalite' %}
+                        {% set isFatalite = true %}
+                    {% endif %}
+                    {% if corporel and corporel.typeCorporel.id == corpId['id'] and key == 'avec_arret_lti' %}
+                        {% set isAvecArretLti = true %}
+                    {% endif %}
+                    {% if corporel and corporel.typeCorporel.id == corpId['id'] and key == 'sans_arret' %}
+                        {% set isSansArret = true %}
+                    {% endif %}
+                {% endfor %}
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                {{ form_row(form.typeCorporel) }}    
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="nolabel">
+                                    {{ form_row(form.corporel) }}   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" id="corporelValueContainer">
+                        <div id="numberInput">
+                            {{ form_row(form.nbreLpsa) }}                   
+                            {{ form_row(form.nbreContracte) }} 
+                            <div class="avec_arret_lti sans_arret fatalite" {% if evenement.id is not null and not isFatalite %}style="display:none;"{% endif %}>
+                                {{ form_row(form.nbreTiers) }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                {{ form_row(form.typeMateriel) }}     
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="nolabel">
+                                    {{ form_row(form.materiel) }}  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                {{ form_row(form.typeEnvironnement) }}      
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="nolabel">
+                                    {{ form_row(form.environnement) }}  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="nolabel" {% if evenement and evenement.environnement %}{% if evenement.environnement.id in environment1m3Ids %}{% else %}style="display: none;"{% endif %}{% endif %}>
+                                    {{ form_widget(form.nbreEnvironnement) }}    
+                                    {{ form_label(form.nbreEnvironnement) }}
+                                    {% if form.nbreEnvironnement.vars.errors|length > 0 %}
+                                        <div>
+                                            <ul class="help-block list-unstyled">
+                                                {% for error in form.nbreEnvironnement.vars.errors %}
+                                                    <li class="text-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}</li>
+                                                    {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div id="impact_mediatique">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_row(form.impactMediatique) }}                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                {{ form_row(form.impactClient) }}                     
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                {{ form_row(form.dysfonctionnement) }}                     
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#        FIN MATRICE#}
+
+        {# DEBUT RESUME GRAVITE #}
+        {% set displayConseqPotentielle = false %}
+        {% set displayConseqReelle = false %}
+        {% if evenement.categorie %}
+            {% if evenement.categorie.id in evenementcategorieIds.consequencePotentielle %}
+                {% set displayConseqPotentielle = true %}
+            {% else %}
+                {% set displayConseqReelle = true %}
+            {% endif %}
+        {% endif %}
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div id="consequencePotentielle" class="black-box consequence" {% if not displayConseqPotentielle %}style="display: none;"{% endif %}>
+                    <h3>{{ 'form_title_group_field.evenement.consequencePotentielle'|trans }}</h3>
+                    <p id="consequenceGravitePotentielle">{{ gravityAbstractLabel }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div id="consequenceReelle" class="red-box consequence" {% if not displayConseqReelle %}style="display: none;"{% endif %}>
+                    <h3>{{ 'form_title_group_field.evenement.consequenceReelle'|trans }}</h3>
+                    <p id="consequenceGraviteReelle">{{ gravityAbstractLabel }}</p>
+                </div>
+            </div>
+        </div>
+        {# FIN RESUME GRAVITE #}
+
+        {# <div class="row">
+             <div class="col-md-12"><div class="group-separator"></div></div>
+         </div>#}
+
+        {# DEBUT ENQUETE#}
+        <div class="block-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="group-field-title"><span>{{ 'form_title_group_field.evenement.enquete'|trans }}</span></h2>
+                </div>
+            </div>
+            <div class="content-group">
+                <div class="row"> 
+                    <div class="col-md-6"> 
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                {{ form_row(form.evenementEnquete.date) }}                   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-md-4">
+                        {{ form_row(form.evenementEnquete.commentaire) }}                   
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_row(form.evenementEnquete.causesImmediates) }}                   
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_row(form.evenementEnquete.causesFondamentales) }}                   
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-md-12">
+                        <div class="uploadZone">
+                            <div class="list-file">
+                                <ul id="filesEvenementEnqueteList" data-prototype="{{ form_widget(form.evenementEnquete.evenementEnquetePJs.vars.prototype)|e }}">
+                                    {% for evenementEnquetePJ in form.evenementEnquete.evenementEnquetePJs %}
+                                        <li class="narration-li">
+                                            {% if evenementEnquetePJ.children['file'].vars.errors|length > 0 %}
+                                                <div>
+                                                    <ul class="help-block list-unstyled">
+                                                        {% for error in evenementEnquetePJ.children['file'].vars.errors %}
+                                                            <li class="text-danger">
+                                                                {% if evenementEnquetePJ.children['file'].vars.data %}{{ evenementEnquetePJ.children['file'].vars.data.clientOriginalName }}<br/>{% endif %}
+                                                                <span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            {% elseif(evenementEnquetePJ.file.vars.data is null) %}
+                                                {{ form_widget(evenementEnquetePJ) }}
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="button-add-file">
+                                <label class="files-label-enquete">
+                                    <span class="content-text"><span class="icon-upload"></span>Attacher une piéce jointe</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {#        FIN ENQUETE#}
+            {# <div class="row">
+                 <div class="col-md-12"><div class="group-separator"></div></div>
+             </div>#}
+
+
+            {#    DEBUT PROGRES#}
+            <div class="block-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="group-field-title"><span>{{ 'form_title_group_field.evenement.actionProgres'|trans }}</span></h2>
+                    </div>
+                </div>
+                <div class="content-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% set evenementActionProgresPrototype = form.evenementActionProgres.vars.prototype %}
+                            <table border="0" cellspacing="0" class="table table-bordered" data-number="{{ evenement.evenementActionProgres|length }}" data-prototype="{{ _self.action_prototype(evenementActionProgresPrototype,false)|e('html_attr') }}" id="table-evtActionProgres">
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'form_label.evenement.table.actions'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.responsable'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.delai'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.avancement'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.observation'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.etat'|trans }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for eventAction in form.evenementActionProgres %}
+                                        <tr>
+                                            {{ _self.action_prototype(eventAction) }}
+                                        </tr>
+                                    {% endfor %}  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>        
+            </div>        
+            {#                FIN PROGRES#}
+            {#<div class="row">
+                <div class="col-md-12"><div class="group-separator"></div></div>
+            </div>#}
+
+            {#    DEBUT RECAP#}
+            <div class="block-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="group-field-title"><span>{{ 'form_title_group_field.evenement.recapitulationDates'|trans }}</span></h2>
+                    </div>
+                </div>
+                <div class="content-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form_label.evenement.evenementDu'|trans }}</label>
+                                <input type="text" class="form-control" disabled="disabled" value="{% if evenement.id is not null %}{{ evenement.dateDesFaits|date('d/m/Y') }}{% endif %}">
+                            </div>           
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.evenementStatut) }}                   
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form_label.evenement.ficheEmiseDu'|trans }}</label>
+                                <input type="text" class="form-control" disabled="disabled" value="{% if evenement.id is not null %}{{ evenement.dateEmission|date('d/m/Y') }}{% endif %}">
+                            </div>           
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.dateCloture) }}                   
+                        </div>
+                    </div>   
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form_label.evenement.enqueteRealiseeLe'|trans }}</label>
+                                <input type="text" class="form-control" disabled="disabled" value="{% if evenement.id is not null and evenement.evenementEnquete is not null %}{{ evenement.evenementEnquete.date|date('d/m/Y') }}{% endif %}">
+                            </div>           
+                        </div>  
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form_label.evenement.nbJourTraitement'|trans }}</label>
+                                {% if evenement.id is not null %}
+                                    {% if evenement.dateCloture %}
+                                        {% set difference = date(evenement.dateCloture).diff(date(evenement.dateDesFaits)) %}
+                                    {% else %}
+                                        {% set difference = date(date('now')).diff(date(evenement.dateDesFaits)) %}
+                                    {% endif %}
+                                    {% set leftDays = difference.days %}
+                                {% endif %}
+                                <input type="text" class="form-control" disabled="disabled" value="{% if evenement.id is not null %}{{ leftDays }}{% endif %}">
+                            </div>           
+                        </div>   
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form_label.evenement.derniereActionCorrective'|trans }}</label>
+                                <input type="text" class="form-control" disabled="disabled" value="{% if evenement.id is not null  %}{{ evenement.dateAction|date('d/m/Y') }}{% endif %}">
+                            </div>           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {#            FIN RECAP#}
+            {# debut PAQSSSE #}
+            <div class="block-group" id="block_paqssse">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="group-field-title"><span>{{ 'form_title_group_field.evenement.paqssse'|trans }}</span></h2>
+                    </div>
+                </div>
+                <div class="content-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.isPaqssse) }}
+                        </div>
+                    </div>
+                    <div class="row formular_paqssse">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{ form_row(form.paq3se.frequence) }}
+                                    {{ form_row(form.paq3se.gravite) }}
+                                    {{ form_row(form.paq3se.niveauRisque) }}
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ form_row(form.paq3se.realisation) }}
+                                    {{ form_row(form.paq3se.priorite) }}
+                                    {{ form_row(form.paq3se.dateFin) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            {{ form_row(form.paq3se.anomalieConstate) }}
+                            {{ form_row(form.paq3se.action) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# fin PAQSSSE #}
+            {{ form_widget(form._token) }}
+            <div class="button-save-bottom">
+            {% if evenement.id is not null %}
+                {% if(is_granted('edit',evenement)) %}
+                <input type="submit" value="{{ 'form.update'|trans }}" class="btn btn-default" id="btn-submit" />
+                {% else %}
+                <input type="button" value="{{ 'form.abstract'|trans }}" class="btn btn-default" id="btn-modal" />
+                {% endif %}
+            {% else %}
+                <input type="submit" value="{{ 'form.add'|trans }}" class="btn btn-default" id="btn-submit" />            
+            {% endif %}
+            </div>
+        </div>

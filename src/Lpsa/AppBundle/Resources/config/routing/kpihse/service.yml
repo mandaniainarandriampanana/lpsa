@@ -1,0 +1,31 @@
+service_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Service:index" }
+    methods:  GET
+    options:
+        section: KPIHSE
+
+service_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Service:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+    options:
+        section: KPIHSE
+
+service_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Service:newEdit" }
+    methods:  GET|POST
+    options:
+        section: KPIHSE
+
+service_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Service:delete" }
+    requirements:
+       id: \d+
+    options:
+        section: KPIHSE
+

@@ -1,0 +1,17 @@
+'User account is disabled.': "Ce compte n'est pas activé."
+form:
+    enabled: Activé
+    add: Ajouter
+    delete: Supprimer
+    back: Retourner à la liste
+    edit: Editer
+    update: Mettre à jour
+    abstract: Résumé
+    changepwd: Changer mot de passe
+    adminchangepwd: Changer le mot de passe de cet utilisateur
+    
+user:
+    crud:
+        new: ajouter utilisateur
+whishes:
+    delete: Etes-vous sûr de vouloir supprimer?

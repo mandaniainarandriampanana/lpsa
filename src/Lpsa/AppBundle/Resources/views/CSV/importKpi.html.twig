@@ -1,0 +1,24 @@
+{% extends "base_admin.html.twig" %}
+
+{% trans_default_domain "LpsaAppBundle" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" action="{{ path('lpsa_app_import_csv_kpi') }}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="file" name="file" id="csv">
+                </div>
+                <button type="submit" class="btn btn-default">Envoyer</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block others_stylesheets %}
+    {{ parent() }}
+    <style>
+        .left{
+            float: left;
+        }
+    </style>
+{% endblock %}

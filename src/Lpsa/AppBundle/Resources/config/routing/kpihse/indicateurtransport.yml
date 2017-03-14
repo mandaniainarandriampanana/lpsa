@@ -1,0 +1,31 @@
+indicateurTransport_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:IndicateurTransport:index" }
+    methods:  GET
+    options:
+        section: [KPIHSE,INDICATEUR_TRANSPORT]
+
+indicateurTransport_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:IndicateurTransport:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+    options:
+        section: [KPIHSE,INDICATEUR_TRANSPORT]
+
+indicateurTransport_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:IndicateurTransport:newEdit" }
+    methods:  GET|POST
+    options:
+        section: [KPIHSE,INDICATEUR_TRANSPORT]
+
+indicateurTransport_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:IndicateurTransport:delete" }
+    requirements:
+       id: \d+
+    options:
+        section: [KPIHSE,INDICATEUR_TRANSPORT]
+

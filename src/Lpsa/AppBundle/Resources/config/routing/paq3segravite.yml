@@ -1,0 +1,16 @@
+admin_paq3seGravite_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Paq3seGravite:index" }
+    methods:  GET
+
+admin_paq3seGravite_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Paq3seGravite:newEdit" }
+    methods:  [GET, POST]
+
+admin_paq3seGravite_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Paq3seGravite:newEdit" }
+    methods:  [GET, PUT]
+    requirements:
+       id: \d+

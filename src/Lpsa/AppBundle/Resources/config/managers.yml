@@ -1,0 +1,374 @@
+services:
+    app.direction.manager:
+        class: Lpsa\AppBundle\Entity\Manager\DirectionManager
+        arguments:  ["@app.direction.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+        
+    app.depot.manager:
+        class: Lpsa\AppBundle\Entity\Manager\DepotManager
+        arguments:  ["@app.depot.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.gravite.manager:
+        class: Lpsa\AppBundle\Entity\Manager\GraviteManager
+        arguments:  ["@app.gravite.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.fonction.manager:
+        class: Lpsa\AppBundle\Entity\Manager\FonctionManager
+        arguments:  ["@app.fonction.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+    
+    app.impactmediatique.manager:
+        class: Lpsa\AppBundle\Entity\Manager\ImpactMediatiqueManager
+        arguments:  ["@app.impactmediatique.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.depotcategorie.manager:
+        class: Lpsa\AppBundle\Entity\Manager\DepotCategorieManager
+        arguments:  ["@app.depotcategorie.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.evenementstatut.manager:
+        class: Lpsa\AppBundle\Entity\Manager\EvenementStatutManager
+        arguments:  ["@app.evenementstatut.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+    
+    app.impactclient.manager:
+        class: Lpsa\AppBundle\Entity\Manager\ImpactClientManager
+        arguments:  ["@app.impactclient.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+        
+    app.evenementcategorie.manager:
+        class: Lpsa\AppBundle\Entity\Manager\EvenementCategorieManager
+        arguments:  ["@app.evenementcategorie.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.evenement.manager:
+        class: Lpsa\AppBundle\Entity\Manager\EvenementManager
+        arguments:  ["@app.evenement.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.evenement_action_progres.manager:
+        class: Lpsa\AppBundle\Entity\Manager\EvenementActionProgresManager
+        arguments:  ["@app.evenement_action_progres.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+        
+    app.heuretravailcategorie.manager:
+        class: Lpsa\AppBundle\Entity\Manager\HeureTravailCategorieManager
+        arguments:  ["@app.heuretravailcategorie.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.heuretravail.manager:
+        class: Lpsa\AppBundle\Entity\Manager\HeureTravailManager
+        arguments:  ["@app.heuretravail.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.environnement.manager:
+        class: Lpsa\AppBundle\Entity\Manager\EnvironnementManager
+        arguments:  ["@app.environnement.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.dysfonctionnement.manager:
+        class: Lpsa\AppBundle\Entity\Manager\DysfonctionnementManager
+        arguments:  ["@app.dysfonctionnement.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.responsableservice.manager:
+        class: Lpsa\AppBundle\Entity\Manager\ResponsableServiceManager
+        arguments:  ["@app.responsableservice.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+        
+    app.typecorporel.manager:
+        class: Lpsa\AppBundle\Entity\Manager\TypeCorporelManager
+        arguments:  ["@app.typecorporel.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.corporel.manager:
+        class: Lpsa\AppBundle\Entity\Manager\CorporelManager
+        arguments:  ["@app.corporel.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.typemateriel.manager:
+        class: Lpsa\AppBundle\Entity\Manager\TypeMaterielManager
+        arguments:  ["@app.typemateriel.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.materiel.manager:
+        class: Lpsa\AppBundle\Entity\Manager\MaterielManager
+        arguments:  ["@app.materiel.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.typeenvironnement.manager:
+        class: Lpsa\AppBundle\Entity\Manager\TypeEnvironnementManager
+        arguments:  ["@app.typeenvironnement.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.evenementactionprogresstatus.manager:
+        class: Lpsa\AppBundle\Entity\Manager\EvenementActionProgresStatusManager
+        arguments:  ["@app.evenementactionprogresstatus.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.departement.manager:
+        class: Lpsa\AppBundle\Entity\Manager\DepartementManager
+        arguments:  ["@app.departement.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.service.manager:
+        class: Lpsa\AppBundle\Entity\Manager\ServiceManager
+        arguments:  ["@app.service.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.objectifdepot.manager:
+        class: Lpsa\AppBundle\Entity\Manager\ObjectifDepotManager
+        arguments:  ["@app.objectifdepot.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+    
+    app.dashboard.manager:
+        class: Lpsa\AppBundle\Entity\Manager\DashboardManager
+        arguments: ["@app.evenement.manager","@app.depot.manager","@service_container"]
+        
+    app.exerciceurgence.manager:
+        class: Lpsa\AppBundle\Entity\Manager\ExerciceUrgenceManager
+        arguments:  ["@app.exerciceurgence.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.toolbox.manager:
+        class: Lpsa\AppBundle\Entity\Manager\ToolboxManager
+        arguments:  ["@app.toolbox.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.visite.manager:
+        class: Lpsa\AppBundle\Entity\Manager\VisiteManager
+        arguments:  ["@app.visite.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+            
+    app.objectifltirtrir.manager:
+        class: Lpsa\AppBundle\Entity\Manager\ObjectifLtirTrirManager
+        arguments:  ["@app.objectifltirtrir.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.piezometre.manager:
+        class: Lpsa\AppBundle\Entity\Manager\PiezometreManager
+        arguments:  ["@app.piezometre.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.decanteur.manager:
+        class: Lpsa\AppBundle\Entity\Manager\DecanteurManager
+        arguments:  ["@app.decanteur.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.laboratoire.manager:
+        class: Lpsa\AppBundle\Entity\Manager\LaboratoireManager
+        arguments:  ["@app.laboratoire.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.indicateurTransport.manager:
+        class: Lpsa\AppBundle\Entity\Manager\IndicateurTransportManager
+        arguments:  ["@app.indicateurTransport.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.PAQSSSE.manager:
+        class: Lpsa\AppBundle\Entity\Manager\PAQSSSEManager
+        arguments:  ["@app.PAQSSSE.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.paq3seGravite.manager:
+        class: Lpsa\AppBundle\Entity\Manager\Paq3seGraviteManager
+        arguments:  ["@app.paq3seGravite.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+    
+    app.fuiteProduit.manager:
+        class: Lpsa\AppBundle\Entity\Manager\FuiteProduitManager
+        arguments:  ["@app.fuiteProduit.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.objectifKpihse.manager:
+        class: Lpsa\AppBundle\Entity\Manager\ObjectifKpihseManager
+        arguments:  ["@app.objectifKpihse.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }

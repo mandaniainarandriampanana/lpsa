@@ -1,0 +1,121 @@
+lpsa_app_evenementstatut:
+    resource: "@LpsaAppBundle/Resources/config/routing/evenementstatut.yml"
+    prefix:   /evenementstatut
+    
+lpsa_app_impactmediatique:
+    resource: "@LpsaAppBundle/Resources/config/routing/impactmediatique.yml"
+    prefix:   /impactmediatique
+
+lpsa_app_admin_evenementcategorie:
+    resource: "@LpsaAppBundle/Resources/config/routing/evenementcategorie.yml"
+    prefix:   /evenementcategorie
+
+lpsa_app_admin_depot:
+    resource: "@LpsaAppBundle/Resources/config/routing/depot.yml"
+    prefix:   /depot
+
+lpsa_app_admin_gravite:
+    resource: "@LpsaAppBundle/Resources/config/routing/gravite.yml"
+    prefix:   /gravite
+
+
+lpsa_app_admin_depotcategorie:
+    resource: "@LpsaAppBundle/Resources/config/routing/depotcategorie.yml"
+    prefix:   /depotcategorie
+
+lpsa_app_direction:
+        resource: "@LpsaAppBundle/Resources/config/routing/direction.yml"
+        prefix:   /direction
+        
+lpsa_app_corporel:
+        resource: "@LpsaAppBundle/Resources/config/routing/corporel.yml"
+        prefix:   /corporel
+
+lpsa_app_evenementcategorietable:
+        resource: "@LpsaAppBundle/Resources/config/routing/evenementcategorietable.yml"
+        prefix:   /evenementcategorietable
+
+lpsa_app_impactclient:
+        resource: "@LpsaAppBundle/Resources/config/routing/impactclient.yml"
+        prefix:   /impactclient
+
+lpsa_app_admin_fonction:
+    resource: "@LpsaAppBundle/Resources/config/routing/fonction.yml"
+    prefix:   /fonction
+
+lpsa_app_heuretravailcategorie:
+    resource: "@LpsaAppBundle/Resources/config/routing/heuretravailcategorie.yml"
+    prefix:   /heuretravailcategorie
+    
+lpsa_app_heuretravail:
+    resource: "@LpsaAppBundle/Resources/config/routing/heuretravail.yml"
+    prefix:   /heuretravail
+    
+lpsa_app_environnement:
+        resource: "@LpsaAppBundle/Resources/config/routing/environnement.yml"
+        prefix:   /environnement
+        
+lpsa_app_admin_dysfonctionnement:
+    resource: "@LpsaAppBundle/Resources/config/routing/dysfonctionnement.yml"
+    prefix:   /dysfonctionnement
+
+lpsa_app_responsableservice:
+        resource: "@LpsaAppBundle/Resources/config/routing/responsableservice.yml"
+        prefix:   /responsableservice
+    
+lpsa_app_typecorporel:
+    resource: "@LpsaAppBundle/Resources/config/routing/typecorporel.yml"
+    prefix:   /typecorporel
+    
+lpsa_app_typemateriel:
+    resource: "@LpsaAppBundle/Resources/config/routing/typemateriel.yml"
+    prefix:   /typemateriel
+    
+lpsa_app_materiel:
+        resource: "@LpsaAppBundle/Resources/config/routing/materiel.yml"
+        prefix:   /materiel
+        
+lpsa_app_typeenvironnement:
+    resource: "@LpsaAppBundle/Resources/config/routing/typeenvironnement.yml"
+    prefix:   /typeenvironnement
+    
+lpsa_app_evenementactionprogresstatus:
+    resource: "@LpsaAppBundle/Resources/config/routing/evenementactionprogresstatus.yml"
+    prefix:   /evenementactionprogresstatus
+
+lpsa_app_admin_configuration:
+    resource: "@LpsaAppBundle/Resources/config/routing/configuration.yml"
+    prefix:   /configuration
+
+    
+lpsa_app_departement:
+        resource: "@LpsaAppBundle/Resources/config/routing/departement.yml"
+        prefix:   /departement
+
+lpsa_app_objectifdepot:
+        resource: "@LpsaAppBundle/Resources/config/routing/objectifdepot.yml"
+        prefix:   /objectifdepot
+
+lpsa_app_paq3seGravite:
+        resource: "@LpsaAppBundle/Resources/config/routing/paq3segravite.yml"
+        prefix:   /paqsssegravite
+
+lpsa_app_export_csv:
+    path:     /export/csv
+    defaults: { _controller: "LpsaAppBundle:CSV:export" }
+    methods:  [GET,POST]
+
+lpsa_app_import_csv_trir:
+    path:     /import/csv
+    defaults: { _controller: "LpsaAppBundle:CSV:import" }
+    methods:  [GET,POST]
+
+lpsa_app_import_csv_kpi:
+    path:     /import/csv/kpi
+    defaults: { _controller: "LpsaAppBundle:CSV:importKpi" }
+    methods:  [GET,POST]
+
+lpsa_clear_cache_prod:
+    path: /clear/cache/prod
+    defaults: { _controller: "LpsaAppBundle:Cache:clear" }
+        

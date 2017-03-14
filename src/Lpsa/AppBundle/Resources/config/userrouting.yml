@@ -1,0 +1,23 @@
+index:
+    resource: "@LpsaAppBundle/Resources/config/routing/userrouting/listerouting.yml"
+    prefix:   /liste
+
+lpsa_app_evenement:
+        resource: "@LpsaAppBundle/Resources/config/routing/userrouting/evenement.yml"
+        prefix:   /evenement
+
+lpsa_app_ajax:
+    resource: "@LpsaAppBundle/Resources/config/routing/userrouting/ajax.yml"
+    prefix:   /ajax
+
+lpsa_app_download:
+    resource: "@LpsaAppBundle/Resources/config/routing/userrouting/download.yml"
+    prefix:   /download
+
+lpsa_app_statistic:
+    resource: "@LpsaAppBundle/Resources/config/routing/userrouting/statistic.yml"
+    prefix:   /statistic
+    
+lpsa_app_dashboard:
+        resource: "@LpsaAppBundle/Resources/config/routing/userrouting/dashboard.yml"
+        prefix:   /dashboard

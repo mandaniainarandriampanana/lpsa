@@ -1,0 +1,22 @@
+admin_depotcategorie_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:DepotCategorie:index" }
+    methods:  GET
+
+admin_depotcategorie_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:DepotCategorie:newEdit" }
+    methods:  [GET, POST]
+
+admin_depotcategorie_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:DepotCategorie:newEdit" }
+    methods:  [GET, PUT]
+    requirements:
+       id: \d+
+
+admin_depotcategorie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:DepotCategorie:delete" }
+    requirements:
+       id: \d+

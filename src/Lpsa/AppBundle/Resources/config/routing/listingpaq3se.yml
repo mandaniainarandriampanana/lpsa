@@ -1,0 +1,55 @@
+admin_paq3se:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Paq3se:index" }
+    options:
+        section: PAQSSSE
+
+admin_paq3se_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Paq3se:edit" }
+    methods:  [GET, PUT]
+    requirements:
+       id: \d+
+    options:
+        section: PAQSSSE
+
+admin_paq3se_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Paq3se:new" }
+    methods:  [GET, POST]
+    options:
+        section: PAQSSSE
+
+admin_paq3se_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Paq3se:delete" }
+    requirements:
+       id: \d+
+    options:
+        section: PAQSSSE
+
+recherche_search:
+    path:    /search
+    defaults: { _controller: "LpsaAppBundle:Paq3se:search" }
+    options:
+        section: PAQSSSE
+    
+recherche_speed_search:
+    path:    /speedsearch
+    defaults: { _controller: "LpsaAppBundle:Paq3se:speedSearch" }
+    options:
+        section: PAQSSSE
+        
+admin_paq3se_doublon:
+    path:    /doublon
+    defaults: { _controller: "LpsaAppBundle:Paq3se:doublon" }
+    
+admin_paq3se_deletedoublon:
+    path:     /{id}/deletedoublon
+    defaults: { _controller: "LpsaAppBundle:Paq3se:deleteDoublon" }
+
+admin_paq3se_export:
+    path:    /export
+    defaults: { _controller: "LpsaAppBundle:Paq3se:export" }
+
+

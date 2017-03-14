@@ -1,0 +1,4 @@
+services:
+    lpsa_mail.manager:
+        class: Lpsa\MailBundle\Service\MailManager
+        arguments: ["@mailer", "@doctrine.orm.entity_manager"]

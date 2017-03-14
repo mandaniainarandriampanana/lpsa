@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_decanteur.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Decanteur\AbstractDecanteurFormHandlerStrategy
+    app.decanteur.form.handler.class: Lpsa\AppBundle\Form\Handler\Decanteur\DecanteurFormHandler
+    app.new_decanteur.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Decanteur\NewDecanteurFormHandlerStrategy
+    app.update_decanteur.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Decanteur\UpdateDecanteurFormHandlerStrategy
+    app.decanteur.form.type.class: Lpsa\AppBundle\Form\Type\Decanteur\DecanteurType
+    
+services:
+    app.abstract_decanteur.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_decanteur.form.handler.strategy.class%
+        arguments:
+           - @app.decanteur.form.type
+        calls:
+           - [setDecanteurManager, ['@app.decanteur.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.decanteur.form.handler:
+        class: %app.decanteur.form.handler.class%
+        calls:
+           - [setNewDecanteurFormHandlerStrategy, ['@app.new_decanteur.form.handler.strategy']]
+           - [setUpdateDecanteurFormHandlerStrategy, ['@app.update_decanteur.form.handler.strategy']]
+
+    app.new_decanteur.form.handler.strategy:
+        class: %app.new_decanteur.form.handler.strategy.class%
+        parent: app.abstract_decanteur.form.handler.strategy
+
+    app.update_decanteur.form.handler.strategy:
+        class: %app.update_decanteur.form.handler.strategy.class%
+        parent: app.abstract_decanteur.form.handler.strategy
+
+    app.decanteur.form.type:
+        class: %app.decanteur.form.type.class%
+        arguments:
+            - @translator
+            - @app.decanteur.manager
+        tags:
+            - { name: form.type, alias: DecanteurType}

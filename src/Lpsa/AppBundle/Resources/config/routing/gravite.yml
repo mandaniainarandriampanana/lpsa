@@ -1,0 +1,20 @@
+admin_gravite_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Gravite:index" }
+    methods:  GET
+
+admin_gravite_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Gravite:newEdit" }
+    methods:  [GET, POST]
+
+admin_gravite_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Gravite:newEdit" }
+    methods:  [GET, PUT]
+
+admin_gravite_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Gravite:delete" }
+    requirements:
+       id: \d+

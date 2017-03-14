@@ -1,0 +1,46 @@
+parameters:
+    app.abstract_evenement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Evenement\AbstractEvenementFormHandlerStrategy
+    app.evenement.form.handler.class: Lpsa\AppBundle\Form\Handler\Evenement\EvenementFormHandler
+    app.new_evenement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Evenement\NewEvenementFormHandlerStrategy
+    app.update_evenement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Evenement\UpdateEvenementFormHandlerStrategy
+    app.evenement.form.type.class: Lpsa\AppBundle\Form\Type\Evenement\EvenementType
+    
+services:
+    app.abstract_evenement.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_evenement.form.handler.strategy.class%
+        arguments:
+           - @security.token_storage
+           - @app.evenement.form.type
+           - @doctrine.orm.entity_manager
+        calls:
+           - [setEvenementManager, ['@app.evenement.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.evenement.form.handler:
+        class: %app.evenement.form.handler.class%
+        arguments:
+           - @app.evenement_action_progres.manager
+           - @app.repository_number_generate
+           - @service_container
+           - @doctrine.orm.entity_manager
+           - @app.observable.event
+        calls:
+           - [setNewEvenementFormHandlerStrategy, ['@app.new_evenement.form.handler.strategy']]
+           - [setUpdateEvenementFormHandlerStrategy, ['@app.update_evenement.form.handler.strategy']]
+
+    app.new_evenement.form.handler.strategy:
+        class: %app.new_evenement.form.handler.strategy.class%
+        parent: app.abstract_evenement.form.handler.strategy
+
+    app.update_evenement.form.handler.strategy:
+        class: %app.update_evenement.form.handler.strategy.class%
+        parent: app.abstract_evenement.form.handler.strategy
+        
+    app.evenement.form.type:
+        class: %app.evenement.form.type.class%
+        arguments: ["@doctrine.orm.entity_manager","@service_container","@translator","@request_stack"]
+        tags:
+            - { name: form.type, alias: EvenementType}

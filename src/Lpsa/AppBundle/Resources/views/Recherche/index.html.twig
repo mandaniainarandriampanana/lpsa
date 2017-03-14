@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="search-block-zone">
+            <form method="POST" 
+                  {% if isPaq3se == true %}
+                      action="{{ path('admin_paq3se') }}"
+                    {% else %}
+                      action="{{ path('admin_evenement_index') }}"
+                   {% endif %}>
+                <div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="zone">Zone:</label>
+                                <select name="zone" class="selection" id="zone">
+
+                                    <option value=""></option>
+                                    {% for depotCategorie in depotCategories %}
+                                        {% if contenuFormulaire != false and contenuFormulaire['idDepotCategorie'] is defined and depotCategorie.id==contenuFormulaire['idDepotCategorie'] %}
+                                                <option value="{{ depotCategorie.id }}" selected="selected">{{ depotCategorie.libelle }}</option>
+                                            {% else %}
+                                                <option value="{{ depotCategorie.id }}">{{ depotCategorie.libelle }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="site">Site:</label>
+                                <select name="site" class="selection" id="site">
+                                    <option value=""></option>
+                                    {% if contenuFormulaire != false and contenuFormulaire['idDepotCategorie'] is defined %}
+                                        {% for depot in depots %}
+                                            {% if depot.getDepotcategories().id==contenuFormulaire['idDepotCategorie'] %}
+                                                {% if contenuFormulaire != false and contenuFormulaire['idDepot'] is defined and depot.id==contenuFormulaire['idDepot'] %}
+                                                    <option value="{{ depot.id }}" selected="selected">{{ depot.libelle }}</option>
+                                                {% else %}
+                                                    <option value="{{ depot.id }}">{{ depot.libelle }}</option>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        {% if isPaq3se != true %}
+                            <div class="form-group">
+                                <label for="statut">Statut:</label>
+                                <select name="statut" class="selection" id="statut">
+                                    <option value=""></option>
+                                    {% for evenementStatut in evenementStatuts %}
+                                        {% if contenuFormulaire != false and contenuFormulaire['idEvenementStatut'] is defined and evenementStatut.id==contenuFormulaire['idEvenementStatut'] %}
+                                            <option value="{{ evenementStatut.id }}" selected="selected">{{ evenementStatut.libelle }}</option>
+                                        {% else %}
+                                            <option value="{{ evenementStatut.id }}">{{ evenementStatut.libelle }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% else %}
+                            <div class="form-group">
+                                <label for="priorite">Priorite:</label>
+                                <select name="priorite" class="selection" id="priorite">
+                                    <option value=""></option>
+                                    <option value="1" {% if contenuFormulaire != false and contenuFormulaire['priorite'] is defined and contenuFormulaire['priorite'] == 1%} selected="selected" {% endif %}>Basse</option>
+                                    <option value="2" {% if contenuFormulaire != false and contenuFormulaire['priorite'] is defined and contenuFormulaire['priorite'] == 2%} selected="selected" {% endif %}>Moyenne</option>
+                                    <option value="3" {% if contenuFormulaire != false and contenuFormulaire['priorite'] is defined and contenuFormulaire['priorite'] == 3%} selected="selected" {% endif %}>Haute</option>
+                                </select>
+                            </div>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="evenementCategorie">Catégorie:</label>
+                                <select name="evenementCategorie" class="selection" id="evenementCategorie">
+                                    <option value=""></option>
+                                    {% for evenementCategorie in evenementCategories %}
+                                        {% if contenuFormulaire != false and contenuFormulaire['idEvenementCategorie'] is defined and evenementCategorie.id==contenuFormulaire['idEvenementCategorie'] %}
+                                            <option value="{{ evenementCategorie.id }}" selected="selected">{{ evenementCategorie.libelle }}</option>
+                                        {%else %}
+                                            <option value="{{ evenementCategorie.id }}">{{ evenementCategorie.libelle }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="responsableservice">Responsable Service:</label>
+                                <select name="responsableservice" class="selection" id="responsableservice">
+                                    <option value=""></option>
+                                    {% for responsableService in responsableServices %}
+                                        {% if contenuFormulaire != false and contenuFormulaire['idResponsableservice'] is defined and responsableService.id==contenuFormulaire['idResponsableservice'] %}
+                                            <option value="{{ responsableService.id }}" selected="selected">{{ responsableService.libelle }}</option>
+                                        {% else %}
+                                            <option value="{{ responsableService.id }}">{{ responsableService.libelle }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        {% if isPaq3se == true %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="niveauRisque">Niveau de Risque:</label>
+                                <input class="form-control selection" type="number" name="niveauRisque" {% if contenuFormulaire != false and contenuFormulaire['niveauRisque'] is defined %} value="{{ contenuFormulaire['niveauRisque'] }}" {% endif %}/>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="declarantText">Déclarant:</label>
+                                <input type="hidden" name="declarant" value="{% if contenuFormulaire != false and contenuFormulaire['declarantId'] is defined %}{{ contenuFormulaire['declarantId'] }}{% endif %}" class="user-declarant"/>
+                                <input type="text" class="form-control ui-autocomplete-input" data-id="declarant" value="{% if contenuFormulaire != false and contenuFormulaire['declarantText'] is defined %}{{ contenuFormulaire['declarantText'] }}{% endif %}" name="declarantText"/>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if isPaq3se == true %}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="declarantText">Déclarant:</label>
+                                <input type="hidden" name="declarant" value="{% if contenuFormulaire != false and contenuFormulaire['declarantId'] is defined %}{{ contenuFormulaire['declarantId'] }}{% endif %}" class="user-declarant"/>
+                                <input type="text" class="form-control ui-autocomplete-input" data-id="declarant" value="{% if contenuFormulaire != false and contenuFormulaire['declarantText'] is defined %}{{ contenuFormulaire['declarantText'] }}{% endif %}" name="declarantText"/>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="search-block-date">
+            {% include  "LpsaAppBundle:Recherche:filtreDate.html.twig" %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input type="submit" name ="rechercher" id="submitForm" class="btn btn-default" value="rechercher"/>
+        <input type="submit" name="reset" id="submitForm" class="btn btn-reset btn-default" value="reset"/>
+    </div>
+</div>
+</form>
+<script>
+    var urlTemp = '{{ path('admin_evenement_index') }}'+"?";
+    var urlAjaxWithId = '{{ path('ajax_depot') }}';
+    var urlAjaxNoId = '{{ path('ajax_all_depot') }}';
+    var objUserDeclarant = {
+            'data_id' : 'declarant',
+            'ajax_url' : "{{ path('lpsa_admin_user_declarantjson') }}",
+            'hidden_target' : '.user-declarant'
+    }; 
+</script>
+

@@ -1,0 +1,22 @@
+heuretravailcategorie_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:HeureTravailCategorie:index" }
+    methods:  GET
+
+heuretravailcategorie_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:HeureTravailCategorie:newEdit" }
+    methods:  [GET, POST]
+
+heuretravailcategorie_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:HeureTravailCategorie:newEdit" }
+    methods:  [GET, PUT]
+    requirements:
+       id: \d+
+
+heuretravailcategorie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:HeureTravailCategorie:delete" }
+    requirements:
+       id: \d+

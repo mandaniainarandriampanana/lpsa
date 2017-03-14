@@ -1,0 +1,28 @@
+typemateriel_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:TypeMateriel:index" }
+    methods:  GET
+
+typemateriel_show:
+    path:     /{id}/show
+    defaults: { _controller: "LpsaAppBundle:TypeMateriel:show" }
+    methods:  GET
+
+typemateriel_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:TypeMateriel:newEdit" }
+    methods:  [GET, POST]
+    
+typemateriel_create:
+    path:     /create
+    defaults: { _controller: "LpsaAppBundle:TypeMateriel:create" }
+    methods:  POST
+
+typemateriel_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:TypeMateriel:newEdit" }
+    methods:  [GET, POST, PUT]
+
+typemateriel_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:TypeMateriel:delete" }

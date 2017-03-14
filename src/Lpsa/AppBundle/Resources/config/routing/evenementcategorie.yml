@@ -1,0 +1,16 @@
+evenementcategorie_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:EvenementCategorie:index" }
+    methods:  GET
+
+evenementcategorie_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:EvenementCategorie:newEdit" }
+
+evenementcategorie_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:EvenementCategorie:newEdit" }
+
+evenementcategorie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:EvenementCategorie:delete" }

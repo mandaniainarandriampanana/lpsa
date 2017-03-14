@@ -1,0 +1,22 @@
+evenementactionprogresstatus_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:EvenementActionProgresStatus:index" }
+    methods:  GET
+
+evenementactionprogresstatus_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:EvenementActionProgresStatus:newEdit" }
+    methods:  [GET, POST]
+
+evenementactionprogresstatus_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:EvenementActionProgresStatus:newEdit" }
+    methods:  [GET, PUT]
+    requirements:
+       id: \d+
+
+evenementactionprogresstatus_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:EvenementActionProgresStatus:delete" }
+    requirements:
+       id: \d+

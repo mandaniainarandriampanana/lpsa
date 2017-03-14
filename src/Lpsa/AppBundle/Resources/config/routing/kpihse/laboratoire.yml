@@ -1,0 +1,31 @@
+laboratoire_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Laboratoire:index" }
+    methods:  GET
+    options:
+        section: [KPIHSE,LABORATOIRE]
+
+laboratoire_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Laboratoire:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+    options:
+        section: [KPIHSE,LABORATOIRE]
+
+laboratoire_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Laboratoire:newEdit" }
+    methods:  GET|POST
+    options:
+        section: [KPIHSE,LABORATOIRE]
+
+laboratoire_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Laboratoire:delete" }
+    requirements:
+       id: \d+
+    options:
+        section: [KPIHSE,LABORATOIRE]
+

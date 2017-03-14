@@ -1,0 +1,31 @@
+PAQSSSE_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:PAQSSSE:index" }
+    methods:  GET
+    options:
+        section: KPIHSE
+
+PAQSSSE_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:PAQSSSE:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+    options:
+        section: KPIHSE
+
+PAQSSSE_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:PAQSSSE:newEdit" }
+    methods:  GET|POST
+    options:
+        section: KPIHSE
+
+PAQSSSE_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:PAQSSSE:delete" }
+    requirements:
+       id: \d+
+    options:
+        section: KPIHSE
+

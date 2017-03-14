@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_paq3seGravite.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Paq3seGravite\AbstractPaq3seGraviteFormHandlerStrategy
+    app.paq3seGravite.form.handler.class: Lpsa\AppBundle\Form\Handler\Paq3seGravite\Paq3seGraviteFormHandler
+    app.new_paq3seGravite.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Paq3seGravite\NewPaq3seGraviteFormHandlerStrategy
+    app.update_paq3seGravite.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Paq3seGravite\UpdatePaq3seGraviteFormHandlerStrategy
+    
+services:
+    app.abstract_paq3seGravite.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_paq3seGravite.form.handler.strategy.class%
+        calls:
+           - [setPaq3seGraviteManager, ['@app.paq3seGravite.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.paq3seGravite.form.handler:
+        class: %app.paq3seGravite.form.handler.class%
+        calls:
+           - [setNewPaq3seGraviteFormHandlerStrategy, ['@app.new_paq3seGravite.form.handler.strategy']]
+           - [setUpdatePaq3seGraviteFormHandlerStrategy, ['@app.update_paq3seGravite.form.handler.strategy']]
+
+    app.new_paq3seGravite.form.handler.strategy:
+        class: %app.new_paq3seGravite.form.handler.strategy.class%
+        parent: app.abstract_paq3seGravite.form.handler.strategy
+
+    app.update_paq3seGravite.form.handler.strategy:
+        class: %app.update_paq3seGravite.form.handler.strategy.class%
+        parent: app.abstract_paq3seGravite.form.handler.strategy

@@ -1,0 +1,34 @@
+admin_evenement_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Evenement:index" }
+
+admin_evenement_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Evenement:edit" }
+    methods:  [GET, PUT]
+    requirements:
+       id: \d+
+
+admin_evenement_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Evenement:new" }
+    methods:  [GET, POST]
+
+admin_evenement_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Evenement:delete" }
+    requirements:
+       id: \d+
+recherche_search:
+    path:    /search
+    defaults: { _controller: "LpsaAppBundle:Evenement:search" }
+    
+recherche_speed_search:
+    path:    /speedsearch
+    defaults: { _controller: "LpsaAppBundle:Evenement:speedSearch" }
+    
+admin_evenement_print:
+    path: /print
+    defaults: { _controller: "LpsaAppBundle:Evenement:print" }
+
+

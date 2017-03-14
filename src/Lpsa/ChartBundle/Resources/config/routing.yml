@@ -1,0 +1,3 @@
+lpsa_chart_homepage:
+    path:     /
+    defaults: { _controller: LpsaChartBundle:Default:index }

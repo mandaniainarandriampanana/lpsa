@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_PAQSSSE.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\PAQSSSE\AbstractPAQSSSEFormHandlerStrategy
+    app.PAQSSSE.form.handler.class: Lpsa\AppBundle\Form\Handler\PAQSSSE\PAQSSSEFormHandler
+    app.new_PAQSSSE.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\PAQSSSE\NewPAQSSSEFormHandlerStrategy
+    app.update_PAQSSSE.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\PAQSSSE\UpdatePAQSSSEFormHandlerStrategy
+    app.PAQSSSE.form.type.class: Lpsa\AppBundle\Form\Type\PAQSSSE\PAQSSSEType
+    
+services:
+    app.abstract_PAQSSSE.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_PAQSSSE.form.handler.strategy.class%
+        arguments:
+           - @app.PAQSSSE.form.type
+        calls:
+           - [setPAQSSSEManager, ['@app.PAQSSSE.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.PAQSSSE.form.handler:
+        class: %app.PAQSSSE.form.handler.class%
+        calls:
+           - [setNewPAQSSSEFormHandlerStrategy, ['@app.new_PAQSSSE.form.handler.strategy']]
+           - [setUpdatePAQSSSEFormHandlerStrategy, ['@app.update_PAQSSSE.form.handler.strategy']]
+
+    app.new_PAQSSSE.form.handler.strategy:
+        class: %app.new_PAQSSSE.form.handler.strategy.class%
+        parent: app.abstract_PAQSSSE.form.handler.strategy
+
+    app.update_PAQSSSE.form.handler.strategy:
+        class: %app.update_PAQSSSE.form.handler.strategy.class%
+        parent: app.abstract_PAQSSSE.form.handler.strategy
+
+    app.PAQSSSE.form.type:
+        class: %app.PAQSSSE.form.type.class%
+        arguments:
+            - @translator
+            - @app.PAQSSSE.manager
+        tags:
+            - { name: form.type, alias: PAQSSSEType}

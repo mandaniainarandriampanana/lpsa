@@ -1,0 +1,82 @@
+{% extends "base_admin.html.twig" %}
+
+{% trans_default_domain "LpsaAppBundle" %}
+{% block content %}
+    <div class="row">
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ message|trans({}, 'LpsaAppBundle') }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ 'impactclient.page_header'|trans }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'impactclient.panel_heading'|trans }}
+                </div>
+                <div style="float: right" class="btn-action">
+                    <a class="btn btn-default" href="{{ path('impactclient_new') }}">{{ 'impactclient.crud_panel_title.new' |trans }}</a>
+                </div>
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-impactClients">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{{ 'impactclient.table.label'|trans }}</th>
+                                <th>{{ 'impactclient.table.gravite'|trans }}</th>
+                                <th>{{ 'impactclient.table.actions'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for impactClient in impactClients %}
+                                <tr>
+                                    <td class="id-td"><a href="{{ path('impactclient_edit',{'id' : impactClient.id }) }}" title="{{ 'form.edit'|trans }}">{{ impactClient.id }}</a></td>
+                                    <td>{{ impactClient.libelle }}</td>
+                                    <td>{% if impactClient.gravite %}{{ impactClient.gravite }}{% endif %}</td>
+                                    <td class="btn-action-table"> 
+                                        <div class="btn-content">
+                                            <a href="{{ path('impactclient_edit', { 'id': impactClient.id }) }}" class="btn btn-default left"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ path('impactclient_delete', { 'id': impactClient.id }) }}" class="btn btn-default left impactClient-delete"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block others_stylesheets %}
+    {{ parent() }}
+    <style>
+        .left{
+            float: left;
+        }
+    </style>
+{% endblock %}
+
+{% block others_javascripts %}
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.impactClient-delete', function (e) {
+                var r = confirm("{{ 'whishes.delete'|trans }}");
+                if (r !== true) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+{% endblock %}

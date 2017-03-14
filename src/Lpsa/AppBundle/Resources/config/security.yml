@@ -1,0 +1,24 @@
+services:
+    lpsa.app.service.role:
+        class: Lpsa\AppBundle\Security\RoleService
+        arguments: [@security.role_hierarchy]
+
+    lpsa.app.event_voter:
+        class: Lpsa\AppBundle\Security\EventVoter
+        arguments: ['@security.access.decision_manager','@lpsa.app.service.role']
+        public: false
+        tags:
+            - { name: security.voter }
+    lpsa.app.section_voter:
+        class: Lpsa\AppBundle\Security\SectionVoter
+        arguments: ['@security.access.decision_manager','@service_container']
+        public: false
+        tags:
+            - { name: security.voter }
+
+    lpsa.app.toolbox_voter:
+        class: Lpsa\AppBundle\Security\ToolboxVoter
+        arguments: ['@security.access.decision_manager','@lpsa.app.service.role']
+        public: false
+        tags:
+            - { name: security.voter }

@@ -1,0 +1,43 @@
+parameters:
+    app.abstract_toolbox.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Toolbox\AbstractToolboxFormHandlerStrategy
+    app.toolbox.form.handler.class: Lpsa\AppBundle\Form\Handler\Toolbox\ToolboxFormHandler
+    app.new_toolbox.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Toolbox\NewToolboxFormHandlerStrategy
+    app.update_toolbox.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Toolbox\UpdateToolboxFormHandlerStrategy
+    app.toolbox.form.type.class: Lpsa\AppBundle\Form\Type\Toolbox\ToolboxType
+    
+services:
+    app.abstract_toolbox.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_toolbox.form.handler.strategy.class%
+        arguments:
+           - @app.toolbox.form.type
+        calls:
+           - [setToolboxManager, ['@app.toolbox.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.toolbox.form.handler:
+        class: %app.toolbox.form.handler.class%
+        arguments:
+           - @doctrine.orm.entity_manager
+        calls:
+           - [setNewToolboxFormHandlerStrategy, ['@app.new_toolbox.form.handler.strategy']]
+           - [setUpdateToolboxFormHandlerStrategy, ['@app.update_toolbox.form.handler.strategy']]
+
+    app.new_toolbox.form.handler.strategy:
+        class: %app.new_toolbox.form.handler.strategy.class%
+        parent: app.abstract_toolbox.form.handler.strategy
+
+    app.update_toolbox.form.handler.strategy:
+        class: %app.update_toolbox.form.handler.strategy.class%
+        parent: app.abstract_toolbox.form.handler.strategy
+
+    app.toolbox.form.type:
+        class: %app.toolbox.form.type.class%
+        arguments:
+            - @translator
+            - @app.toolbox.manager
+            - @service_container
+        tags:
+            - { name: form.type, alias: ToolboxType}

@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_exerciceurgence.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ExerciceUrgence\AbstractExerciceUrgenceFormHandlerStrategy
+    app.exerciceurgence.form.handler.class: Lpsa\AppBundle\Form\Handler\ExerciceUrgence\ExerciceUrgenceFormHandler
+    app.new_exerciceurgence.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ExerciceUrgence\NewExerciceUrgenceFormHandlerStrategy
+    app.update_exerciceurgence.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ExerciceUrgence\UpdateExerciceUrgenceFormHandlerStrategy
+    app.exerciceurgence.form.type.class: Lpsa\AppBundle\Form\Type\ExerciceUrgence\ExerciceUrgenceType
+    
+services:
+    app.abstract_exerciceurgence.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_exerciceurgence.form.handler.strategy.class%
+        arguments:
+           - @app.exerciceurgence.form.type
+        calls:
+           - [setExerciceUrgenceManager, ['@app.exerciceurgence.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.exerciceurgence.form.handler:
+        class: %app.exerciceurgence.form.handler.class%
+        calls:
+           - [setNewExerciceUrgenceFormHandlerStrategy, ['@app.new_exerciceurgence.form.handler.strategy']]
+           - [setUpdateExerciceUrgenceFormHandlerStrategy, ['@app.update_exerciceurgence.form.handler.strategy']]
+
+    app.new_exerciceurgence.form.handler.strategy:
+        class: %app.new_exerciceurgence.form.handler.strategy.class%
+        parent: app.abstract_exerciceurgence.form.handler.strategy
+
+    app.update_exerciceurgence.form.handler.strategy:
+        class: %app.update_exerciceurgence.form.handler.strategy.class%
+        parent: app.abstract_exerciceurgence.form.handler.strategy
+
+    app.exerciceurgence.form.type:
+        class: %app.exerciceurgence.form.type.class%
+        arguments:
+            - @translator
+            - @app.exerciceurgence.manager            
+        tags:
+            - { name: form.type, alias: ExerciceUrgenceType}

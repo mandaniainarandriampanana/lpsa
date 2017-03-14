@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_service.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Service\AbstractServiceFormHandlerStrategy
+    app.service.form.handler.class: Lpsa\AppBundle\Form\Handler\Service\ServiceFormHandler
+    app.new_service.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Service\NewServiceFormHandlerStrategy
+    app.update_service.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Service\UpdateServiceFormHandlerStrategy
+    
+services:
+    app.abstract_service.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_service.form.handler.strategy.class%
+        calls:
+           - [setServiceManager, ['@app.service.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.service.form.handler:
+        class: %app.service.form.handler.class%
+        calls:
+           - [setNewServiceFormHandlerStrategy, ['@app.new_service.form.handler.strategy']]
+           - [setUpdateServiceFormHandlerStrategy, ['@app.update_service.form.handler.strategy']]
+
+    app.new_service.form.handler.strategy:
+        class: %app.new_service.form.handler.strategy.class%
+        parent: app.abstract_service.form.handler.strategy
+
+    app.update_service.form.handler.strategy:
+        class: %app.update_service.form.handler.strategy.class%
+        parent: app.abstract_service.form.handler.strategy

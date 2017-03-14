@@ -1,0 +1,46 @@
+{% extends "base_admin.html.twig" %}
+
+{% trans_default_domain "FOSUserBundle" %}
+
+ {% block nav %}{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Authentification</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{{ path("fos_user_security_check") }}" method="post">
+                        <fieldset>
+                            <div class="logo-app">
+                                <img src="{{ asset('bundles/lpsauser/img/logo-login.png') }}"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" name="_username" id="username" type="text" value="{{ last_username }}" required="required" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" name="_password" id="password" type="password" value="" required="required">
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                                </label>
+                            </div>
+                            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-lg btn-success btn-block" />
+                        </fieldset>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    </form>
+                    {% if error %}
+                        <ul class="help-block list-unstyled">
+                            <li class="text-danger">
+                                <b>{{ error|trans({}, 'FOSUserBundle') }}</b>
+                            </li>
+                        </ul>
+                    {% endif %}
+                    <br><a href="{{ path('fos_user_resetting_request') }}" style="color:blue">mot de passe oublié?</i></a>
+                </div>
+            </div>
+        </div>    
+    </div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+impactmediatique_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:ImpactMediatique:index" }
+    methods:  GET
+
+impactmediatique_show:
+    path:     /{id}/show
+    defaults: { _controller: "LpsaAppBundle:ImpactMediatique:show" }
+    methods:  GET
+
+impactmediatique_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:ImpactMediatique:newEdit" }
+    methods:  [GET, POST]
+    
+impactmediatique_create:
+    path:     /create
+    defaults: { _controller: "LpsaAppBundle:ImpactMediatique:create" }
+    methods:  POST
+
+impactmediatique_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:ImpactMediatique:newEdit" }
+    methods:  [GET, POST, PUT]
+
+impactmediatique_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:ImpactMediatique:delete" }

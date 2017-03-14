@@ -1,0 +1,28 @@
+typecorporel_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:TypeCorporel:index" }
+    methods:  GET
+
+typecorporel_show:
+    path:     /{id}/show
+    defaults: { _controller: "LpsaAppBundle:TypeCorporel:show" }
+    methods:  GET
+
+typecorporel_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:TypeCorporel:newEdit" }
+    methods:  [GET, POST]
+    
+typecorporel_create:
+    path:     /create
+    defaults: { _controller: "LpsaAppBundle:TypeCorporel:create" }
+    methods:  POST
+
+typecorporel_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:TypeCorporel:newEdit" }
+    methods:  [GET, POST, PUT]
+
+typecorporel_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:TypeCorporel:delete" }

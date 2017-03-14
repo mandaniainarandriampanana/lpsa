@@ -1,0 +1,5 @@
+services:
+    lpsa.chart.twig_extension:
+        class: Lpsa\ChartBundle\Twig\ChartTwigExtension
+        tags:
+           - { name: twig.extension }

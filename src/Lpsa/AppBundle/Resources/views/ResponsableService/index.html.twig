@@ -1,0 +1,86 @@
+{% extends "base_admin.html.twig" %}
+
+{% trans_default_domain "LpsaAppBundle" %}
+{% block content %}
+    <div class="row">
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ message|trans({}, 'LpsaAppBundle') }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ 'responsableservice.page_header'|trans }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'responsableservice.panel_heading'|trans }}
+                </div>
+                <div style="float: right" class="btn-action">
+                    <a class="btn btn-default" href="{{ path('admin_responsableservice_new') }}">{{ 'responsableservice.crud_panel_title.new' |trans }}</a>
+                </div>
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-responsableservices">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{{ 'responsableservice.table.label'|trans }}</th>
+                                <th>{{ 'responsableservice.table.direction'|trans }}</th>
+                                <th>{{ 'responsableservice.table.departement'|trans }}</th>
+                                <th>{{ 'responsableservice.table.service'|trans }}</th>
+                                <th>{{ 'responsableservice.table.actions'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for responsableService in responsableServices %}
+                                <tr>
+                                    <td class="id-td"><a href="{{ path('admin_responsableservice_edit',{'id' : responsableService.id }) }}" title="{{ 'form.edit'|trans }}">{{ responsableService.id }}</a></td>
+                                    <td>{{ responsableService.libelle }}</td>
+                                    <td>{% if responsableService.direction %}{{ responsableService.direction }}{% endif %}</td>
+                                    <td>{% if responsableService.departement %}{{ responsableService.departement }}{% endif %}</td>
+                                    <td>{% if responsableService.service %}{{ responsableService.service }}{% endif %}</td>
+                                    <td class="btn-action-table"> 
+                                        <div class="btn-content">
+                                            <a href="{{ path('admin_responsableservice_edit', { 'id': responsableService.id }) }}" class="btn btn-default left"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ path('admin_responsableservice_delete', { 'id': responsableService.id }) }}" class="btn btn-default left responsableservice-delete"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block others_stylesheets %}
+    {{ parent() }}
+    <style>
+        .left{
+            float: left;
+        }
+    </style>
+{% endblock %}
+
+{% block others_javascripts %}
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.responsableservice-delete', function (e) {
+                var r = confirm("{{ 'whishes.delete'|trans }}");
+                if (r !== true) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+{% endblock %}

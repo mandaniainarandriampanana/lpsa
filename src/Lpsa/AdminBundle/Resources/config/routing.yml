@@ -1,0 +1,3 @@
+lpsa_admin_index:
+    path:     /
+    defaults: { _controller: LpsaAdminBundle:Admin:index }

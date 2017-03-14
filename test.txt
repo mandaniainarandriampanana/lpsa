@@ -1,0 +1,8 @@
+
+Sprint 1
+Environnement
+Accueil/langue/boutique : dev 90% - Int 75% : Vidéo en cours
+Chantier : dev 30% - Int 15%
+Modele : dev 33% - int 0%
+
+Le modele 

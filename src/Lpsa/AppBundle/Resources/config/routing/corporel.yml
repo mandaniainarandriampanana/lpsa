@@ -1,0 +1,23 @@
+corporel_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Corporel:index" }
+    methods:  GET
+
+corporel_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Corporel:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+
+corporel_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Corporel:newEdit" }
+    methods:  GET|POST
+
+corporel_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Corporel:delete" }
+    requirements:
+       id: \d+
+

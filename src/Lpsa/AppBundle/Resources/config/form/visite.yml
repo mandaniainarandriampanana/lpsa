@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_visite.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Visite\AbstractVisiteFormHandlerStrategy
+    app.visite.form.handler.class: Lpsa\AppBundle\Form\Handler\Visite\VisiteFormHandler
+    app.new_visite.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Visite\NewVisiteFormHandlerStrategy
+    app.update_visite.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Visite\UpdateVisiteFormHandlerStrategy
+    
+services:
+    app.abstract_visite.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_visite.form.handler.strategy.class%
+        calls:
+           - [setVisiteManager, ['@app.visite.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.visite.form.handler:
+        class: %app.visite.form.handler.class%
+        calls:
+           - [setNewVisiteFormHandlerStrategy, ['@app.new_visite.form.handler.strategy']]
+           - [setUpdateVisiteFormHandlerStrategy, ['@app.update_visite.form.handler.strategy']]
+
+    app.new_visite.form.handler.strategy:
+        class: %app.new_visite.form.handler.strategy.class%
+        parent: app.abstract_visite.form.handler.strategy
+
+    app.update_visite.form.handler.strategy:
+        class: %app.update_visite.form.handler.strategy.class%
+        parent: app.abstract_visite.form.handler.strategy

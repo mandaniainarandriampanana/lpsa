@@ -1,0 +1,43 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+{% extends "LpsaAppBundle:Layout:index.html.twig" %}
+
+{% block crud_header_title %}
+    Evènement catégorie table
+{% endblock %}
+{% block crud_panel_title %}Liste des évènements{% endblock %}   
+{% block crud_panel_content %}
+    <div id="container-event-category-table">
+        {{ include('LpsaAppBundle:EvenementCategorieTable:_index.html.twig') }}        
+    </div>
+{% endblock %}
+
+{% block others_javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','.category-table',function(){
+                $(this).attr("disabled", 'disabled');
+                var val = $(this).val();
+                var split = val.split('#');
+                var id = split[0];
+                var entity = split[1];
+                if($(this).hasClass('checked')){
+                    $(this).removeClass('checked');
+                    $.ajax({
+                        url: '{{ path('evenementcategorietable_delete') }}?id='+id
+                    }).done(function(response) {
+                        $('#container-event-category-table').empty().html(response);
+                    });
+                } else {
+                    $(this).addClass('checked');
+                    $.ajax({
+                        url: '{{ path('evenementcategorietable_add') }}?id='+id+'&entity='+entity
+                    }).done(function(response) {
+                        $('#container-event-category-table').empty().html(response);
+                    });
+                }                
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base_admin.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4"><br>
+            {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+            <h4>
+                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+            </h4>
+        </div>
+    </div>
+{% endblock %}

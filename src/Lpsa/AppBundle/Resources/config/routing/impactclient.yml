@@ -1,0 +1,23 @@
+impactclient_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:ImpactClient:index" }
+    methods:  GET
+
+impactclient_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:ImpactClient:newEdit" }
+    requirements:
+       id: \d+
+
+impactclient_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:ImpactClient:newEdit" }
+
+impactclient_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:ImpactClient:delete" }
+    requirements:
+       id: \d+
+
+
+

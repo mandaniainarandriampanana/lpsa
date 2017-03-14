@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_fuiteProduit.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\FuiteProduit\AbstractFuiteProduitFormHandlerStrategy
+    app.fuiteProduit.form.handler.class: Lpsa\AppBundle\Form\Handler\FuiteProduit\FuiteProduitFormHandler
+    app.new_fuiteProduit.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\FuiteProduit\NewFuiteProduitFormHandlerStrategy
+    app.update_fuiteProduit.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\FuiteProduit\UpdateFuiteProduitFormHandlerStrategy
+    app.fuiteProduit.form.type.class: Lpsa\AppBundle\Form\Type\FuiteProduit\FuiteProduitType
+    
+services:
+    app.abstract_fuiteProduit.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_fuiteProduit.form.handler.strategy.class%
+        arguments:
+           - @app.fuiteProduit.form.type
+        calls:
+           - [setFuiteProduitManager, ['@app.fuiteProduit.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.fuiteProduit.form.handler:
+        class: %app.fuiteProduit.form.handler.class%
+        calls:
+           - [setNewFuiteProduitFormHandlerStrategy, ['@app.new_fuiteProduit.form.handler.strategy']]
+           - [setUpdateFuiteProduitFormHandlerStrategy, ['@app.update_fuiteProduit.form.handler.strategy']]
+
+    app.new_fuiteProduit.form.handler.strategy:
+        class: %app.new_fuiteProduit.form.handler.strategy.class%
+        parent: app.abstract_fuiteProduit.form.handler.strategy
+
+    app.update_fuiteProduit.form.handler.strategy:
+        class: %app.update_fuiteProduit.form.handler.strategy.class%
+        parent: app.abstract_fuiteProduit.form.handler.strategy
+
+    app.fuiteProduit.form.type:
+        class: %app.fuiteProduit.form.type.class%
+        arguments:
+            - @translator
+            - @app.fuiteProduit.manager
+        tags:
+            - { name: form.type, alias: FuiteProduitType}

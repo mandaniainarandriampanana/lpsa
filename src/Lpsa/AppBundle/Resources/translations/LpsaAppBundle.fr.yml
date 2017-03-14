@@ -1,0 +1,1127 @@
+errors:
+    404:
+       h1: Page non trouvée
+       description: "La page demandée n'a pas pu être localisée. Vérifier s'il n'y a d'erreur orthographique dans l'URL."
+    403:
+       h1: "L'accès a été réfusé"
+       description: "Vous n'avez pas l'autorisation de consulter cette page."
+    other:
+       h1: "Oops! Une erreur s'est produite"
+       description: "Quelque chose est cassé. Veuillez nous faire savoir ce que vous faisiez lorsque cette erreur s'est produite. Nous allons le réparer dès que possible. Désolé pour tout dérangement occasionné."
+form: 
+    add: Ajouter
+    delete: Supprimer
+    back: Retourner à la liste
+    edit: Editer
+    update: Mettre à jour
+    abstract: Résumé
+    errors:
+        heureTravail:
+            monthYearCategorie: Combinaison (mois,année,catégorie) déjà existante
+        objctifTrirTrir:
+            trirTrir: Entrer un nombre
+            monthYear: Combinaison (mois,année) déjà existante
+        piezometre:
+            trirTrir: Entrer un nombre
+            monthYear: Combinaison (mois,année) déjà existante
+        decanteur:
+            trirTrir: Entrer un nombre
+            monthYear: Combinaison (mois,année) déjà existante
+        PAQSSSE:
+            trirTrir: Entrer un nombre
+            monthYear: Combinaison (mois,année) déjà existante
+        indicateurTransport:
+            trirTrir: Entrer un nombre
+            monthYear: Combinaison (mois,année) déjà existante
+        laboratoire:
+            trirTrir: Entrer un nombre
+            monthYear: Combinaison (mois,année) déjà existante
+        exerciceUrgence:
+            monthYear: Combinaison (mois,année) déjà existante
+        toolbox:
+            monthYear: Combinaison (mois,année) déjà existante
+        fuiteProduit:
+            monthYear: Combinaison (mois,année) déjà existante
+        evenement:
+            maxTotal: Le total ne doit pas dépassé total_max.
+        blank: Cette valeur ne doit pas être vide.
+        mimeTypes: "Le type du fichier est invalide. Les types autorisés sont: les documents (word,excel,powerpoint,pdf) et les images (jpg,jpeg,png)."
+        statistic:
+            kpihse:
+                maxYear: "L'année ne doit pas être supérieur à year_end."
+                period: "La valeur doit être pour une periode d'une année."
+                monthDayEnd: "La date ne doit pas dépasser le month_day_end du mois de Décembre."
+                monthDayStart: "Le jour doit être au moins supérieur ou égale au month_day_start du mois de Décembre."
+    download: Télécharger
+whishes:
+    delete: Etes-vous sûr de vouloir supprimer?
+direction:
+    flashes:
+        new:
+            success: La direction a été bien ajouté.
+        edit:
+            success: La direction a été bien mis à jour.
+        delete:
+            success: La direction a été bien supprimé.
+    page_header: Direction
+    panel_heading: Listes des directions
+    table:
+        label: Libellé
+        department: Département
+        actions: Actions
+    crud_header_title: Direction
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+gravite:
+    flashes:
+        new:
+            success: La gravité a été bien ajouté.
+        edit:
+            success: La gravité a été bien mis à jour.
+        delete:
+            success: La gravité a été bien supprimé.
+    page_header: Gravité
+    panel_heading: Listes des gravités
+    table:
+        label: Libellé
+        value: Valeur
+        actions: Actions
+    crud_header_title: Gravité
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+pollutioneaux:
+    flashes:
+        new:
+            success: La pollution de l'eau a été bien ajouté.
+        edit:
+            success: La pollution de l'eau a été bien mis à jour.
+        delete:
+            success: La pollution de l'eau a été bien supprimé.
+    page_header: Pollution de l'eau
+    panel_heading: Listes des pollutions
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Pollution de l'eau
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+pollutionsol:
+    flashes:
+        new:
+            success: La pollution du sol a été bien ajouté.
+        edit:
+            success: La pollution du sol a été bien mis à jour.
+        delete:
+            success: La pollution du sol a été bien supprimé.
+    page_header: Pollution du Sol
+    panel_heading: Listes des pollutions
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Pollution du sol
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+receptionexploitation:
+    flashes:
+        new:
+            success: La reception d'exploitation a été bien ajouté.
+        edit:
+            success: La reception d'exploitation a été bien mis à jour.
+        delete:
+            success: La reception d'exploitation a été bien supprimé.
+    page_header: Reception Exploitation
+    panel_heading: Listes des receptions d'exploitation
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Reception Exploitation
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+fonction:
+    flashes:
+        new:
+            success: La fonction a été bien ajouté.
+        edit:
+            success: La fonction a été bien mis à jour.
+        delete:
+            success: La fonction a été bien supprimé.
+    page_header: Fonction
+    panel_heading: Listes des fonctions
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Fonction
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+corporelaccident:
+    flashes:
+        new:
+            success: L'accident corporel a été bien ajouté.
+        edit:
+            success: L'accident corporel a été bien mis à jour.
+        delete:
+            success: L'accident corporel a été bien supprimé.
+    page_header: Accident Corporel
+    panel_heading: Listes des accidents corporels
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Accident Corporel
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+corporeldeces:
+    flashes:
+        new:
+            success: Le decès corporel a été bien ajouté.
+        edit:
+            success: Le decès corporel a été bien mis à jour.
+        delete:
+            success: Le decès corporel a été bien supprimé.
+    page_header: Decès Corporel
+    panel_heading: Listes des decès corporels
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Decès Corporel
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+departementservice:
+    flashes:
+        new:
+            success: Le département service a été bien ajouté.
+        edit:
+            success: Le département service a été bien mis à jour.
+        delete:
+            success: Le département service a été bien supprimé.
+    page_header: Département service
+    panel_heading: Listes des départements
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Département service
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+depotcategorie:
+    flashes:
+        new:
+            success: Le dépôt catégorie a été bien ajouté.
+        edit:
+            success: Le dépôt catégorie a été bien mis à jour.
+        delete:
+            success: Le dépôt catégorie a été bien supprimé.
+    page_header: Dépôt Catégorie
+    panel_heading: Listes des dépôts
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Dépôt Catégorie
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+debordementsepandages:
+    flashes:
+        new:
+            success: Le débordement épandage a été bien ajouté.
+        edit:
+            success: Le débordement épandage a été bien mis à jour.
+        delete:
+            success: Le débordement épandage a été bien supprimé.
+    page_header: Débordements épandages
+    panel_heading: Listes des débordements épandages
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Débordements épandages
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+fournisseursexterne:
+    flashes:
+        new:
+            success: Le fournisseur externe a été bien ajouté.
+        edit:
+            success: Le fournisseur externe a été bien mis à jour.
+        delete:
+            success: Le fournisseur externe a été bien supprimé.
+    page_header: Fournisseurs Externes
+    panel_heading: Listes des fournisseurs externes
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Fournisseurs Externes
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+incendie:
+    flashes:
+        new:
+            success: L'incendie a été bien ajouté.
+        edit:
+            success: L'incendie a été bien mis à jour.
+        delete:
+            success: L'incendie a été bien supprimé.
+    page_header: Incendie
+    panel_heading: Listes des incendies
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Incendie
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+impactmediatique:
+    flashes:
+        new:
+            success: L'impacte mediatique a été bien ajouté.
+        edit:
+            success: L'impacte mediatique a été bien mis à jour.
+        delete:
+            success: L'impacte mediatique a été bien supprimé.
+    page_header: Impacte Mediatique
+    panel_heading: Listes des impactes Mediatiques
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Impacte Mediatique
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+depot:
+    flashes:
+        new:
+            success: Le depot a été bien ajouté.
+        edit:
+            success: Le depot a été bien mis à jour.
+        delete:
+            success: Le depot a été bien supprimé.
+    page_header: Depot
+    panel_heading: Listes des depots
+    table:
+        label: Libellé
+        categorie: Catégorie
+        actions: Actions
+        sigle: Sigle
+        emailcdd: Email CDD
+        emailadm: Email ADM
+    crud_header_title: Depot
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+evenementlieu:
+    flashes:
+        new:
+            success: L'évènement lieu a été bien ajouté.
+        edit:
+            success: L'évènement lieu a été bien mis à jour.
+        delete:
+            success: L'évènement lieu a été bien supprimé.
+    page_header: Evènement Lieu
+    panel_heading: Listes des évènements lieux
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Evènement Lieu
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+evenementstatut:
+    flashes:
+        new:
+            success: L'évènement statut a été bien ajouté.
+        edit:
+            success: L'évènement statut a été bien mis à jour.
+        delete:
+            success: L'évènement statut a été bien supprimé.
+    page_header: Statut d'évènement
+    panel_heading: Listes des status d'évènements
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Statut d'évènement
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+impactclient:
+    flashes:
+        new:
+            success: L'impacte client a été bien ajouté.
+        edit:
+            success: L'impacte client a été bien mis à jour.
+        delete:
+            success: L'impacte client a été bien supprimé.
+    page_header: Impacte Client
+    panel_heading: Listes des impactes Clients
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Impacte Client
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+degatsmateriel:
+    flashes:
+        new:
+            success: Le dégat matériel a été bien ajouté.
+        edit:
+            success: Le dégat matériel a été bien mis à jour.
+        delete:
+            success: Le dégat matériel a été bien supprimé.
+    page_header: Dégat Matériel
+    panel_heading: Listes des degatsmateriels
+    table:
+        label: Libellé
+        gravite: gravité
+        actions: Actions
+    crud_header_title: Dégat Matériel
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+evenementcategorie:
+    flashes:
+        new:
+            success: L'évènement catégorie a été bien ajouté.
+        edit:
+            success: L'évènement catégorie a été bien mis à jour.
+        delete:
+            success: L'évènement catégorie a été bien supprimé.
+    page_header: Evènement catégorie
+    panel_heading: Listes des évènements categories
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Evènement catégorie
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+
+evenement:
+    flashes:
+        new:
+            success: L'évènement a été bien ajouté.
+        edit:
+            success: L'évènement a été bien mis à jour.
+        delete:
+            success: L'évènement a été bien supprimé.
+    page_header: Evènement
+    panel_heading: Listes des évènements
+    panel_heading_search: Résultats de recherche
+    table:
+        editor: Rédacteur
+        date_emission: Date émission
+        depot: Dépôt
+        categorie: Catégorie
+        status: Etat de la fiche
+        actions: Actions
+        paqssse:
+            priorite: priorité
+            risque: Niveau de risque
+            action: Action PAQSSSE
+            anomalieConstate: Anomalie constatée
+            empty: Aucun Paqssse!!
+    crud_header_title: Evènement
+    crud_panel_title:
+        new: Ajouter évènement
+        edit: Edition
+    message:
+        alertDateFaits: Date de fait changée, veuillez vérifier enquête et action
+        alertDateAction: Date action changée, veuillez vérifier enquête
+responsableservice:
+    flashes:
+        new:
+            success: Le responsable service a été bien ajouté.
+        edit:
+            success: Le responsable service a été bien mis à jour.
+        delete:
+            success: Le responsable service a été bien supprimé.
+    page_header: Responsable service
+    panel_heading: Listes des responsable services
+    table:
+        label: Libellé
+        departement: Département
+        direction: Direction
+        service: Service
+        actions: Actions
+    crud_header_title: Responsable service
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+
+fuiteProduit:
+    flashes:
+        new:
+            success: La fuite produit a été bien ajouté.
+        edit:
+            success: La fuite produit a été bien mis à jour.
+        delete:
+            success: La fuite produit a été bien supprimé.
+    page_header: Fuite produit non mesurable 
+    panel_heading: Listes des fuites produits non mesurables
+    table:
+        depot: Dépot
+        fuiteNonMesurable: Valeur
+        mois: Mois
+        annee: Annee
+        actions: Actions
+    crud_header_title: Fonction
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+
+objectifKpihse:
+    flashes:
+        new:
+            success: "L'objectif KPI HSE a été bien ajouté."
+        edit:
+            success: "L'objectif KPI HSE a été bien mis à jour."
+        delete:
+            success: "L'objectif KPI HSE a été bien supprimé."
+    page_header: Objectif KPI HSE
+    panel_heading: Listes des objectifs KPI HSE
+    table:
+        annee: Année
+        actions: Actions
+    crud_header_title: Objectif KPI HSE
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+
+recherche:
+    page_header: Recherche
+    panel_heading: Recherche rapide
+    noresults: Aucun Résultat!
+
+form_label:
+    user:
+        created: L'utilisateur à été bien crée!
+        matricule: Matricule
+        service: Service
+        direction: Direction
+        departement: Département
+        firstname: Nom
+        lastname: Prénom
+    evenement:
+        nbreLpsa: Nombre Lpsa
+        nbreContracte: Nombre Contractés
+        nbreTiers: Nombre Tiers
+        nbreAgression: Nombre Agression
+        nbreVol: Nombre Vol
+        nbreIntrusion: Nombre Intrusion
+        userDeclarant: "Déclarant:" 
+        dysfonctionnement: Dysfonctionnement
+        dateEmission: "Date d'émission:"
+        dateDesFaits: "Date des faits"
+        dateAction: "Date d'action"
+        corporelAccident: Risque d'accident
+        corporelDeces: Risque de decès
+        mediatique: Médiatique
+        impactMediatique: Risque d'impact mediatique
+        pollutionEaux: Risque de pollution des eaux
+        pollutionSol: Risque de pollution du sol
+        impactClient: Qualite
+        receptionExploitation: Risque de reception,exploitation
+        incendie: Risque d'incendie
+        degatsMateriel: Risque de dégâts matériels
+        fournisseursExterne: Risque de fournisseur externe
+        table:
+            actions: Actions
+            responsable: Service concerné
+            delai: Délais
+            avancement: Avancement
+            observation: Observation
+            etat: Etat
+        evenementDu: "Evènement du:"
+        ficheEmiseDu: "Fiche emise du:"
+        dateCloture: "Date de clôture"
+        enqueteRealiseeLe: "Enquête réalisée le:"
+        nbJourTraitement: "Nombre de jour de traitement:"
+        derniereActionCorrective: "Dernière action corrective réalisée le:"
+        zone: "Zone:"
+        site: "Site:"
+        categorie: "Catégorie"
+        redacteur: "Rédacteur:"
+        narration: "Narration"
+        typeCorporel: Corporel
+        typeMateriel: Materiels
+        typeEnvironnement: Environnement (air-eau-sol)
+        evenementStatut: "Evenement statut:"
+        numeroEnregistrement: Numéro d'enregistrement emmetteur
+        categorieCommentaire: Catégorie commentaire
+        environnementValue: "Valeur:"
+        risque:
+            corporel: Risque d'accident corporel
+            materiel: Risque de degat matériel
+            environnemental: Risque environnemental
+            dysfonctionnement: Risque de dysfonctionnement
+            qualite: Risque d'impact qualité
+            mediatique: Risque mediatique
+        m3: m3
+        modal:
+            btnOk: OK
+            btnCancel: Annuler
+            title: Récapitulatif
+        btnSaved: Enregistrer
+    evenementEnquete:
+        date: "Date de l'enquête:"
+        causesImmediates: "Cause immediate:"
+        causesFondamentales: "Cause fondamentale:"
+        commentaire: "Commentaire:"
+    responsableservice:
+        direction: Direction
+        departement: Département
+        service: Service
+form_title_group_field:
+    evenement:
+        actionsCorrectivesImmediates: Actions correctives immediates
+        analyseParMatriceGravite: Analyse par matrice de gravite
+        corporel: Corporel
+        enquete: Enquête
+        actionProgres: Actions de progres decidées avec le(s) RAC(s)
+        recapitulationDates: Recapitulatif des dates
+        depot: Dépôt
+        faits: Faits
+        entiteEmettrice: Entité Emettrice
+        consequencePotentielle: Consequence potentielle
+        consequenceReelle: Consequence réelle
+        paqssse: PAQSSSE
+        
+rechercherapide:
+    flashes:
+        results: Resultats de recherche
+        
+heuretravailcategorie:
+    flashes:
+        new:
+            success: La catégorie de l'heure de travail a été bien ajouté.
+        edit:
+            success: La catégorie de l'heure de travail a été bien mis à jour.
+        delete:
+            success: La catégorie de l'heure de travail a été bien supprimé.
+    page_header: Type de personnels
+    panel_heading: Listes des catégories de l'heure de travail
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Type de personnel
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+heuretravail:
+    flashes:
+        new:
+            success: L'heure de travail a été bien ajouté.
+        edit:
+            success: L'heure de travail a été bien mis à jour.
+        delete:
+            success: L'heure de travail a été bien supprimé.
+    page_header: Heure de travail
+    panel_heading: Listes des heureS de travail
+    table:
+        label: Libellé
+        heure: Heure
+        mois: Mois
+        annee: Année
+        heuretravailcategorie: Type de personnel
+        actions: Actions
+    crud_header_title: Heure de travail
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+environnement:
+    flashes:
+        new:
+            success: L'environnement a été bien ajouté.
+        edit:
+            success: L'environnement a été bien mis à jour.
+        delete:
+            success: L'environnement a été bien supprimé.
+    page_header: Environnement
+    panel_heading: Listes des environnements
+    table:
+        label: Libellé
+        gravite: Gravité
+        typeenvironnement: Type
+        actions: Actions
+    crud_header_title: Environnement
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+calendar:
+    day:
+        1: Lundi
+        2: Mardi
+        3: Mercredi
+        4: Jeudi
+        5: Vendredi
+        6: Samedi
+        7: Dimanche
+    month:
+        1: Janvier 
+        2: Février
+        3: Mars
+        4: Avril
+        5: Mai
+        6: Juin
+        7: Juillet
+        8: Août
+        9: Septembre
+        10: Octobre
+        11: Novembre
+        12: Décembre
+        
+dysfonctionnement:
+    flashes:
+        new:
+            success: Le dysfonctionnement a été bien ajouté.
+        edit:
+            success: Le dysfonctionnement a été bien mis à jour.
+        delete:
+            success: Le dysfonctionnement a été bien supprimé.
+    page_header: Dysfonctionnement
+    panel_heading: Listes des dysfonctionnements
+    table:
+        label: Libellé
+        gravite: Gravité
+        actions: Actions
+    crud_header_title: Dysfonctionnement
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+
+typecorporel:
+    flashes:
+        new:
+            success: Le Type Corporel a été bien ajouté.
+        edit:
+            success: Le Type Corporel a été bien mis à jour.
+        delete:
+            success: Le Type Corporel a été bien supprimé.
+    page_header: Type Corporel
+    panel_heading: Listes des type Corporels
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Type Corporel
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+corporel:
+    flashes:
+        new:
+            success: Le Corporel a été bien ajouté.
+        edit:
+            success: Le Corporel a été bien mis à jour.
+        delete:
+            success: Le Corporel a été bien supprimé.
+    page_header: Corporel
+    panel_heading: Listes des Corporels
+    table:
+        label: Libellé
+        gravite: Gravite
+        typecorporel: Type
+        actions: Actions
+    crud_header_title: Corporel
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+typemateriel:
+    flashes:
+        new:
+            success: Le Type Materiel a été bien ajouté.
+        edit:
+            success: Le Type Materiel a été bien mis à jour.
+        delete:
+            success: Le Type Materiel a été bien supprimé.
+    page_header: Type Materiel
+    panel_heading: Listes des type Materiels
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Type Materiel
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+materiel:
+    flashes:
+        new:
+            success: Le Materiel a été bien ajouté.
+        edit:
+            success: Le Materiel a été bien mis à jour.
+        delete:
+            success: Le Materiel a été bien supprimé.
+    page_header: Materiel
+    panel_heading: Listes des Materiels
+    table:
+        label: Libellé
+        gravite: Gravite
+        typemateriel: Type
+        actions: Actions
+    crud_header_title: Materiel
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+
+objectifdepot:
+    flashes:
+        new:
+            success: "L'objectif a été bien ajouté."
+        edit:
+            success: "L'objectif a été bien mis à jour."
+        delete:
+            success: "L'objectif a été bien supprimé."
+    page_header: Objectif par dépôt
+    panel_heading: Listes des objectifs par dépôt
+    table:
+        objectif: Objectif
+        dateDebut: Date début
+        dateFin: Date fin
+        depot: Dépôt
+        actions: Actions
+    crud_header_title: Objectif par dépôt
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+typeenvironnement:
+    flashes:
+        new:
+            success: Le Type Environnement a été bien ajouté.
+        edit:
+            success: Le Type Environnement a été bien mis à jour.
+        delete:
+            success: Le Type Environnement a été bien supprimé.
+    page_header: Type Environnement
+    panel_heading: Listes des types Environnements
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Type Environnement
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+evenementactionprogresstatus:
+    flashes:
+        new:
+            success: L'Evenement Action Progres Status a été bien ajouté.
+        edit:
+            success: L'Evenement Action Progres Status a été bien mis à jour.
+        delete:
+            success: L'Evenement Action Progres Status a été bien supprimé.
+    page_header: Evenement Action Progres Status
+    panel_heading: Listes des Evenements Action Progres Status
+    table:
+        label: Libellé
+        actions: Actions
+    crud_header_title: Evenement Action Progres Status
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+departement:
+    flashes:
+        new:
+            success: Le departement a été bien ajouté.
+        edit:
+            success: Le departement a été bien mis à jour.
+        delete:
+            success: Le departement a été bien supprimé.
+    page_header: Departement
+    panel_heading: Listes des departements
+    table:
+        label: Libellé
+        direction: Direction
+        actions: Actions
+    crud_header_title: Departement
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+
+service:
+    flashes:
+        new:
+            success: Le service a été bien ajouté.
+        edit:
+            success: Le service a été bien mis à jour.
+        delete:
+            success: Le service a été bien supprimé.
+    page_header: Service
+    panel_heading: Listes des services
+    table:
+        label: Service
+        departement: Département
+        actions: Actions
+    crud_header_title: Service
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+pagination:
+    next: Suivant
+    previous: Précédent
+    
+exerciceurgence:
+    flashes:
+        new:
+            success: L'exercice d'urgence a été bien ajouté.
+        edit:
+            success: L'exercice d'urgence a été bien mis à jour.
+        delete:
+            success: L'exercice d'urgence a été bien supprimé.
+    page_header: Exercice d'urgence
+    panel_heading: Listes des exercices d'urgence
+    table:
+        depot: Dépot
+        nbrePoi: Poi
+        nbreMiniPoi: MiniPoi
+        nbrePum: Pum
+        nbreCombine: Combine
+        nbreCmc: Cmc
+        mois: Mois
+        annee: Annee
+        actions: Actions
+    crud_header_title: Exercice d'urgence
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+toolbox:
+    flashes:
+        new:
+            success: Le toolbox a été bien ajouté.
+        edit:
+            success: Le toolbox a été bien mis à jour.
+        delete:
+            success: Le toolbox a été bien supprimé.
+    page_header: Toolbox
+    panel_heading: Listes des toolboxs
+    table:
+        depot: Dépot
+        siege: Nbre siège
+        depots: Nbre dépot
+        sct: sct
+        mois: Mois
+        annee: Annee
+        actions: Actions
+    crud_header_title: Toolbox
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+
+visite:
+    flashes:
+        new:
+            success: Le visite a été bien ajouté.
+        edit:
+            success: Le visite a été bien mis à jour.
+        delete:
+            success: Le visite a été bien supprimé.
+    page_header: Visite
+    panel_heading: Listes des visites
+    table:
+        nbre_visite: nombre de visites
+        mois: Mois
+        annee: Annee
+        actions: Actions
+    crud_header_title: Visite
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+objectifltirtrir:
+    flashes:
+        new:
+            success: L'objectif LTIR-TRIR a été bien ajouté.
+        edit:
+            success: L'objectif LTIR-TRIR a été bien mis à jour.
+        delete:
+            success: L'objectif LTIR-TRIR a été bien supprimé.
+    page_header: Objectif LTIR-TRIR
+    panel_heading: Listes des objectifs LTIR-TRIR
+    table:
+        nbre_visite: nombre de visites
+        trir: TRIR
+        ltir: LTIR
+        mois: Mois
+        annee: Année
+        actions: Actions
+    crud_header_title: Objectif LTIR-TRIR
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+piezometre:
+    flashes:
+        new:
+            success: Le pizomètre a été bien ajouté.
+        edit:
+            success: Le pizomètre a été bien mis à jour.
+        delete:
+            success: Le pizomètre a été bien supprimé.
+    page_header: Pizomètre
+    panel_heading: Listes des pizomètres
+    table:
+        nbreEchantillonPreleve: "Nbres d'échantillons prélévés"
+        nbreEchantillonAnalyse: "Nbres d'échantillons analysés"
+        nbreAnomalieReleve: "Nbre d'anomalies relevées"
+        tauxNonConformite: "Taux de non-conformité"
+        mois: Mois
+        annee: Annee
+        actions: Actions
+    crud_header_title: Pizomètre
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+decanteur:
+    flashes:
+        new:
+            success: Le décanteur a été bien ajouté.
+        edit:
+            success: Le décanteur a été bien mis à jour.
+        delete:
+            success: Le décanteur a été bien supprimé.
+    page_header: Décanteur
+    panel_heading: Listes des décanteurs
+    table:
+        nbreEchantillonPreleve: "Nbres d'échantillons prélévés"
+        nbreEchantillonAnalyse: "Nbres d'échantillons analysés"
+        nbreAnomalieReleve: "Nbre d'anomalies relevées"
+        tauxNonConformite: "Taux de non-conformité"
+        mois: Mois
+        annee: Annee
+        actions: Actions
+    crud_header_title: Décanteur
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+laboratoire:
+    flashes:
+        new:
+            success: Le laboratoire a été bien ajouté.
+        edit:
+            success: Le laboratoire a été bien mis à jour.
+        delete:
+            success: Le laboratoire a été bien supprimé.
+    page_header: Laboratoire
+    panel_heading: Listes des laboratoires
+    table:
+        nbreEchantillonPreleve: "Nbres d'échantillons prélévés"
+        nbreEchantillonAnalyse: "Nbres d'échantillons analysés"
+        nbreAnomalieReleve: "Nbre d'anomalies relevées"
+        tauxNonConformite: "Taux de non-conformité"
+        resultatEssaiCirculaire: "Résultats Essais Circulaires"
+        mois: Mois
+        annee: Annee
+        actions: Actions
+    crud_header_title: Laboratoire
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+indicateurTransport:
+    flashes:
+        new:
+            success: "L'indicateur transport a été bien ajouté."
+        edit:
+            success: "L'indicateur transport a été bien mis à jour."
+        delete:
+            success: "L'indicateur transport a été bien supprimé."
+    page_header: Indicateur Transport
+    panel_heading: Listes des indicateurs transports
+    table:
+        nbreJourAccidentCorporelTransportRoute: "Nombre de jours depuis dernier accident corporel y compris tiers \"Transport Route\""
+        kmAccidentCorporelTransportRoute: "KM parcourus \"Transport Route\" depuis dernier accident corporel y compris tiers"
+        nbreJourAccidentCorporelTransportRail: "Nombre de jours depuis dernier accident corporel y compris tiers \"Transport Rail\""
+        kmAccidentCorporelTransportRail: "KM parcourus \"Transport Rail\" depuis dernier accident corporel y compris tiers"
+        nbreJourIncidentTransportMaritime: "Nombre de jours depuis dernier incident y compris tiers \"Transport Maritime\""
+        kmIncidentTransportMaritime: "Miles parcourus \"Transport Maritime\" depuis dernier incident y compris tiers"
+        nbreJourFatalite: "Nombre de jours depuis dernière fatalité y compris tiers \"Tout mode transport\""
+        tauxSinistraliteMatiereDangereuse: "Taux de sinistralité de transport de matières dangereuses"
+        kmVehiculeLeger: "KM parcourus véhicules legers"
+        tauxSinistraliteVehiculeLeger: "Taux de sinistralité de transport véhicules légers"
+        mois: Mois
+        annee: Annee
+        actions: Actions
+    crud_header_title: Indicateur Transport
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+PAQSSSE:
+    flashes:
+        new:
+            success: Le PAQSSSE a été bien ajouté.
+        edit:
+            success: Le PAQSSSE a été bien mis à jour.
+        delete:
+            success: Le PAQSSSE a été bien supprimé.
+    page_header: PAQSSSE
+    panel_heading: Listes des PAQSSSE
+    table:
+        nbreNonConformiteCloture: "Nombre de non-conformités clôturées"
+        nbreNonConformiteNonEchue: "Nombre de non-conformités non-échues"
+        nbreOVERDUE: "Nombre OVERDUE"
+        pourcentageOVERDUE: "Pourcentage OVERDUE"
+        mois: Mois
+        annee: Annee
+        actions: Actions
+    crud_header_title: PAQSSSE
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+paq3seGravite:
+    flashes:
+        new:
+            success: La gravité du PAQSSSE a été bien ajouté.
+        edit:
+            success: La gravité du PAQSSSE a été bien mis à jour.
+        delete:
+            success: La gravité du PAQSSSE a été bien supprimé.
+    page_header: Gravité du PAQSSSE
+    panel_heading: Gravité du PAQSSSE
+    table:
+        label: Libellé
+        value: valeur
+        actions: Actions
+    crud_header_title: Gravité du PAQSSSE
+    crud_panel_title:
+        new: Ajout
+        edit: Edition
+        
+doublon:
+    flashes:
+        new: pas de doublon
+    page_header: PAQSSSE:Doublon
+    panel_heading: Listes des paqssses
+    table:
+        actions: Actions
+        redacteur: Redacteur
+        depot: Depot
+        anomalie: Anomalie constaté
+        dateEmission: Date Emission
+    crud_header_title: PAQSSSE
+        

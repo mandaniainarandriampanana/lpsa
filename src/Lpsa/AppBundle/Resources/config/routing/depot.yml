@@ -1,0 +1,29 @@
+admin_depot_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Depot:index" }
+    methods:  GET
+
+admin_depot_show:
+    path:     /{id}/show
+    defaults: { _controller: "LpsaAppBundle:Depot:show" }
+    methods:  GET
+
+admin_depot_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Depot:newEdit" }
+    methods:  [GET, POST]
+    
+admin_depot_create:
+    path:     /create
+    defaults: { _controller: "LpsaAppBundle:Depot:create" }
+    methods:  POST
+
+admin_depot_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Depot:newEdit" }
+
+admin_depot_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Depot:delete" }
+
+    

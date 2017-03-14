@@ -1,0 +1,36 @@
+parameters:
+    app.abstract_dysfonctionnement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Dysfonctionnement\AbstractDysfonctionnementFormHandlerStrategy
+    app.dysfonctionnement.form.handler.class: Lpsa\AppBundle\Form\Handler\Dysfonctionnement\DysfonctionnementFormHandler
+    app.new_dysfonctionnement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Dysfonctionnement\NewDysfonctionnementFormHandlerStrategy
+    app.update_dysfonctionnement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Dysfonctionnement\UpdateDysfonctionnementFormHandlerStrategy
+    
+services:
+    app.abstract_dysfonctionnement.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_dysfonctionnement.form.handler.strategy.class%
+        calls:
+           - [setDysfonctionnementManager, ['@app.dysfonctionnement.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.dysfonctionnement.form.handler:
+        class: %app.dysfonctionnement.form.handler.class%
+        calls:
+           - [setNewDysfonctionnementFormHandlerStrategy, ['@app.new_dysfonctionnement.form.handler.strategy']]
+           - [setUpdateDysfonctionnementFormHandlerStrategy, ['@app.update_dysfonctionnement.form.handler.strategy']]
+
+    app.new_dysfonctionnement.form.handler.strategy:
+        class: %app.new_dysfonctionnement.form.handler.strategy.class%
+        parent: app.abstract_dysfonctionnement.form.handler.strategy
+
+    app.update_dysfonctionnement.form.handler.strategy:
+        class: %app.update_dysfonctionnement.form.handler.strategy.class%
+        parent: app.abstract_dysfonctionnement.form.handler.strategy
+
+    app.form.dysfonctionnement.evenement:
+        class: Lpsa\AppBundle\Form\Type\Dysfonctionnement\DysfonctionnementEvenementType
+        arguments:
+            - '@app.dysfonctionnement.manager'
+        tags:
+            - { name: form.type, alias: evenement_dysfonctionnement_choice}

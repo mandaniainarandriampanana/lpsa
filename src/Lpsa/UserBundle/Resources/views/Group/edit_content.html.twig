@@ -1,0 +1,26 @@
+{% extends "LpsaAppBundle:Layout:newEdit.html.twig" %}
+
+{% set deleteClassSelector = 'group' %}
+
+{% block crud_header_title %}
+    Groupe utilisateur
+{% endblock %}
+{% block crud_panel_title %}Edition groupe{% endblock %} 
+{% block crud_panel_nav %}
+    <ul class="nav nav-pills">
+        <li>
+            <a href="{{ path('fos_user_group_list') }}" class="btn btn-default" style="padding: 6px 12px;"><i class="fa fa-mail-reply"></i> Retourner à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('fos_user_group_delete',{'groupname': groupname }) }}" class="btn btn-default group-delete" style="padding: 6px 12px;"><i class="fa fa-trash-o"></i> Supprimer</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block crud_panel_content %}
+    <form action="{{ path('fos_user_group_edit', {'groupname': groupname} ) }}" {{ form_enctype(form) }} method="POST" class="fos_user_group_edit">
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" class="btn btn-default" value="{{ 'group.edit.submit'|trans([], 'FOSUserBundle') }}" />
+        </div>
+    </form>
+{% endblock %} 

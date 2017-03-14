@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_impactclient.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ImpactClient\AbstractImpactClientFormHandlerStrategy
+    app.impactclient.form.handler.class: Lpsa\AppBundle\Form\Handler\ImpactClient\ImpactClientFormHandler
+    app.new_impactclient.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ImpactClient\NewImpactClientFormHandlerStrategy
+    app.update_impactclient.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ImpactClient\UpdateImpactClientFormHandlerStrategy
+    
+services:
+    app.abstract_impactclient.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_impactclient.form.handler.strategy.class%
+        calls:
+           - [setImpactClientManager, ['@app.impactclient.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.impactclient.form.handler:
+        class: %app.impactclient.form.handler.class%
+        calls:
+           - [setNewImpactClientFormHandlerStrategy, ['@app.new_impactclient.form.handler.strategy']]
+           - [setUpdateImpactClientFormHandlerStrategy, ['@app.update_impactclient.form.handler.strategy']]
+
+    app.new_impactclient.form.handler.strategy:
+        class: %app.new_impactclient.form.handler.strategy.class%
+        parent: app.abstract_impactclient.form.handler.strategy
+
+    app.update_impactclient.form.handler.strategy:
+        class: %app.update_impactclient.form.handler.strategy.class%
+        parent: app.abstract_impactclient.form.handler.strategy

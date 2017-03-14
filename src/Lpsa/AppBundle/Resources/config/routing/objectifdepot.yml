@@ -1,0 +1,25 @@
+objectifdepot_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:ObjectifDepot:index" }
+    methods:  GET
+
+objectifdepot_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:ObjectifDepot:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+
+objectifdepot_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:ObjectifDepot:newEdit" }
+    methods:  GET|POST
+
+objectifdepot_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:ObjectifDepot:delete" }
+    requirements:
+       id: \d+
+
+
+

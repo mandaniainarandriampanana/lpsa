@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_evenementactionprogresstatus.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\EvenementActionProgresStatus\AbstractEvenementActionProgresStatusFormHandlerStrategy
+    app.evenementactionprogresstatus.form.handler.class: Lpsa\AppBundle\Form\Handler\EvenementActionProgresStatus\EvenementActionProgresStatusFormHandler
+    app.new_evenementactionprogresstatus.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\EvenementActionProgresStatus\NewEvenementActionProgresStatusFormHandlerStrategy
+    app.update_evenementactionprogresstatus.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\EvenementActionProgresStatus\UpdateEvenementActionProgresStatusFormHandlerStrategy
+    
+services:
+    app.abstract_evenementactionprogresstatus.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_evenementactionprogresstatus.form.handler.strategy.class%
+        calls:
+           - [setEvenementActionProgresStatusManager, ['@app.evenementactionprogresstatus.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.evenementactionprogresstatus.form.handler:
+        class: %app.evenementactionprogresstatus.form.handler.class%
+        calls:
+           - [setNewEvenementActionProgresStatusFormHandlerStrategy, ['@app.new_evenementactionprogresstatus.form.handler.strategy']]
+           - [setUpdateEvenementActionProgresStatusFormHandlerStrategy, ['@app.update_evenementactionprogresstatus.form.handler.strategy']]
+
+    app.new_evenementactionprogresstatus.form.handler.strategy:
+        class: %app.new_evenementactionprogresstatus.form.handler.strategy.class%
+        parent: app.abstract_evenementactionprogresstatus.form.handler.strategy
+
+    app.update_evenementactionprogresstatus.form.handler.strategy:
+        class: %app.update_evenementactionprogresstatus.form.handler.strategy.class%
+        parent: app.abstract_evenementactionprogresstatus.form.handler.strategy

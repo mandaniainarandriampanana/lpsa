@@ -1,0 +1,25 @@
+lpsa_user_admin_index:
+    path:     /
+    defaults: { _controller: LpsaUserBundle:User:index }
+
+lpsa_user_admin_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaUserBundle:User:delete" }
+    requirements:
+       id: \d+
+
+lpsa_admin_user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaUserBundle:User:edit" }
+    methods:  [GET, POST]
+
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
+    
+lpsa_admin_user_change_password:
+    path:    /{id}/change_pwd
+    defaults: { _controller: "LpsaUserBundle:User:AdminChangePassword" }
+
+
+

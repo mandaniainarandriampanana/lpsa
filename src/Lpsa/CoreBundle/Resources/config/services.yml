@@ -1,0 +1,3 @@
+services:
+    lpsa_core.file_uploader:
+        class: Lpsa\CoreBundle\Service\FileUploader

@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_responsableservice.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ResponsableService\AbstractResponsableServiceFormHandlerStrategy
+    app.responsableservice.form.handler.class: Lpsa\AppBundle\Form\Handler\ResponsableService\ResponsableServiceFormHandler
+    app.new_responsableservice.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ResponsableService\NewResponsableServiceFormHandlerStrategy
+    app.update_responsableservice.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ResponsableService\UpdateResponsableServiceFormHandlerStrategy
+    
+services:
+    app.abstract_responsableservice.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_responsableservice.form.handler.strategy.class%
+        calls:
+           - [setResponsableServiceManager, ['@app.responsableservice.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.responsableservice.form.handler:
+        class: %app.responsableservice.form.handler.class%
+        calls:
+           - [setNewResponsableServiceFormHandlerStrategy, ['@app.new_responsableservice.form.handler.strategy']]
+           - [setUpdateResponsableServiceFormHandlerStrategy, ['@app.update_responsableservice.form.handler.strategy']]
+
+    app.new_responsableservice.form.handler.strategy:
+        class: %app.new_responsableservice.form.handler.strategy.class%
+        parent: app.abstract_responsableservice.form.handler.strategy
+
+    app.update_responsableservice.form.handler.strategy:
+        class: %app.update_responsableservice.form.handler.strategy.class%
+        parent: app.abstract_responsableservice.form.handler.strategy

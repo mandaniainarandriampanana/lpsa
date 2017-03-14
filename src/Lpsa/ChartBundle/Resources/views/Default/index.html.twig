@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chart</title>
+        <!--[if lte IE 8]><script type="text/javascript" src="{{ asset('bundles/lpsachart/js/excanvas.js') }}"></script><![endif]-->
+        <script src="{{ asset('bundles/lpsaapp/jquery/jquery-3.1.1.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/lpsachart/js/chart.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/lpsachart/js/Chart.min.js') }}" type="text/javascript"></script>
+    </head>
+    <body>
+    <script>
+    </script>
+    <a id="export" target="_blank">Exporter</a>
+    {{ chart_render_html(chart) }}
+    {{ chart_render_js(chart) }}
+    <script type="text/javascript">
+    
+    $(document).ready(function(){
+        $('#export').click(function(){
+            var url_base64 = exportToImage('myChart');
+            $(this).attr('href',url_base64);
+        });
+       /* setTimeout(function(){
+            drawDatasetPointsLabels();
+        },300);*/
+    });
+    //callback function, called when the pie ends his animation
+   
+    </script>
+    </body>
+</html>

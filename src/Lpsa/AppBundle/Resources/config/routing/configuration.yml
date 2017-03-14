@@ -1,0 +1,5 @@
+admin_configuration_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Configuration:index" }
+    methods:  GET
+    

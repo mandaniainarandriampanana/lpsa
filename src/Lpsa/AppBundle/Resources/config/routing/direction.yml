@@ -1,0 +1,23 @@
+direction_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Direction:index" }
+    methods:  GET
+
+direction_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Direction:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+
+direction_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Direction:newEdit" }
+    methods:  GET|POST
+
+direction_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Direction:delete" }
+    requirements:
+       id: \d+
+

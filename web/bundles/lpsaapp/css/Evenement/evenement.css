@@ -1,0 +1,82 @@
+#table-evtActionProgres>tbody>tr>td > * {
+    height: auto;
+    resize: none!important;
+    border: none;
+}
+#table-evtActionProgres>tbody>tr>td{
+    padding: 0!important;
+}
+.datetime-container .input-group-addon{
+    background-color: initial!important;
+}
+
+.group-field-title,.sub-title{
+    text-transform: uppercase;
+}
+
+.group-field-title{
+    color: #CC0000;
+    font-size: large;
+}
+.sub-title{
+    color: #CC0000;
+    font-size: small;
+}
+.group-separator{
+    height: 3px;
+    margin-bottom: 8px;
+    background-color: #CCC;
+}
+.progress-bar-container-avancement .progress-bar {
+    border:none;
+    background:#aaa;
+     border-radius: 0px;
+     font-size: 10px;
+}
+.progress-bar-container-avancement{
+    background: #fff;
+    border: 1px solid #aaa !important;
+    border-radius: 0px;
+    padding: 2px;
+    height: 24px !important;
+    margin-bottom: 0;
+    margin-top: 6px;
+}
+#wantAddPassseContainer strong{
+    font-family: Arial;
+    font-weight: bold;
+}
+
+#infoPaqsse strong{
+    font-family: Arial;
+    font-weight: bold;
+}
+
+@media screen {
+    #printSection {
+        display: none;
+    }
+    .print-header{
+        display: none;
+    }
+}
+
+@media print {
+    body > *:not(#printSection) {
+        display: none;
+    }
+    #printSection, #printSection * {
+        visibility: visible;
+    }
+    #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+    }
+    .print-header{
+        display: block;
+    }
+    .print-header .logo-header{
+        padding: 0!important;
+    }
+}

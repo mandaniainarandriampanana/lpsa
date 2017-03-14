@@ -1,0 +1,34 @@
+admin_fuiteProduit_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:FuiteProduit:index" }
+    methods:  GET
+    options:
+        section: 
+            - KPIHSE
+
+admin_fuiteProduit_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:FuiteProduit:newEdit" }
+    methods:  [GET, POST]
+    options:
+        section: 
+            - KPIHSE
+
+admin_fuiteProduit_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:FuiteProduit:newEdit" }
+    methods:  [GET, PUT]
+    requirements:
+       id: \d+
+    options:
+        section: 
+            - KPIHSE
+
+admin_fuiteProduit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:FuiteProduit:delete" }
+    requirements:
+       id: \d+
+    options:
+        section: 
+            - KPIHSE

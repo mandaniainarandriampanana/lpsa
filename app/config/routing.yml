@@ -1,0 +1,47 @@
+lpsa_mail:
+    resource: "@LpsaMailBundle/Controller/"
+    prefix:   /mail
+
+lpsa_app:
+    resource: "@LpsaAppBundle/Resources/config/routing.yml"
+    prefix:   /admin
+    
+lpsa_app_admin_user:
+    resource: "@LpsaAppBundle/Resources/config/userrouting.yml"
+    prefix:   /user
+
+lpsa_app_admin_kpihse:
+    resource: "@LpsaAppBundle/Resources/config/routing/kpihse.yml"
+    prefix:   /kpihse
+
+lpsa_app_admin_paqssse:
+    resource: "@LpsaAppBundle/Resources/config/routing/listingpaq3se.yml"
+    prefix:   /paqssse
+
+lpsa_admin:
+    resource: "@LpsaAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+lpsa_user_admin:
+    resource: "@LpsaUserBundle/Resources/config/routing.yml"
+    prefix:   /admin/user
+
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /user
+    
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /user/profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /admin/register

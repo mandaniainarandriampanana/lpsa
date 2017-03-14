@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_fonction.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Fonction\AbstractFonctionFormHandlerStrategy
+    app.fonction.form.handler.class: Lpsa\AppBundle\Form\Handler\Fonction\FonctionFormHandler
+    app.new_fonction.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Fonction\NewFonctionFormHandlerStrategy
+    app.update_fonction.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Fonction\UpdateFonctionFormHandlerStrategy
+    
+services:
+    app.abstract_fonction.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_fonction.form.handler.strategy.class%
+        calls:
+           - [setFonctionManager, ['@app.fonction.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.fonction.form.handler:
+        class: %app.fonction.form.handler.class%
+        calls:
+           - [setNewFonctionFormHandlerStrategy, ['@app.new_fonction.form.handler.strategy']]
+           - [setUpdateFonctionFormHandlerStrategy, ['@app.update_fonction.form.handler.strategy']]
+
+    app.new_fonction.form.handler.strategy:
+        class: %app.new_fonction.form.handler.strategy.class%
+        parent: app.abstract_fonction.form.handler.strategy
+
+    app.update_fonction.form.handler.strategy:
+        class: %app.update_fonction.form.handler.strategy.class%
+        parent: app.abstract_fonction.form.handler.strategy

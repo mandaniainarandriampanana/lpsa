@@ -1,0 +1,17 @@
+evenementcategorietable_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:EvenementCategorieTable:index" }
+    methods:  GET
+
+evenementcategorietable_delete:
+    path:     /delete
+    defaults: { _controller: "LpsaAppBundle:EvenementCategorieTable:delete" }
+    methods:  GET
+
+evenementcategorietable_add:
+    path:     /add
+    defaults: { _controller: "LpsaAppBundle:EvenementCategorieTable:add" }
+    methods:  GET
+
+
+

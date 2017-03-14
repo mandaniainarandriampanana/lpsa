@@ -1,0 +1,191 @@
+{% extends "base_admin.html.twig" %}
+{% trans_default_domain "LpsaAppBundle" %}
+{% block content %}
+    <div id="dashboard">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Tableau de bord</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 col-sm-12">                
+                <div class="last-incident-block">
+                    <div class="title-block"><span>Les derniers incidents</span></div>
+                    <table width="100%" class="table table-striped  table-hover" id="dataTables-lastincident">
+                        <thead>
+                        <th>#</th>
+                        <th>Redacteur</th>
+                        <th>Date emission</th>
+                        <th>Depot</th>
+                        <th>Catégorie</th>
+                        <th>Etat de la fiche</th>
+                        </thead>
+                        <tbody>
+                            {% for evenement in lastTenEvent %}
+                                <tr>
+                                    <td>{{ evenement.numeroEnregistrement }}</td>
+                                    <td>{{ evenement.user.matricule ~ ' / ' ~ evenement.user.firstname ~ ' ' ~ evenement.user.lastname|capitalize }}</td>
+                                    <td>{{ evenement.dateEmission|date('d/m/y') }}</td>
+                                    <td>{% if evenement.depot %}{{ evenement.depot.libelle }}{% endif %}</td>
+                                    <td>{% if evenement.categorie %}{{ evenement.categorie.libelle }}{% endif %}</td>
+                                    <td>{% if evenement.evenementStatut %}{{ evenement.evenementStatut.libelle }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            <!--        <span class="" style="color:#CC1B27">Nombre total d'incidents :</span><span style="color:#333"> {{ nbEvent }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="" style="color:#CC1B27">Nombre incidents mis à jour :</span><span style="color:#333"> {{ nbEventUpdated }}</span>  -->
+                </div>
+                <div class="nb-incident-zone-block">
+                    <div class="title-block"><span>Nombre incident par zone</span></div>
+                    <table width="100%" class="table table-striped  table-hover" id="dataTables-nb-incident-zone">
+                        <thead>
+                        <th>Zone nord</th>
+                        <th>Zone sud</th>
+                        <th>Siège</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="centered">{{ nbEventZoneNord }}</td>
+                                <td class="centered">{{ nbEventZoneSud }}</td>
+                                <td class="centered">{{ nbEventSiege }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="nb-incident-zone-block">
+                    <div class="title-block"><span>Nombre incident par Statut</span></div>
+                    <table width="100%" class="table table-striped  table-hover" id="dataTables-nb-incident-statut">
+                        <thead>
+                        <th>En Cours</th>
+                        <th>Cloturé</th>
+                        <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="centered">{{ nbEventHasStatutEnCours }}</td>
+                                <td class="centered">{{ nbEventHasStatutCloture }}</td>
+                                <td class="centered">{{ nbEvent }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="nb-incident-cat-block">
+                    <div class="title-block"><span>Nombre incident par catégorie</span></div>
+                    <table width="100%" class="table table-striped  table-hover" id="dataTables-nb-incident-cat">
+                        <thead>
+                        <th>Catégorie</th>
+                        <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Accident</td>
+                                <td class="centered">{{ nbEventHasCategorieAccident }}</td>
+                            </tr>
+                            <tr>
+                                <td>Presqu'accident</td>
+                                <td class="centered">{{ nbEventHasCategoriePresqueAccident }}</td>
+                            </tr>
+                            <tr>
+                                <td>Comportement non sécuritaire</td>
+                                <td class="centered">{{ nbEventHasCategorieComportementNonSecuritaire }}</td>
+                            </tr>
+                            <tr>
+                                <td>Situation dangereuse</td>
+                                <td class="centered">{{ nbEventHasCategorieSituationDangereuse }}</td>
+                            </tr>
+                            <tr>
+                                <td>Dysfonctionnements des matériels</td>
+                                <td class="centered">{{ nbEventHasCategorieDysfonctionnementsDeMateriels }}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="nb-incident-cat-block">
+                    <div class="title-block"><span>Nombre incident par Gravité</span></div>
+                    <table width="100%" class="table table-striped  table-hover" id="dataTables-nb-incident-grav">
+                        <thead>
+                        <th>Gravité</th>
+                        <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Catastrophique</td>
+                                <td class="centered">{{ nbEventHasGraviteCatastrophique }}</td>
+                            </tr>
+                            <tr>
+                                <td>Majeur</td>
+                                <td class="centered">{{ nbEventHasGraviteMajeur }}</td>
+                            </tr>
+                            <tr>
+                                <td>Serieux</td>
+                                <td class="centered">{{ nbEventHasGraviteSerieux }}</td>
+                            </tr>
+                            <tr>
+                                <td>Modere</td>
+                                <td class="centered">{{ nbEventHasGraviteModere }}</td>
+                            </tr>
+                            <tr>
+                                <td>Mineur</td>
+                                <td class="centered">{{ nbEventHasGraviteMineur }}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="last-incident-block">
+                    <div class="title-block"><span>Indice de reporting</span></div>
+                    <table width="100%" class="table table-striped  table-hover" id="dataTables-lastincident">
+                        <thead>
+                            <th>Dépôt</th>
+                            <th>Indice</th>
+                        </thead>
+                        <tbody>
+                            {% for indice in indiceReporting %}
+                                <tr>
+                                    <td>{{ indice['depot'] }}</td>
+                                    <td class="centered">{{ indice['value'] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-12">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="graph-block">
+                            <div class="title-block"><span>Graphe LTIR</span></div>
+                            <div class="graph-content">
+                                {{ chart_render_html(chart['chartLtir'],200,200) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="graph-block">
+                            <div class="title-block"><span>Graphe TRIR</span></div>
+                            <div class="graph-content">
+                                {{ chart_render_html(chart['chartTrir'],200,200) }}
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block others_javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/lpsachart/js/chart.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/lpsachart/js/Chart.min.js') }}" type="text/javascript"></script>
+    {{ chart_render_js(chart['chartLtir']) }}
+    {{ chart_render_js(chart['chartTrir']) }}
+    
+{% endblock %}

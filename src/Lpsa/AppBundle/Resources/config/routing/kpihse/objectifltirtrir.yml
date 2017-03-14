@@ -1,0 +1,34 @@
+objectifltirtrir_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:ObjectifLtirTrir:index" }
+    methods:  GET
+    options:
+        section: 
+            - KPIHSE
+
+objectifltirtrir_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:ObjectifLtirTrir:newEdit" }
+    methods:  [GET, POST]
+    options:
+        section: 
+            - KPIHSE
+
+objectifltirtrir_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:ObjectifLtirTrir:newEdit" }
+    methods:  [GET, PUT]
+    requirements:
+       id: \d+
+    options:
+        section: 
+            - KPIHSE
+
+objectifltirtrir_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:ObjectifLtirTrir:delete" }
+    requirements:
+       id: \d+
+    options:
+        section: 
+            - KPIHSE

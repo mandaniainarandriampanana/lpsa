@@ -1,0 +1,23 @@
+departement_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Departement:index" }
+    methods:  GET
+
+departement_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Departement:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+
+departement_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Departement:newEdit" }
+    methods:  GET|POST
+
+departement_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Departement:delete" }
+    requirements:
+       id: \d+
+

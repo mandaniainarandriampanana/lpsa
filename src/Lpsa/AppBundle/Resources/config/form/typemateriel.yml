@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_typemateriel.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\TypeMateriel\AbstractTypeMaterielFormHandlerStrategy
+    app.typemateriel.form.handler.class: Lpsa\AppBundle\Form\Handler\TypeMateriel\TypeMaterielFormHandler
+    app.new_typemateriel.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\TypeMateriel\NewTypeMaterielFormHandlerStrategy
+    app.update_typemateriel.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\TypeMateriel\UpdateTypeMaterielFormHandlerStrategy
+    
+services:
+    app.abstract_typemateriel.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_typemateriel.form.handler.strategy.class%
+        calls:
+           - [setTypeMaterielManager, ['@app.typemateriel.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.typemateriel.form.handler:
+        class: %app.typemateriel.form.handler.class%
+        calls:
+           - [setNewTypeMaterielFormHandlerStrategy, ['@app.new_typemateriel.form.handler.strategy']]
+           - [setUpdateTypeMaterielFormHandlerStrategy, ['@app.update_typemateriel.form.handler.strategy']]
+
+    app.new_typemateriel.form.handler.strategy:
+        class: %app.new_typemateriel.form.handler.strategy.class%
+        parent: app.abstract_typemateriel.form.handler.strategy
+
+    app.update_typemateriel.form.handler.strategy:
+        class: %app.update_typemateriel.form.handler.strategy.class%
+        parent: app.abstract_typemateriel.form.handler.strategy

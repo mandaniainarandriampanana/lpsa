@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_gravite.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Gravite\AbstractGraviteFormHandlerStrategy
+    app.gravite.form.handler.class: Lpsa\AppBundle\Form\Handler\Gravite\GraviteFormHandler
+    app.new_gravite.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Gravite\NewGraviteFormHandlerStrategy
+    app.update_gravite.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Gravite\UpdateGraviteFormHandlerStrategy
+    
+services:
+    app.abstract_gravite.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_gravite.form.handler.strategy.class%
+        calls:
+           - [setGraviteManager, ['@app.gravite.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.gravite.form.handler:
+        class: %app.gravite.form.handler.class%
+        calls:
+           - [setNewGraviteFormHandlerStrategy, ['@app.new_gravite.form.handler.strategy']]
+           - [setUpdateGraviteFormHandlerStrategy, ['@app.update_gravite.form.handler.strategy']]
+
+    app.new_gravite.form.handler.strategy:
+        class: %app.new_gravite.form.handler.strategy.class%
+        parent: app.abstract_gravite.form.handler.strategy
+
+    app.update_gravite.form.handler.strategy:
+        class: %app.update_gravite.form.handler.strategy.class%
+        parent: app.abstract_gravite.form.handler.strategy

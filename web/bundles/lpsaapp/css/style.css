@@ -1,0 +1,831 @@
+/*custom style*/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+.navbar{
+    background:url('../img/bg-header.png');
+    /*background:#d83133;*/
+    height:100px;
+    border:none;
+    /*     -webkit-box-shadow:1px 1px 1px 1px #ddd;
+        box-shadow:1px 1px 1px 1px #ddd;*/
+}
+body{
+    font-family: 'Cooper Hewitt Book';
+    background: #fff none repeat scroll 0 0;
+}
+.sidebar-nav{
+    /*display:none;*/
+}
+.header-content{
+    background: rgba(0, 0, 0, 0) url("../img/bg-header.png") repeat scroll 0 0;
+}
+.content-fluid-header{
+    width:100%;
+    background: rgba(0, 0, 0, 0) url("../img/bg-header.png") repeat scroll 0 0;
+    height:100px;
+    -webkit-box-shadow:1px 1px 1px 1px #ddd;
+    box-shadow:1px 1px 1px 1px #ddd;
+}
+.sidebar {
+    margin-top: 100px;
+}
+.navbar-brand {
+    padding:0;
+}
+.logo-header{
+    width:290px;
+    background:#fff;
+    display: table;
+    height: 100px;
+}
+.logo-header-content{
+    display: table-cell;
+}
+.logo-header .logo-img{
+    display:table-cell;
+    vertical-align: middle;
+    width: 10px;
+}
+.logo-header .appli-name strong{
+    color:#CC1B27;
+}
+.logo-header .appli-name{
+    width:70px;
+    display:table-cell;
+    vertical-align: middle;
+    font-size:23px;
+    color:#7C97A1;
+    font-family:'DIN Alternate';
+}
+.logo-header .logo-img img{
+    display:block;
+    width:50px;
+    margin:0 auto;
+}
+ul.menu-header li{
+    width:100px;
+} 
+ul.menu-header li{
+    display: table-cell;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    width: 100px;
+} 
+.menu-header li a {
+    color:#fff;
+    text-transform: uppercase;
+    padding: 0;
+}
+.menu-header li a:hover,.menu-header li a:active .menu-header li a:focus ,.menu-header li a:link  {
+    background:none!important;
+}
+.menu-header li .label-menu {
+    font-family:'DIN Alternate';
+    font-weight:normal;
+}
+.menu-header li:hover a:after {
+    background: #000 ;
+    content: "";
+    display: block;
+    height: 2px;
+    margin: 0 auto;
+    width: 29px;
+}
+.icon-menu{
+    width:32px;
+    height:32px;
+    margin:0 auto;
+    display:block;
+}
+
+#page-wrapper{
+    margin: 0 auto;
+    width: 1200px;
+    border-left:0;
+    background: transparent;
+}
+.header-content{
+    width:100%;
+}
+
+#wrapper{
+    background-image: url('../img/bg-top.png');
+    background-size: 70%;
+    background-attachment: fixed;
+    background-position: bottom;
+    background-repeat:  no-repeat;
+    /*background-position:10%;*/
+}
+#page-wrapper h1.page-header{
+    text-transform:uppercase;
+    margin-bottom:0;
+    border:none;
+    font-size: 25px;
+    padding-bottom: 0px;
+    font-family:'DIN Alternate';
+}
+#page-wrapper h1.page-header:after{
+    width:50px;
+    background:red;
+    display:block;
+    height:3px;
+    content:"";
+    margin-bottom:30px;
+    margin-top:7px;
+}
+.panel-default {
+    border:none;
+}
+.panel-heading{
+    display:none;
+}
+.panel-body {
+    padding-top:0;
+}
+.form-group label{
+    display:block;
+    width:100%;
+}
+.form-group input[type="text"]:disabled {
+    background: #fff;
+    border:1px solid #dedddd;
+    /*color:#dedddd;*/
+}
+.form-group input[type="text"],.form-group .ui-selectmenu-button,.datepicker{
+    background: #fff;
+    border:1px solid #92908e;
+    color:#92908e;
+    font-family: 'Cooper Hewitt Book';
+}
+span.ui-spinner{
+    border:1px solid #92908e !important;
+    padding-left: 10px;
+}
+input.ui-spinner-input{
+    margin:0;
+}
+.form-group .control-label{
+    font-family: 'Cooper Hewitt Book';
+    font-weight:normal;
+}
+.group-field-title span{
+    padding-left: 10px;
+    padding-top: 9px;
+}
+.group-field-title {
+    background: #fff none repeat scroll 0 0;
+    color: #CC1B27;
+    font-family: Arial;
+    font-weight: bold;
+    left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: absolute;
+    top: -30px;
+}
+.group-field-title:before {
+    content:"";
+    display: block;
+    float: left;
+    height: 24px;
+    margin-top: -3px;
+    vertical-align: middle;
+    width: 24px;
+    background:url('../img/icon-group-title.png')no-repeat;
+}
+.block-group{
+    border-top: 1px solid #aaa;
+    margin-top: 30px;
+}
+.content-group{
+    margin-top: 50px;
+}
+.subtitle-group{
+    font-family: Arial;
+    font-weight: bold;
+    font-size:15px;
+}
+#evenement_categorie {
+    display:table;
+    width:100%;
+}
+#evenement_categorie .radio{
+    display:table-cell;
+    width:20%;
+    font-family: 'Cooper Hewitt Book';
+}
+.nolabel{
+    margin-top:25px;
+}
+#table-evtActionProgres tbody tr:nth-child(even), #dataTables-evenement tbody tr:nth-child(even) {
+    background:#f8f8f8;
+    color:#000;
+}
+#table-evtActionProgres tbody tr:nth-child(odd),#dataTables-evenement tbody tr:nth-child(odd) {
+    color:#000;
+    background:transparent;
+}
+/*#table-evtActionProgres td, #dataTables-evenement td {*/
+table td {
+    border:none !important;
+}
+/*#table-evtActionProgres th,#dataTables-evenement th{*/
+table th{
+    background:#000 !important;
+    color:#fff !important;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+    /*height:60px;*/
+    text-align: center;
+    vertical-align: middle;
+    border:none;
+    border-left:1px solid #fff;
+}
+#table-evtActionProgres td .form-control{
+    box-shadow: none;
+}
+/*#table-evtActionProgres{*/
+table{
+    border:none !important;
+}
+.panel-body{
+    border:none !important;
+}
+.panel{
+    box-shadow:none;
+}
+.button-save-bottom{
+    border-top: 1px solid #dedede;
+    height: 60px;
+    margin-top: 20px;
+    padding-top: 20px;
+    text-align: right;
+}
+.btn-action-table .btn:hover{
+    background:#7C97A1;
+    color:#fff;
+}
+.btn-action-table .btn{
+    background:#CC1B27;
+}
+
+.button-save-bottom .btn:hover,.btn-action .btn:hover,.btn:hover{
+    background:#CC1B27 !important;
+    color:#fff;
+}
+.button-save-bottom .btn,.btn-action .btn,.btn{
+    background:#7C97A1;
+    color:#fff;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+    border:none;
+    padding: 10px 75px;
+}
+td .btn{
+    padding:5px 10px;
+    margin-left:10px;
+}
+td.btn-action-table{
+    width:100px;
+}
+td .btn-content{
+    display: block;
+    margin:0 auto;
+    width:100px;
+}
+td.id-td{
+    text-align: center;
+}
+.black-box{
+    background:#000;
+    color:#fff;
+}
+.red-box{
+    background:#f13738;
+    color:#fff;
+}
+.consequence h3{
+    font-family: Arial;
+    font-size:15px;
+    text-transform: uppercase;
+    margin:0;
+}
+.consequence p{
+    font-family: Arial;
+    font-weight:900;
+    font-size:30px;
+    text-transform: uppercase;
+}
+.consequence{
+    border-radius: 5px;
+    height: 80px;
+    padding: 13px;
+    text-align: center;
+}
+
+#evenement_fileDescriptionFaitPj,#evenement_evenementEnquete_file,#evenement_fileNarrationPj{
+    display: none;
+}
+
+.files-label-description,.files-label-narration,.files-label-enquete,.files-label-toolbox{
+    width:200px;
+    margin:0 auto;
+    display: block;
+}
+.uploadZone{
+    display: block;
+    background: #dedddd;
+    min-height:115px;
+    border-radius:5px;
+    border:1px #92908e dashed;
+    float:left;
+    width:100%;
+}
+.files-label-description span.icon-upload,.files-label-narration span.icon-upload,.files-label-enquete span.icon-upload,.files-label-toolbox span.icon-upload{
+    width:32px;
+    height:32px;
+    background:url('../img/icon-upload.png')no-repeat;
+    display: block;
+    margin:0 auto;
+}
+.files-label-description span.content-text,.files-label-narration span.content-text,.files-label-enquete span.content-text,.files-label-toolbox span.content-text{
+    width:100%;
+    height:100%;
+    display: block;
+    min-height:90px;
+    text-align: center;
+    padding-top:20px;
+    font-family: 'Cooper Hewitt Book';
+    color:#92908e;
+    font-weight:normal;
+}
+textarea{
+    min-height:122px;
+}
+.datetime-container .input-group-addon {
+    border: 1px solid #92908e;
+    border-left:none;
+    padding:0;
+}
+input.datepicker{
+    border-right:none !important;
+}
+.glyphicon-calendar::before {
+    content: "";
+    display:block;
+    width:24px;
+    height:24px;
+    background:url('../img/icon-datepicker.png')no-repeat;
+    background-position:90% center;
+}
+.menu-header li {
+    position:relative;
+}
+.menu-header li:hover ul{
+    display: block;
+}
+.menu-header li ul{
+    display: none;
+}
+.menu-header li ul li{
+    display: block;
+    height: 30px;
+    padding-right: 10px;
+    text-align: center;
+    width: 100%;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+.menu-header li ul li a{
+    font-family: Arial;
+    text-transform: uppercase;
+    color:red;
+    text-decoration: none;
+}
+.menu-header li ul {
+    width:200px;
+    position:absolute;
+    background:#fff;
+    border:1px solid red;
+    right:0;
+    padding:0;
+}
+.menu-header li:hover ul li a:after {
+    background:none;
+}
+.menu-header li:hover ul li:hover a:after {
+    background: red;
+    content: "";
+    display: block;
+    height: 2px;
+    margin: 0 auto;
+    width: 29px;
+
+}
+a{
+    color:#ff0000;
+    text-decoration: none;
+}
+.config-list h2{
+    font-family: Arial;
+    text-transform: uppercase;
+    color:#ff0000;
+    font-size:20px;
+    margin-left:20px;
+}
+
+.config-list li{
+    font-family: 'Cooper Hewitt Book';
+    font-size:14px;
+}
+#evenement_nbreEnvironnement,input-avancement {
+    border: medium none;
+    box-shadow: none;
+    width:100%;
+}
+#table-evtActionProgres span.ui-spinner{
+    width:100%;
+}
+.ui-spinner a.ui-spinner-button{
+    border-style: none;
+}
+table textarea {
+    height:35px !important;
+    max-height:35px !important;
+    min-height:0 !important;
+}
+#table-evtActionProgres .datepicker, #table-evtActionProgres .datetime-container .input-group-addon{
+    border:none;
+    background: #fff !important;
+}
+
+.btn-action{
+    margin-bottom:20px;
+    margin-right:20px;
+}
+.progress-bar{
+    border:1px solid #000;
+}
+input.input-avancement{
+    display:block !important;
+}
+a.icon-td{
+    width:24px;
+    height:24px;
+    display:block;
+    border:1px solid red;
+    background:red;
+    border-radius:5px;
+    color:#fff;
+    text-decoration: none;
+    text-align:center;
+    font-size:14px;
+}
+.paginate_button.active a{
+    background:#000 !important;
+    color:#fff !important;
+    border:1px solid #000;
+}
+.paginate_button a{
+    color:#000 !important;
+}
+.input-avancement-td{
+    display:none;
+    position:relative;
+}
+.links-content-td{
+    position: absolute;
+    right: 6px;
+    top: 1px;
+}
+.table-modal{
+    width:100%;
+}
+.table-details{
+    width:100%;
+    margin-top:30px;
+}
+.modal-header{
+    background:#ff0000;
+    font-family: Arial;
+    text-transform: uppercase;
+    font-size:24px;
+    color:#fff;
+
+}
+.modal-header .close{
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color: #fff;
+    opacity: 1;
+}
+.ui-spinner input{
+    border:none !important;
+    height:32px;
+}
+.btn-success:hover,.btn-success:active,.btn-success:link,.btn-success:focus{
+    background:#dedede!important;
+    color:#000 !important;
+}
+.logo-app img{
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+}
+.logo-app{
+    display:block;
+    margin-bottom:50px;
+}
+.span-has-error {
+    border:1px solid #ff0000;
+}
+input type[type='text']{
+    outline-style: dotted;
+    box-shadow: none;
+}
+#filesDescriptionFaitList{
+    float:left;
+    width:100%;
+    padding-left:0;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+.list-file ul li{
+    display: block;
+    font-size: 12px;
+    float: left;
+    width: 100%;
+}
+li.description-li .form-group{
+    margin-bottom:0px;
+}
+li.description-li .delete-file{
+    margin-bottom:0px;
+}
+
+li.toolbox-li .form-group{
+    margin-bottom:0px;
+}
+li.toolbox-li .delete-file{
+    margin-bottom:0px;
+}
+
+.list-file{
+    display:block;
+    float:left;
+    width:100%;
+    margin-top:20px;
+    min-height: 10px;
+}
+.list-file li div,.list-file li a{
+    float:left;
+    margin-left:10px;
+}
+list-file li{
+    font-size:10px;
+}
+.button-add-file{
+    display:block;
+    float:left;
+    width:100%;
+}
+.button-add-file span.content-text{
+    padding-top:0px;
+}
+
+.search-block-head #submitForm{
+    float:left;
+    margin-top:10px;
+}
+.search-block-head{
+    display:block;
+    margin-bottom:20px;
+    padding: 15px;
+}
+.search-block-date{
+    margin-top:20px;
+}
+.search-block-date label{
+    padding-top:10px;
+}
+.search-block-zone{
+}
+.search-block-date .form-group input{
+    margin-top:5px;
+}
+.title-toggle{
+    margin-left:15px;
+}
+.title-toggle label .icon{
+    margin-left: 10px;
+    font-size: 10px;
+    display: block;
+    float: right;
+    margin-top: 3px;
+}
+.title-toggle label{
+    background: #CC1B27;
+    color: #fff;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    padding: 10px 75px;
+    cursor: pointer;
+}
+.content-toggle{
+    display:none;
+}
+th a, th a:hover {
+    color:#7C97A1;
+    text-decoration: none;
+}
+
+#dataTables-users_wrapper td.center i{
+    display: block;
+    margin: 0 auto;
+    width: 15px;
+}
+.resume-title{
+    padding:5px;
+    background: #fff;
+    position:absolute;
+    top:-16px;
+    display:block;
+    color: #ed2e2f;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size:18px;
+}
+
+.resume-block{
+    border:1px solid #aaa;
+    border-radius: 10px;
+    margin-bottom:30px;
+    position:relative;
+    padding:15px;
+}
+.speed_search{
+    float:right;
+}
+.resume-list li{
+    display:inline-table;
+    border-right:1px solid #000;
+    list-style: none;
+    padding-left:10px;
+    padding-right:10px;
+}
+.resume-list li:last-child{
+    border-right:0px solid #000;
+}
+.number-event{
+    color:#ff0000;
+    padding-right:5px;
+}
+.resume-list{
+    margin-top:10px;
+    padding:0;
+}
+.btn.search-speed-valid{
+    padding:5px;
+    float:left;    margin:0;
+
+}
+.speed_search .form-group{
+    float:left;
+    margin:0;
+}
+.search-block-head input.datepicker{
+    border: 1px solid #92908e !important;
+}
+.btn-reset{
+    margin-left:10px;
+}
+.panel{
+    background: transparent;
+}
+.error-block{
+    width:60%;
+    display:block;
+    margin:0 auto;
+    border:2px solid #CC1B27;
+    padding:15px;
+}
+.error-title{
+    color:#CC1B27;
+    font-family:arial;
+    text-decoration: none;
+    display:block;
+    text-align:center;
+    text-transform: uppercase;
+    font-size:11px;
+}
+.error-description{
+    color:#000;
+    font-family:arial ;
+    display:block;
+    text-align:center;
+     font-size:12px;
+     line-height:20px;
+        
+}
+
+/* DASHBOARD */
+
+.title-block{
+    color:#CC1B27;
+    text-transform: uppercase;
+    display:block;
+    margin-bottom:10px;
+    font-family:arial;
+    font-weight:bold;
+}
+.nb-incident-zone-block,.nb-incident-cat-block{
+    margin-top:20px;
+}
+.nb-incident-zone-block table,.nb-incident-cat-block table,.last-incident-block table{
+    border:1px solid #dedede !important;
+}
+.nb-incident-zone-block table td,.nb-incident-cat-block table td,.last-incident-block table td{
+   height:30px;
+}
+.nb-incident-zone-block table th,.nb-incident-cat-block table th,.last-incident-block table th,table th{
+  background:#fff !important;
+  border-bottom:2px solid #7C97A1 !important;
+  color:#7C97A1 !important;
+  border-left:0;
+}
+.graph-content{
+    border:1px solid #DEDEDE;
+    height:450px;
+}
+.graph-content canvas{
+    width: 100%!important;
+    height: 100%!important;
+}
+td.centered{
+    text-align: center;
+}
+.last-incident-block th {
+    font-size:10px;
+}
+.last-incident-block td {
+    font-size:11px;
+}
+.stat-block{
+}
+.stat-item-block{
+    border:1px solid #dedede;
+    margin-top:20px;
+    display: block;
+    height:80px;
+}
+label.label-stat-item{
+    background: #fff !important;
+    border-bottom: 2px solid #7C97A1 !important;
+    color: #7C97A1 !important;
+    border-left: 0;
+    display:block;
+    text-transform: uppercase;
+    text-align: center;
+    font-family:arial;
+    font-weight:bold;
+}
+label.number-stat-item{
+    display:block;
+    color:#000;
+    font-weight:bold;
+    display:block;
+    text-align: center;
+    font-family:arial;
+    font-size:30px;
+    padding-top:2px;
+}
+#dataTables-ltir-trir th,#dataTables-kpihse th{
+    font-size:10px;
+}
+#dataTables-ltir-trir td,#dataTables-kpihse td{
+    height:20px;
+    text-align: center;
+    font-size:10px;
+}
+.left-align{
+    text-align: left !important;
+}
+#dataTables-ltir-trir th.month,#dataTables-ltir-trir td.month{
+    width:100px;
+}
+#dataTables-ltir-trir td.month{
+    text-align: left;
+}
+#dataTables-kpihse td.indicator{
+    width:180px;
+}

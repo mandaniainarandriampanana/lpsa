@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_laboratoire.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Laboratoire\AbstractLaboratoireFormHandlerStrategy
+    app.laboratoire.form.handler.class: Lpsa\AppBundle\Form\Handler\Laboratoire\LaboratoireFormHandler
+    app.new_laboratoire.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Laboratoire\NewLaboratoireFormHandlerStrategy
+    app.update_laboratoire.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Laboratoire\UpdateLaboratoireFormHandlerStrategy
+    app.laboratoire.form.type.class: Lpsa\AppBundle\Form\Type\Laboratoire\LaboratoireType
+    
+services:
+    app.abstract_laboratoire.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_laboratoire.form.handler.strategy.class%
+        arguments:
+           - @app.laboratoire.form.type
+        calls:
+           - [setLaboratoireManager, ['@app.laboratoire.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.laboratoire.form.handler:
+        class: %app.laboratoire.form.handler.class%
+        calls:
+           - [setNewLaboratoireFormHandlerStrategy, ['@app.new_laboratoire.form.handler.strategy']]
+           - [setUpdateLaboratoireFormHandlerStrategy, ['@app.update_laboratoire.form.handler.strategy']]
+
+    app.new_laboratoire.form.handler.strategy:
+        class: %app.new_laboratoire.form.handler.strategy.class%
+        parent: app.abstract_laboratoire.form.handler.strategy
+
+    app.update_laboratoire.form.handler.strategy:
+        class: %app.update_laboratoire.form.handler.strategy.class%
+        parent: app.abstract_laboratoire.form.handler.strategy
+
+    app.laboratoire.form.type:
+        class: %app.laboratoire.form.type.class%
+        arguments:
+            - @translator
+            - @app.laboratoire.manager
+        tags:
+            - { name: form.type, alias: LaboratoireType}

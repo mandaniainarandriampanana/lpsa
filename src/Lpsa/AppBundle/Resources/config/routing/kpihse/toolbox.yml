@@ -1,0 +1,31 @@
+toolbox_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Toolbox:index" }
+    methods:  GET
+    options:
+        section: [KPIHSE,TOOLBOX]
+
+toolbox_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Toolbox:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+    options:
+        section: [KPIHSE,TOOLBOX]
+
+toolbox_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Toolbox:newEdit" }
+    methods:  GET|POST
+    options:
+        section: [KPIHSE,TOOLBOX]
+
+toolbox_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Toolbox:delete" }
+    requirements:
+       id: \d+
+    options:
+        section: [KPIHSE,TOOLBOX]
+

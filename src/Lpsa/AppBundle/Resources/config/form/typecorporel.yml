@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_typecorporel.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\TypeCorporel\AbstractTypeCorporelFormHandlerStrategy
+    app.typecorporel.form.handler.class: Lpsa\AppBundle\Form\Handler\TypeCorporel\TypeCorporelFormHandler
+    app.new_typecorporel.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\TypeCorporel\NewTypeCorporelFormHandlerStrategy
+    app.update_typecorporel.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\TypeCorporel\UpdateTypeCorporelFormHandlerStrategy
+    
+services:
+    app.abstract_typecorporel.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_typecorporel.form.handler.strategy.class%
+        calls:
+           - [setTypeCorporelManager, ['@app.typecorporel.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.typecorporel.form.handler:
+        class: %app.typecorporel.form.handler.class%
+        calls:
+           - [setNewTypeCorporelFormHandlerStrategy, ['@app.new_typecorporel.form.handler.strategy']]
+           - [setUpdateTypeCorporelFormHandlerStrategy, ['@app.update_typecorporel.form.handler.strategy']]
+
+    app.new_typecorporel.form.handler.strategy:
+        class: %app.new_typecorporel.form.handler.strategy.class%
+        parent: app.abstract_typecorporel.form.handler.strategy
+
+    app.update_typecorporel.form.handler.strategy:
+        class: %app.update_typecorporel.form.handler.strategy.class%
+        parent: app.abstract_typecorporel.form.handler.strategy

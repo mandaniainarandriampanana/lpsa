@@ -1,0 +1,63 @@
+lpsa_app_piezometre:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/piezometre.yml"
+        prefix:   /piezometre
+
+lpsa_app_decanteur:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/decanteur.yml"
+        prefix:   /decanteur
+
+lpsa_app_laboratoire:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/laboratoire.yml"
+        prefix:   /laboratoire
+
+lpsa_app_indicateurtransport:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/indicateurtransport.yml"
+        prefix:   /indicateurtransport
+
+lpsa_app_paqssse:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/paqssse.yml"
+        prefix:   /paqssse
+
+lpsa_app_exerciceurgence:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/exerciceurgence.yml"
+        prefix:   /exerciceurgence
+
+lpsa_app_toolbox:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/toolbox.yml"
+        prefix:   /toolbox
+        
+lpsa_app_visite:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/visite.yml"
+        prefix:   /visite
+        
+lpsa_app_objectifltirtrir:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/objectifltirtrir.yml"
+        prefix:   /objectifltirtrir
+
+lpsa_app_service:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/service.yml"
+        prefix:   /service
+
+lpsa_app_fuiteproduit:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/fuiteproduit.yml"
+        prefix:   /fuiteproduit
+
+lpsa_app_objectifkpihse:
+        resource: "@LpsaAppBundle/Resources/config/routing/kpihse/objectifkpihse.yml"
+        prefix:   /objectifkpihse
+
+admin_configuration_kpihse_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Configuration:index" }
+    methods:  GET
+    options:
+        section: 
+            - KPIHSE
+            - VISITE
+            - EXERCICE_URGENCE
+            - TOOLBOX
+            - PIEZOMETRE
+            - DECANTEUR
+            - LABORATOIRE
+            - INDICATEUR_TRANSPORT
+            - OBJECTIF_KPI

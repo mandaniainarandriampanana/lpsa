@@ -1,0 +1,23 @@
+download_event_attachment:
+    path:     /events/{id}/{filename}
+    defaults: { _controller: "LpsaAppBundle:Download:getEventAttachment" }
+    requirements:
+        id: \d+
+
+download_description_attachment:
+    path:     /descriptions/{id}/{filename}
+    defaults: { _controller: "LpsaAppBundle:Download:getDescritionAttachment" }
+    requirements:
+        id: \d+
+
+download_investigation_attachment:
+    path:     /investigations/{id}/{filename}
+    defaults: { _controller: "LpsaAppBundle:Download:getInvestigationAttachment" }
+    requirements:
+        id: \d+
+
+download_toolbox_attachment:
+    path:     /toolbox/{id}/{filename}
+    defaults: { _controller: "LpsaAppBundle:Download:getToolboxAttachment" }
+    requirements:
+        id: \d+

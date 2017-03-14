@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_indicateurTransport.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\IndicateurTransport\AbstractIndicateurTransportFormHandlerStrategy
+    app.indicateurTransport.form.handler.class: Lpsa\AppBundle\Form\Handler\IndicateurTransport\IndicateurTransportFormHandler
+    app.new_indicateurTransport.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\IndicateurTransport\NewIndicateurTransportFormHandlerStrategy
+    app.update_indicateurTransport.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\IndicateurTransport\UpdateIndicateurTransportFormHandlerStrategy
+    app.indicateurTransport.form.type.class: Lpsa\AppBundle\Form\Type\IndicateurTransport\IndicateurTransportType
+    
+services:
+    app.abstract_indicateurTransport.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_indicateurTransport.form.handler.strategy.class%
+        arguments:
+           - @app.indicateurTransport.form.type
+        calls:
+           - [setIndicateurTransportManager, ['@app.indicateurTransport.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.indicateurTransport.form.handler:
+        class: %app.indicateurTransport.form.handler.class%
+        calls:
+           - [setNewIndicateurTransportFormHandlerStrategy, ['@app.new_indicateurTransport.form.handler.strategy']]
+           - [setUpdateIndicateurTransportFormHandlerStrategy, ['@app.update_indicateurTransport.form.handler.strategy']]
+
+    app.new_indicateurTransport.form.handler.strategy:
+        class: %app.new_indicateurTransport.form.handler.strategy.class%
+        parent: app.abstract_indicateurTransport.form.handler.strategy
+
+    app.update_indicateurTransport.form.handler.strategy:
+        class: %app.update_indicateurTransport.form.handler.strategy.class%
+        parent: app.abstract_indicateurTransport.form.handler.strategy
+
+    app.indicateurTransport.form.type:
+        class: %app.indicateurTransport.form.type.class%
+        arguments:
+            - @translator
+            - @app.indicateurTransport.manager
+        tags:
+            - { name: form.type, alias: IndicateurTransportType}

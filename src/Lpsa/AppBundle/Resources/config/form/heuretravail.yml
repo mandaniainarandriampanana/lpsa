@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_heuretravail.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\HeureTravail\AbstractHeureTravailFormHandlerStrategy
+    app.heuretravail.form.handler.class: Lpsa\AppBundle\Form\Handler\HeureTravail\HeureTravailFormHandler
+    app.new_heuretravail.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\HeureTravail\NewHeureTravailFormHandlerStrategy
+    app.update_heuretravail.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\HeureTravail\UpdateHeureTravailFormHandlerStrategy
+    app.heuretravail.form.type.class: Lpsa\AppBundle\Form\Type\HeureTravail\HeureTravailType
+    
+services:
+    app.abstract_heuretravail.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_heuretravail.form.handler.strategy.class%
+        arguments:
+           - @app.heuretravail.form.type
+        calls:
+           - [setHeureTravailManager, ['@app.heuretravail.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.heuretravail.form.handler:
+        class: %app.heuretravail.form.handler.class%
+        calls:
+           - [setNewHeureTravailFormHandlerStrategy, ['@app.new_heuretravail.form.handler.strategy']]
+           - [setUpdateHeureTravailFormHandlerStrategy, ['@app.update_heuretravail.form.handler.strategy']]
+
+    app.new_heuretravail.form.handler.strategy:
+        class: %app.new_heuretravail.form.handler.strategy.class%
+        parent: app.abstract_heuretravail.form.handler.strategy
+
+    app.update_heuretravail.form.handler.strategy:
+        class: %app.update_heuretravail.form.handler.strategy.class%
+        parent: app.abstract_heuretravail.form.handler.strategy
+
+    app.heuretravail.form.type:
+        class: %app.heuretravail.form.type.class%
+        arguments:
+            - @app.heuretravail.manager
+            - @translator
+        tags:
+            - { name: form.type, alias: HeureTravailType}

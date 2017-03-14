@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="lpsa-event" default="ci" basedir="../../..">
+    <property name="version" value="0.0.1" />
+
+	<target name="ci"
+        description="Tâche principale d'intégration continue"
+        depends="clean,package"/>
+ 
+	<target name="clean" description="Vide les répertoires d'artefacts">
+	    <delete dir="${project.basedir}/workspace/build/api" />
+	    <delete dir="${project.basedir}/workspace/build/code-browser" />
+	    <delete dir="${project.basedir}/workspace/build/coverage" />
+	    <delete dir="${project.basedir}/workspace/build/logs" />
+	    <delete dir="${project.basedir}/workspace/build/pdepend" />
+		<delete dir="${project.basedir}/workspace/build/package" />
+		<delete dir="${project.basedir}/workspace/build/test" />
+	 
+		<mkdir dir="${project.basedir}/workspace/build/api" />
+	    <mkdir dir="${project.basedir}/workspace/build/code-browser" />
+	    <mkdir dir="${project.basedir}/workspace/build/coverage" />
+	    <mkdir dir="${project.basedir}/workspace/build/logs" />
+	    <mkdir dir="${project.basedir}/workspace/build/pdepend" />
+		<mkdir dir="${project.basedir}/workspace/build/package" />
+		<mkdir dir="${project.basedir}/workspace/build/test" />
+	</target>
+     		 
+	<target name="package">
+		<echo msg="supprimer le dossier /tmp/lpsa-event/" />
+		<exec command="rm -rf /tmp/lpsa-event/" logoutput="true" />
+		
+		<echo msg="créer le dossier /tmp/lpsa-event/" />
+		<exec command="mkdir -p /tmp/lpsa-event/" logoutput="true" />
+		
+		<tar destfile="${project.basedir}/workspace/build/package/lpsa-event.tar.gz" compression="gzip" 
+			excludes=".svn/**" basedir="${project.basedir}/workspace/"/>
+		<copy file="${project.basedir}/workspace/build/package/lpsa-event.tar.gz" todir="/tmp/lpsa-event/"/>		
+		
+		<echo msg="detarrer la source" />
+		<untar  file="/tmp/lpsa-event/lpsa-event.tar.gz" todir="/tmp/lpsa-event/" />
+		
+		<echo msg="supprimer le dossier /tmp/lpsa-event/" />
+		<exec command="rm /tmp/lpsa-event/lpsa-event.tar.gz" logoutput="true" />
+		
+		<echo msg="supprimer les dossier build et utils dans /tmp/lpsa-event/" />
+		<exec command="rm -rf /tmp/lpsa-event/build" logoutput="true" />
+		<exec command="rm -rf /tmp/lpsa-event/utils" logoutput="true" />
+		
+    </target>
+	
+	<!-- déployer sur lpsa-event -->
+	<target name="deploy-lpsa-event"> 
+	
+		<echo msg="envoyer le contenu du dossier tmp vers le FTP" />
+		<exec command="cd /tmp/lpsa-event/; lftp ftp://lpsa:bHdOcL5Q8mCYxty@104.155.18.196/hudson/ -e 'mirror -R; quit;'" logoutput="true" />
+
+		<echo msg="supprimer le dossier /tmp/lpsa-event" />
+		<exec command="rm -rf /tmp/lpsa-event/" logoutput="true" />
+		
+	</target>
+	<!--
+	<target name="svn-tag-html">
+		<echo msg="Tagguer sur svn la livraison ${version}" />	
+		<exec command="svn copy http://extranet.arkeup.com/svn/PHP/lpsa-event/trunk/ http://extranet.arkeup.com/svn/PHP/lpsa-event/tags/lpsa-event-${version} -m 'tag SVN ${version}' --username h.raveloson --password etechheri" logoutput="true" />
+	</target>	
+	-->
+
+</project>

@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_direction.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Direction\AbstractDirectionFormHandlerStrategy
+    app.direction.form.handler.class: Lpsa\AppBundle\Form\Handler\Direction\DirectionFormHandler
+    app.new_direction.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Direction\NewDirectionFormHandlerStrategy
+    app.update_direction.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Direction\UpdateDirectionFormHandlerStrategy
+    
+services:
+    app.abstract_direction.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_direction.form.handler.strategy.class%
+        calls:
+           - [setDirectionManager, ['@app.direction.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.direction.form.handler:
+        class: %app.direction.form.handler.class%
+        calls:
+           - [setNewDirectionFormHandlerStrategy, ['@app.new_direction.form.handler.strategy']]
+           - [setUpdateDirectionFormHandlerStrategy, ['@app.update_direction.form.handler.strategy']]
+
+    app.new_direction.form.handler.strategy:
+        class: %app.new_direction.form.handler.strategy.class%
+        parent: app.abstract_direction.form.handler.strategy
+
+    app.update_direction.form.handler.strategy:
+        class: %app.update_direction.form.handler.strategy.class%
+        parent: app.abstract_direction.form.handler.strategy

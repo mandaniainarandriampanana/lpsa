@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_objectifdepot.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ObjectifDepot\AbstractObjectifDepotFormHandlerStrategy
+    app.objectifdepot.form.handler.class: Lpsa\AppBundle\Form\Handler\ObjectifDepot\ObjectifDepotFormHandler
+    app.new_objectifdepot.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ObjectifDepot\NewObjectifDepotFormHandlerStrategy
+    app.update_objectifdepot.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ObjectifDepot\UpdateObjectifDepotFormHandlerStrategy
+    
+services:
+    app.abstract_objectifdepot.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_objectifdepot.form.handler.strategy.class%
+        calls:
+           - [setObjectifDepotManager, ['@app.objectifdepot.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.objectifdepot.form.handler:
+        class: %app.objectifdepot.form.handler.class%
+        calls:
+           - [setNewObjectifDepotFormHandlerStrategy, ['@app.new_objectifdepot.form.handler.strategy']]
+           - [setUpdateObjectifDepotFormHandlerStrategy, ['@app.update_objectifdepot.form.handler.strategy']]
+
+    app.new_objectifdepot.form.handler.strategy:
+        class: %app.new_objectifdepot.form.handler.strategy.class%
+        parent: app.abstract_objectifdepot.form.handler.strategy
+
+    app.update_objectifdepot.form.handler.strategy:
+        class: %app.update_objectifdepot.form.handler.strategy.class%
+        parent: app.abstract_objectifdepot.form.handler.strategy

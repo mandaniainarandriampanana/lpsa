@@ -1,0 +1,35 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+{% form_theme form 'LpsaAppBundle:Form:custom_type.html.twig' %}
+
+{% if responsableService.id is not null %}
+    {% set deleteClassSelector = 'responsableservice' %}
+{% endif %}
+
+{% extends "LpsaAppBundle:Layout:newEdit.html.twig" %}
+
+{% block crud_header_title %}
+    {{ 'responsableservice.crud_header_title'|trans }}
+{% endblock %}
+{% block crud_panel_title %}{% if responsableService.id is not null %}{{ 'responsableservice.crud_panel_title.edit'|trans }}{% else %}{{ 'responsableservice.crud_panel_title.new'|trans }}{% endif %}{% endblock %} 
+{% block crud_panel_nav %}
+    {% if responsableService.id is not null %}
+    <ul class="nav nav-pills">
+        <li>
+            <a href="{{ path('admin_responsableservice_index') }}" class="btn btn-default" style="padding: 6px 12px;"><i class="fa fa-mail-reply"></i> {{ 'form.back'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_responsableservice_delete',{'id': responsableService.id }) }}" class="btn btn-default responsableservice-delete" style="padding: 6px 12px;"><i class="fa fa-trash-o"></i> {{ 'form.delete'|trans }}</a>
+        </li>
+    </ul>
+    {% endif %}
+{% endblock %}
+{% block crud_panel_content %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="{% if responsableService.id is not null %}{{ 'form.update'|trans }}{% else %}{{ 'form.add'|trans }}{% endif %}" class="btn btn-default" />
+    {{ form_end(form) }}    
+{% endblock %} 
+{% block others_javascripts %}  
+    <script src="{{ asset('bundles/lpsaapp/js/ResponsableService/app.js') }}"></script>
+{% endblock %}

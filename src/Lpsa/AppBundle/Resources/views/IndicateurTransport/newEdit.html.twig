@@ -1,0 +1,30 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+{% if indicateurTransport.id is not null %}
+    {% set deleteClassSelector = 'indicateurTransport' %}
+{% endif %}
+
+{% extends "LpsaAppBundle:Layout:newEdit.html.twig" %}
+
+{% block crud_header_title %}
+    {{ 'indicateurTransport.crud_header_title'|trans }}
+{% endblock %}
+{% block crud_panel_title %}{% if indicateurTransport.id is not null %}{{ 'indicateurTransport.crud_panel_title.edit'|trans }}{% else %}{{ 'indicateurTransport.crud_panel_title.new'|trans }}{% endif %}{% endblock %} 
+{% block crud_panel_nav %}
+    {% if indicateurTransport.id is not null %}
+    <ul class="nav nav-pills">
+        <li>
+            <a href="{{ path('indicateurTransport_index') }}" class="btn btn-default" style="padding: 6px 12px;"><i class="fa fa-mail-reply"></i> {{ 'form.back'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('indicateurTransport_delete',{'id': indicateurTransport.id }) }}" class="btn btn-default indicateurTransport-delete" style="padding: 6px 12px;"><i class="fa fa-trash-o"></i> {{ 'form.delete'|trans }}</a>
+        </li>
+    </ul>
+    {% endif %}
+{% endblock %}
+{% block crud_panel_content %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="{% if indicateurTransport.id is not null %}{{ 'form.update'|trans }}{% else %}{{ 'form.add'|trans }}{% endif %}" class="btn btn-default" />
+    {{ form_end(form) }}    
+{% endblock %} 

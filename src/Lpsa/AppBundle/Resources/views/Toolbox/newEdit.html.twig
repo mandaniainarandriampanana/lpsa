@@ -1,0 +1,173 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+{% if toolbox.id is not null %}
+    {% set deleteClassSelector = 'toolbox' %}
+{% endif %}
+
+{% extends "LpsaAppBundle:Layout:newEdit.html.twig" %}
+
+{% form_theme form 'LpsaAppBundle:Form:custom_type.html.twig' %}
+
+
+{% block crud_header_title %}
+    {{ 'toolbox.crud_header_title'|trans }}
+{% endblock %}
+{% block crud_panel_title %}{% if toolbox.id is not null %}{{ 'toolbox.crud_panel_title.edit'|trans }}{% else %}{{ 'toolbox.crud_panel_title.new'|trans }}{% endif %}{% endblock %} 
+{% block crud_panel_nav %}
+    {% if toolbox.id is not null %}
+    <ul class="nav nav-pills">
+        <li>
+            <a href="{{ path('toolbox_index') }}" class="btn btn-default" style="padding: 6px 12px;"><i class="fa fa-mail-reply"></i> {{ 'form.back'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('toolbox_delete',{'id': toolbox.id }) }}" class="btn btn-default toolbox-delete" style="padding: 6px 12px;"><i class="fa fa-trash-o"></i> {{ 'form.delete'|trans }}</a>
+        </li>
+    </ul>
+    {% endif %}
+{% endblock %}
+{% block crud_panel_content %}
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.depot) }} 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.siege) }} 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.depots) }} 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.sct) }} 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.mois) }} 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.annee) }} 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="uploadZone">
+                    <div class="list-file">
+                        <ul id="filesToolboxList" data-prototype="{{ form_widget(form.toolboxPjs.vars.prototype)|e }}">
+                            {% for toolboxPjs in form.toolboxPjs %}
+                                <li class="toolbox-li">
+                                    {% if toolboxPjs.children['file'].vars.errors|length > 0 %}
+                                        <div>
+                                            <ul class="help-block list-unstyled">
+                                                {% for error in toolboxPjs.children['file'].vars.errors %}
+                                                    <li class="text-danger">
+                                                        {% if toolboxPjs.children['file'].vars.data %}{{ toolboxPjs.children['file'].vars.data.clientOriginalName }}<br/>{% endif %}
+                                                        <span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% elseif(toolboxPjs.file.vars.data is null) %}
+                                        {{ form_widget(toolboxPjs) }}
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="button-add-file">
+                        <label class="files-label-toolbox">
+                            <span class="content-text"><span class="icon-upload"></span>Attacher une piéce jointe</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_widget(form._token) }}
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" value="{% if toolbox.id is not null %}{{ 'form.update'|trans }}{% else %}{{ 'form.add'|trans }}{% endif %}" class="btn btn-default" style="margin-top:15px;"/> 
+            </div>
+        </div>
+{% endblock %} 
+{% block others_javascripts %}
+    {{ parent() }}
+    <script>
+        var toolboxPJsCount = {{ form.toolboxPjs|length }};
+        var nbMaxFileUpload = {{ lpsa_nb_max_file_upload }};
+        $(document).ready(function(){
+            //manage files upload
+            $('#filesToolboxList').children('li').each(function() {
+                if($(this).find('input:first').length > 0 || $(this).find('ul').length > 0){
+                    addDeleteLink($(this),'delete-toolboxPj');                
+                }
+            });
+            $('.files-label-toolbox').click(function(){
+                if(typeof toolboxPJsCount === 'undefined') return;
+                var filesToolboxList = $('#filesToolboxList');
+                var newLiFileToolbox = filesToolboxList.find('#newLiToolbox');
+                if(newLiFileToolbox && (newLiFileToolbox.length > 0)){
+                    $(newLiFileToolbox).find('.lpsa-file').trigger('click');
+                    return;
+                }
+                if(toolboxPJsCount >= nbMaxFileUpload){
+                    var inputFile = $('#filesToolboxList li').last().find('.lpsa-file');
+                    if(inputFile){
+                        inputFile.trigger('click');                    
+                    }
+                    return;
+                }
+                // grab the prototype template
+                var newWidget = filesToolboxList.attr('data-prototype');
+                newWidget = newWidget.replace(/__name__/g, toolboxPJsCount);
+                toolboxPJsCount++;
+
+                // create a new list element and add it to the list
+                var newLi = $('<li id="newLiFileToolbox" style="display:none;" class="toolbox-li"></li>').html(newWidget);
+                newLi.appendTo(filesToolboxList);
+                newLi.find('.lpsa-file').addClass('lpsa-file-toolbox').trigger('click');
+                addDeleteLink(newLi,'delete-toolboxPj');
+            }); 
+            $(document).on('change','.lpsa-file',function(){
+                var fullPath = $(this).val();
+                var filename = $(this).val();
+                if (fullPath) {
+                    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                    var filename = fullPath.substring(startIndex);
+                    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                        filename = filename.substring(1);
+                    }
+                }
+                if($(this).hasClass('lpsa-file-toolbox')){
+                    $(this).siblings('span').text(filename).parents('#newLiFileToolbox').removeAttr('id','newLiFileToolbox').show();                
+                }
+            });           
+        });
+        function addDeleteLink(li,selector) {
+            var removeA = $('<a href="#" class="delete-file ' + selector + '"><i class="fa fa-close"></i></a>');
+            li.append(removeA);
+            removeA.on('click', function(e) {
+                // prevent the link 
+                e.preventDefault();
+                // remove the li 
+                li.remove();
+            });
+        }
+        function cleanBeforeSending(){
+            var lastFileNarr = $('#newLiFileNarration').find('input:first').val();
+            if(!lastFileNarr && isValid){
+                $('#newLiFileNarration').remove();
+                if(typeof narrationPJsCount !== 'undefined'){
+                    narrationPJsCount--;
+                }
+            }
+        }
+    </script>
+{% endblock %}

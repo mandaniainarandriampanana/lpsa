@@ -1,0 +1,28 @@
+typeenvironnement_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:TypeEnvironnement:index" }
+    methods:  GET
+
+typeenvironnement_show:
+    path:     /{id}/show
+    defaults: { _controller: "LpsaAppBundle:TypeEnvironnement:show" }
+    methods:  GET
+
+typeenvironnement_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:TypeEnvironnement:newEdit" }
+    methods:  [GET, POST]
+    
+typeenvironnement_create:
+    path:     /create
+    defaults: { _controller: "LpsaAppBundle:TypeEnvironnement:create" }
+    methods:  POST
+
+typeenvironnement_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:TypeEnvironnement:newEdit" }
+    methods:  [GET, POST, PUT]
+
+typeenvironnement_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:TypeEnvironnement:delete" }

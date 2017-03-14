@@ -1,0 +1,72 @@
+services:
+    form.type.datepicker:
+        class: Lpsa\AppBundle\Form\Type\DatePickerType
+        tags:
+            - { name: form.type, alias: lpsa_datepicker }
+
+    form.type.select_ajax:
+        class: Lpsa\AppBundle\Form\Type\SelectAjaxType
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@router'
+            - '@request_stack'
+        tags:
+            - { name: form.type, alias: lpsa_select_ajax }
+
+    form.type.input_ajax:
+        class: Lpsa\AppBundle\Form\Type\InputAjaxType
+        arguments:
+            - '@router'
+        tags:
+            - { name: form.type, alias: lpsa_input_ajax }
+
+    form.type.lpsa_file:
+        class: Lpsa\AppBundle\Form\Type\FileType
+        tags:
+            - { name: form.type, alias: lpsa_file }
+
+    form.type.lpsa_kpihse_filter:
+        class: Lpsa\AppBundle\Form\Type\Statistic\KpiHseType
+        arguments:
+            - '@translator'
+        tags:
+            - { name: form.type, alias: lpsa_kpihse_filter }
+
+    app.repository_number_generate:
+        class: Lpsa\AppBundle\Service\RepositoryNumberGenerate
+        arguments: 
+            - '@app.evenement.manager'
+
+    app.abstract_gravity:
+        class: Lpsa\AppBundle\Service\AbstractGravity
+
+    form.type.progressbar:
+        class: Lpsa\AppBundle\Form\Type\ProgressBarType
+        tags:
+            - { name: form.type, alias: lpsa_progress_bar }
+
+    form.type.yearchoice:
+        class: Lpsa\AppBundle\Form\Type\YearChoiceType
+        tags:
+            - { name: form.type, alias: lpsa_year_choice }
+
+    app.function_helper:
+        class: Lpsa\AppBundle\Service\FunctionHelper
+
+    app.statistic.kpihse:
+        class: Lpsa\AppBundle\Statistic\StatisticKPIHSE
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@app.evenement.manager'
+            - '@app.statistic.ltir_trir'
+            - '@service_container'
+
+    app.statistic.ltir_trir:
+        class: Lpsa\AppBundle\Statistic\StatisticLtirTrir
+        arguments:
+            - '@app.evenement.manager'
+            - '@app.heuretravail.manager'
+            - '@app.objectifLtirTrir.manager'
+
+    app.document.excel_manager:
+        class: Lpsa\AppBundle\Service\ExcelDocumentManager

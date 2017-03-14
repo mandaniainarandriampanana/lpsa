@@ -1,0 +1,121 @@
+corporel_liste:
+    path:     /corporel
+    defaults: { _controller: "LpsaAppBundle:Corporel:index" }
+    methods:  GET
+    
+admin_depot_liste:
+    path:     /depot
+    defaults: { _controller: "LpsaAppBundle:Depot:index" }
+    methods:  GET
+
+admin_depotcategorie_liste:
+    path:     /depotCategorie
+    defaults: { _controller: "LpsaAppBundle:DepotCategorie:index" }
+    methods:  GET
+
+direction_liste:
+    path:     /direction
+    defaults: { _controller: "LpsaAppBundle:Direction:index" }
+    methods:  GET
+
+admin_dysfonctionnement_liste:
+    path:     /dysfonctionnement
+    defaults: { _controller: "LpsaAppBundle:Dysfonctionnement:index" }
+    methods:  GET
+
+environnement_liste:
+    path:     /environnement
+    defaults: { _controller: "LpsaAppBundle:Environnement:index" }
+    methods:  GET
+
+admin_evenement_liste:
+    path:     /evenement
+    defaults: { _controller: "LpsaAppBundle:Evenement:index" }
+    methods:  GET
+
+evenementactionprogresstatus_liste:
+    path:     /evenementactionprogresstatus
+    defaults: { _controller: "LpsaAppBundle:EvenementActionProgresStatus:index" }
+    methods:  GET
+
+evenementcategorie_liste:
+    path:     /evenementcategorie
+    defaults: { _controller: "LpsaAppBundle:EvenementCategorie:index" }
+    methods:  GET
+
+evenementcategorietable_liste:
+    path:     /evenementcategorietable
+    defaults: { _controller: "LpsaAppBundle:EvenementCategorieTable:index" }
+    methods:  GET
+
+evenementstatut_liste:
+    path:     /evenementstatut
+    defaults: { _controller: "LpsaAppBundle:EvenementStatut:index" }
+    methods:  GET
+
+admin_fonction_liste:
+    path:     /fonction
+    defaults: { _controller: "LpsaAppBundle:Fonction:index" }
+    methods:  GET
+
+admin_gravite_liste:
+    path:     /gravite
+    defaults: { _controller: "LpsaAppBundle:Gravite:index" }
+    methods:  GET
+
+heuretravail_liste:
+    path:     /heuretravail
+    defaults: { _controller: "LpsaAppBundle:HeureTravail:index" }
+    methods:  GET
+
+heuretravailcategorie_liste:
+    path:     /heuretravailcategorie
+    defaults: { _controller: "LpsaAppBundle:HeureTravailCategorie:index" }
+    methods:  GET
+
+impactclient_liste:
+    path:     /impactclient
+    defaults: { _controller: "LpsaAppBundle:ImpactClient:index" }
+    methods:  GET
+
+impactmediatique_liste:
+    path:     /impactmediatique
+    defaults: { _controller: "LpsaAppBundle:ImpactMediatique:index" }
+    methods:  GET
+
+materiel_liste:
+    path:     /materiel
+    defaults: { _controller: "LpsaAppBundle:Materiel:index" }
+    methods:  GET
+    
+admin_responsableservice_liste:
+    path:     /responsableservice
+    defaults: { _controller: "LpsaAppBundle:ResponsableService:index" }
+    methods:  GET
+
+typecorporel_liste:
+    path:     /typecorporel
+    defaults: { _controller: "LpsaAppBundle:TypeCorporel:index" }
+    methods:  GET
+
+typeenvironnement_liste:
+    path:     /typeenvironnement
+    defaults: { _controller: "LpsaAppBundle:TypeEnvironnement:index" }
+    methods:  GET
+
+typemateriel_liste:
+    path:     /typemateriel
+    defaults: { _controller: "LpsaAppBundle:TypeMateriel:index" }
+    methods:  GET
+    
+lpsa_user_admin_liste:
+    path:     /user
+    defaults: { _controller: LpsaUserBundle:User:index }
+    
+departement_liste:
+    path:     /departement
+    defaults: { _controller: "LpsaAppBundle:Departement:index" }
+    methods:  GET
+
+
+

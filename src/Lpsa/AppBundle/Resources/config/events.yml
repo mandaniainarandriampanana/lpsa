@@ -1,0 +1,24 @@
+services:
+    app.doctrine_evenement_listener:
+        class: Lpsa\AppBundle\EventListener\EvenementUploadListener
+        tags:
+            - { name: doctrine.event_listener, event: preRemove }
+
+    app.doctrine_toolbox_listener:
+        class: Lpsa\AppBundle\EventListener\ToolboxUploadListener
+        tags:
+            - { name: doctrine.event_listener, event: preRemove }
+
+    app.observable.event:
+        class: Lpsa\AppBundle\Entity\Observable\EventObservable
+        calls:
+            - [setDispatcher, ['@event_dispatcher']]
+
+    app.listener.servicemanager:
+        class: Lpsa\AppBundle\EventListener\ServiceManagerListener
+        arguments:
+            - @lpsa_mail.manager
+            - @templating
+            - "%mail_site%"
+        tags:
+            - { name: kernel.event_listener, event: manager_service.set, method: setEvent }

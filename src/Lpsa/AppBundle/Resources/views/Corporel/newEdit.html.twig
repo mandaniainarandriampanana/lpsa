@@ -1,0 +1,38 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+{% extends "LpsaAppBundle:Layout:newEdit.html.twig" %}
+
+{% block crud_header_title %}
+    {{ 'corporel.crud_header_title'|trans }}
+{% endblock %}
+{% block crud_panel_title %}
+    {% if corporel.id is not null %}
+        {{ 'corporel.crud_panel_title.edit'|trans }}
+            {% else %}
+        {{ 'corporel.crud_panel_title.new'|trans }}
+    {% endif %}
+{% endblock %}
+{% block crud_panel_nav %}
+    {% if corporel.id is not null %}
+    <ul class="nav nav-pills">
+        <li>
+            <a href="{{ path('corporel_index') }}" class="btn btn-default" style="padding: 6px 12px;"><i class="fa fa-mail-reply"></i> {{ 'form.back'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('corporel_delete',{'id': corporel.id }) }}" class="btn btn-default direction-delete" style="padding: 6px 12px;"><i class="fa fa-trash-o"></i> {{ 'form.delete'|trans }}</a>
+        </li>
+    </ul>
+    {% endif %}
+{% endblock %}
+{% block crud_panel_content %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div>
+            {% if corporel.id is not null %}
+            <input type="submit" value="{{ 'form.update'|trans }}" class="btn btn-default" />
+            {% else %}
+            <input type="submit" value="{{ 'form.add'|trans }}" class="btn btn-default" />
+            {% endif %}
+        </div>
+    {{ form_end(form) }} 
+{% endblock %}  

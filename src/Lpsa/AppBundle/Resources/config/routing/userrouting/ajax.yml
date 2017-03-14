@@ -1,0 +1,39 @@
+ajax_corporel:
+    path:     /corporel
+    defaults: { _controller: "LpsaAppBundle:Ajax:getCorporel" }
+
+ajax_depot:
+    path:     /depot
+    defaults: { _controller: "LpsaAppBundle:Ajax:getDepot" }
+
+ajax_environnement:
+    path:     /environnement
+    defaults: { _controller: "LpsaAppBundle:Ajax:getEnvironnement" }
+
+ajax_materiel:
+    path:     /materiel
+    defaults: { _controller: "LpsaAppBundle:Ajax:getMateriel" }
+
+ajax_get_numero_enregistrement:
+    path: /evenement/numero-enregistrement
+    defaults: { _controller: "LpsaAppBundle:Ajax:getNumeroEnregistrement" }
+
+ajax_get_gravity:
+   path: /evenement/get-gravity
+   defaults: { _controller: "LpsaAppBundle:Ajax:getGravity" }
+   
+ajax_departement:
+    path: /get-departement
+    defaults: { _controller: "LpsaAppBundle:Ajax:getDepartement" }
+    
+ajax_service:
+    path: /get-service
+    defaults: { _controller: "LpsaAppBundle:Ajax:getService" }
+    
+ajax_all_depot:
+    path:     /alldepot
+    defaults: { _controller: "LpsaAppBundle:Ajax:alldepot" }
+
+lpsa_admin_user_declarantjson:
+    path:    /declarantjson
+    defaults: { _controller: "LpsaUserBundle:User:declarantjson" }

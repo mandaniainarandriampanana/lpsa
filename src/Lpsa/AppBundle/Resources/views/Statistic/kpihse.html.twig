@@ -1,0 +1,1415 @@
+{% extends "base_admin.html.twig" %}
+
+{% trans_default_domain "LpsaAppBundle" %}
+{% form_theme form 'LpsaAppBundle:Form:custom_type.html.twig' %}
+
+{% macro printErrors(errors) %}
+    <div>
+        <ul class="help-block list-unstyled">
+            {% for error in errors %}
+                <li class="text-danger">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}
+
+{% block content %}    
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Statistique KPI HSE</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    KPIHSE
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_start(form) }}
+                            <div class="col-md-3 col-sm-3">
+                                {{ form_label(form.dateStart) }}
+                                {{ form_widget(form.dateStart) }} 
+                                {% if form.dateStart.vars.errors|length > 0 %}
+                                    {{ _self.printErrors(form.dateStart.vars.errors) }}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                {{ form_label(form.dateEnd) }}
+                                {{ form_widget(form.dateEnd) }} 
+                                {% if form.dateEnd.vars.errors|length > 0 %}
+                                    {{ _self.printErrors(form.dateEnd.vars.errors) }}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-2 col-sm-2" style="margin-top: 20px;">
+                                {{ form_row(form.btnFilter) }}
+                            </div>
+                            <div class="col-md-2 col-sm-2" style="margin-top: 20px;">
+                                {{ form_row(form.btnReset) }}
+                            </div>
+                            <div class="col-md-2 col-sm-2" style="margin-top: 20px;">
+                                {{ form_row(form.btnExport) }}
+                            </div>
+                            {{ form_rest(form) }}
+                        </div>
+                    </div>
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-kpihse">
+                        <thead>
+                            <tr>
+                                <th>Indicateurs</th>
+                                <th>{{ 'Cumul ' ~ latestYear.date|date('Y') }}</th>
+                                {% for monthHeader in monthHeaders %}
+                                <th>{{ monthHeader|date('M-Y') }}</th>
+                                {% endfor %}
+                                <th>{{ 'Cumul ' ~ currentCumul.date|date('Y') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre <b>FAT</b> "LPSA"
+                                </td>
+                                <td>
+                                    {{ latestYear.getFat()['nbLpsa'] }}
+                                </td>
+                                {% for kpihse in aKpihse %}
+                                {% set fat = kpihse.getFat() %}
+                                <td>
+                                    {{ fat['nbLpsa'] }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getFat()['nbLpsa'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre <b>FAT</b> "Contractés"
+                                </td>
+                                <td>
+                                    {{ latestYear.getFat()['nbContracte'] }}
+                                </td>
+                                {% for kpihse in aKpihse %}
+                                {% set fat = kpihse.getFat() %}
+                                <td>
+                                    {{ fat['nbContracte'] }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getFat()['nbContracte'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre <b>FAT</b> "Tiers"
+                                </td>
+                                <td>
+                                    {{ latestYear.getFat()['nbTiers'] }}
+                                </td>
+                                {% for kpihse in aKpihse %}
+                                {% set fat = kpihse.getFat() %}
+                                <td>
+                                    {{ fat['nbTiers'] }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getFat()['nbTiers'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Cumul <b>FAT Fatality</b>
+                                </td>
+                                <td>
+                                    {{ latestYear.TotalFat }}
+                                </td>
+                                {% for kpihse in aKpihse %}
+                                <td>
+                                    {{ kpihse.TotalFat }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.TotalFat }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre <b>LTI</b> "LPSA"
+                                </td>
+                                <td>
+                                    {{ latestYear.getLti()['nbLpsa'] }}
+                                </td>
+                                {% for kpihse in aKpihse %}                            
+                                {% set lti = kpihse.getLti() %}
+                                <td>
+                                    {{ lti['nbLpsa'] }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getLti()['nbLpsa'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre <b>LTI</b> "Contractés"
+                                </td>
+                                <td>
+                                    {{ latestYear.getLti()['nbContracte'] }}
+                                </td>
+                                {% for kpihse in aKpihse %}                            
+                                {% set lti = kpihse.getLti() %}
+                                <td>
+                                    {{ lti['nbContracte'] }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getLti()['nbContracte'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Cumul <b>LTI Lost Time Injury</b>
+                                </td>
+                                <td>
+                                    {{ latestYear.TotalLti }}
+                                </td>
+                                {% for kpihse in aKpihse %}   
+                                <td>
+                                    {{ kpihse.TotalLti }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.TotalLti }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Poste Aménagé <b>RWC</b>
+                                </td>
+                                <td>
+                                    {{ latestYear.TotalRwc }}
+                                </td>
+                                {% for kpihse in aKpihse %}  
+                                <td>
+                                    {{ kpihse.TotalRwc }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.TotalRwc }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre <b>MT</b> "LPSA"
+                                </td>
+                                <td>
+                                    {{ latestYear.getMt()['nbLpsa'] }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                {% set mt = kpihse.getMt() %}
+                                <td>
+                                    {{ mt['nbLpsa'] }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getMt()['nbLpsa'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre <b>MT</b> "Contractés"
+                                </td>
+                                <td>
+                                    {{ latestYear.getMt()['nbContracte'] }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                {% set mt = kpihse.getMt() %}
+                                <td>
+                                    {{ mt['nbContracte'] }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getMt()['nbContracte'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Cumul <b>MT Medical Traitement</b>
+                                </td>
+                                <td>
+                                    {{ latestYear.TotalMt }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.TotalMt }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.TotalMt }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre <b>FA</b> "LPSA"
+                                </td>
+                                <td>
+                                    {{ latestYear.getFa()['nbLpsa'] }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                {% set fa = kpihse.getFa() %}
+                                <td>
+                                    {{ fa['nbLpsa'] }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getFa()['nbLpsa'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre <b>FA</b> "Contractés"
+                                </td>
+                                <td>
+                                    {{ latestYear.getFa()['nbContracte'] }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                {% set fa = kpihse.getFa() %}
+                                <td>
+                                    {{ fa['nbContracte'] }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getFa()['nbContracte'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Cumul <b>FA First Aid</b>
+                                </td>
+                                <td>
+                                    {{ latestYear.TotalFa }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.TotalFa }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.TotalFa }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    <b>TRI</b> Total Recording Injury
+                                </td>
+                                <td>
+                                    {{ latestYear.TRI }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.TRI }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.TRI }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator"><b>TRIR (sur 12 mois glissants)</b></td>
+                                <td>
+                                    {{ latestYear.getTrir12() }}
+                                </td>    
+                                {% for month,kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getTrir12() }}
+                                </td>
+                                {% endfor %}  
+                                <td>
+                                    {{ currentCumul.getTrir12() }}
+                                </td>                          
+                            </tr>  
+                            <tr>
+                                <td class="left-align indicator"><b>LTIR (sur 12 mois glissants)</b></td>
+                                <td>
+                                    {{ latestYear.getLtir12() }}
+                                </td> 
+                                {% for month,kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getLtir12() }}
+                                </td>
+                                {% endfor %}  
+                                <td>
+                                    {{ currentCumul.getLtir12() }}
+                                </td>                                     
+                            </tr>  
+                            <tr>
+                                <td class="left-align indicator"><b>TRIR</b></td>
+                                <td>
+                                    {{ latestYear.getTrir() }}
+                                </td>  
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getTrir() }}
+                                </td>
+                                {% endfor %}  
+                                <td>
+                                    {{ currentCumul.getTrir() }}
+                                </td>                                
+                            </tr>  
+                            <tr>
+                                <td class="left-align indicator"><b>LTIR</b></td>
+                                <td>
+                                    {{ latestYear.getLtir() }}
+                                </td>  
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getLtir() }}
+                                </td>
+                                {% endfor %}   
+                                <td>
+                                    {{ currentCumul.getLtir() }}
+                                </td>                                 
+                            </tr> 
+                            <tr>
+                                <td class="left-align indicator"><b>FAR</b></td>
+                                <td>
+                                    {{ latestYear.getFar() }}
+                                </td> 
+                                {% for month,kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getTrirObject().getFar() }}
+                                </td>
+                                {% endfor %}  
+                                <td>
+                                    {{ currentCumul.getTrirObject().getFar() }}
+                                </td>                                 
+                            </tr>   
+                            <tr>
+                                <td class="left-align indicator"><b>FAR (sur 12 mois glissants)</b></td>
+                                <td>
+                                    {{ latestYear.getFar12() }}
+                                </td> 
+                                {% for month,kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getFar12() }}
+                                </td>
+                                {% endfor %}  
+                                <td>
+                                    {{ currentCumul.getFar12() }}
+                                </td>                                   
+                            </tr>                           
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'accidents  <b>"Dépots"</b> avec arrêt
+                                </td>
+                                <td>
+                                    {{ latestYear.NbLostTimeAccidentRepositories }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.NbLostTimeAccidentRepositories }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.NbLostTimeAccidentRepositories }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'accidents <b>"Transport Terrestre"</b> avec arrêt 
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbTransportTerrestreAvecArret() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbTransportTerrestreAvecArret() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbTransportTerrestreAvecArret() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'accidents <b>"Transport Maritime"</b> avec arrêt
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbTransportMaritimeAvecArret() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbTransportMaritimeAvecArret() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbTransportMaritimeAvecArret() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'accidents <b>"Siège"</b> avec arrêt 
+                                </td>
+                                <td>
+                                    {{ latestYear.NbLostTimeAccidentCenter }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.NbLostTimeAccidentCenter }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.NbLostTimeAccidentCenter }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    CUMUL des accidents avec arrêt
+                                </td>
+                                <td>
+                                    {{ latestYear.getCumulAvecArret() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getCumulAvecArret() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getCumulAvecArret() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'accidents  <b>"Dépots"</b> sans arrêt
+                                </td>
+                                <td>
+                                    {{ latestYear.NbAccidentRepositories }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.NbAccidentRepositories }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.NbAccidentRepositories }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'accidents <b>"Transport Terrestre"</b> sans arrêt   
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbTransportTerrestreSansArret() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbTransportTerrestreSansArret() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbTransportTerrestreSansArret() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'accidents <b>"Transport Maritime"</b> sans arrêt   
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbTransportMaritimeSansArret() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbTransportMaritimeSansArret() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbTransportMaritimeSansArret() }}
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'accidents <b>"Siège"</b> sans arrêt 
+                                </td>
+                                <td>
+                                    {{ latestYear.NbAccidentCenter }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.NbAccidentCenter }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.NbAccidentCenter }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    CUMUL des accidents sans arrêt   
+                                </td>
+                                <td>
+                                    {{ latestYear.getCumulSansArret() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getCumulSansArret() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getCumulSansArret() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'Agressions  
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbAgression() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbAgression() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbAgression() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre de Vols  
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbVol() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbVol() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbVol() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'intrusions  
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbIntrusion() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbIntrusion() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbIntrusion() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre de jours depuis dernier accident corporel y compris tiers "Transport Route"
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbreJourAccidentCorporelTransportRoute() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbreJourAccidentCorporelTransportRoute() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbreJourAccidentCorporelTransportRoute() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    KM parcourus "Transport Route" depuis dernier accident corporel y compris tiers
+                                </td>
+                                <td>
+                                    {{ latestYear.getKmAccidentCorporelTransportRoute() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getKmAccidentCorporelTransportRoute() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getKmAccidentCorporelTransportRoute() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre de jours depuis dernier accident corporel y compris tiers "Transport Rail"
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbreJourAccidentCorporelTransportRail() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbreJourAccidentCorporelTransportRail() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbreJourAccidentCorporelTransportRail() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    KM parcourus "Transport Rail" depuis dernier accident corporel y compris tiers
+                                </td>
+                                <td>
+                                    {{ latestYear.getKmAccidentCorporelTransportRail() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getKmAccidentCorporelTransportRail() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getKmAccidentCorporelTransportRail() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre de jours depuis dernier incident y compris tiers "Transport Maritime"
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbreJourIncidentTransportMaritime() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbreJourIncidentTransportMaritime() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbreJourIncidentTransportMaritime() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Miles parcourus "Transport Maritime" depuis dernier incident y compris tiers
+                                </td>
+                                <td>
+                                    {{ latestYear.getKmIncidentTransportMaritime() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getKmIncidentTransportMaritime() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getKmIncidentTransportMaritime() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre de jours depuis dernière fatalité y compris tiers "Tout mode transport"
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbreJourFatalite() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbreJourFatalite() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbreJourFatalite() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Taux de sinistralité de transport de matières dangereuses
+                                </td>
+                                <td>
+                                    {{ latestYear.getTauxSinistraliteMatiereDangereuse() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getTauxSinistraliteMatiereDangereuse() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getTauxSinistraliteMatiereDangereuse() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    KM parcourus véhicules legers
+                                </td>
+                                <td>
+                                    {{ latestYear.getKmVehiculeLeger() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getKmVehiculeLeger() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getKmVehiculeLeger() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Taux de sinistralité de transport véhicules légers
+                                </td>
+                                <td>
+                                    {{ latestYear.getTauxSinistraliteVehiculeLeger() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getTauxSinistraliteVehiculeLeger() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getTauxSinistraliteVehiculeLeger() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'exercices POI  
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbPoi() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbPoi() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbPoi() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'exercices mini POI 
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbMiniPoi() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbMiniPoi() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbMiniPoi() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'exercices PUM (Plan d'Urgence Maritime Tier1 ) 
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbPum() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbPum() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbPum() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre d'exercice combiné avec l'OLEP 
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbCombine() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbCombine() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbCombine() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'exercices CMC
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbCmc() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbCmc() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbCmc() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    SIEGE
+                                </td>
+                                <td>
+                                    {{ latestYear.getToolboxSiege() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getToolboxSiege() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getToolboxSiege() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    DEPOTS
+                                </td>
+                                <td>
+                                    {{ latestYear.getToolboxDepots() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getToolboxDepots() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getToolboxDepots() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    SCT
+                                </td>
+                                <td>
+                                    {{ latestYear.getToolboxSct() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getToolboxSct() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getToolboxSct() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre de Visites Sécurité CODIR
+                                </td>
+                                <td>
+                                    {{ latestYear.getVisite() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getVisite() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getVisite() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre d'évènement reporté: Toutes activités  y compris Petites unités 
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbEvenementReporte() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbEvenementReporte() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbEvenementReporte() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Indice de reporting 
+                                </td>
+                                <td>
+                                    {{ latestYear.getIndiceReporting() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getIndiceReporting() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getIndiceReporting() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre de Presqu'Accidents (PA) 
+                                </td>
+                                <td>
+                                    {{ latestYear.getPresqueAccident() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getPresqueAccident() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getPresqueAccident() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre des Actes et situations Dangéreuses (AD)
+                                </td>
+                                <td>
+                                    {{ latestYear.getSituationDangereuse() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getSituationDangereuse() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getSituationDangereuse() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d' Incidents  Potentiels nécéssitant un ADC  (IP)
+                                </td>
+                                <td>
+                                    {{ latestYear.getIncidentPotentiel() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getIncidentPotentiel() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getIncidentPotentiel() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nbre d'Analyses par Arbre Des Causes Réalisées
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbParArbreCauseRealise() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbParArbreCauseRealise() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbParArbreCauseRealise() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Zone étanche >159litres
+                                </td>
+                                <td>
+                                    {{ latestYear.getEnvironmentMore1m3ZE() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getEnvironmentMore1m3ZE() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getEnvironmentMore1m3ZE() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Zone étanche < 159litres
+                                </td>
+                                <td>
+                                    {{ latestYear.getEnvironmentLess1m3ZE() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getEnvironmentLess1m3ZE() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getEnvironmentLess1m3ZE() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Zone non étanche  > 159 litres
+                                </td>
+                                <td>
+                                    {{ latestYear.getEnvironmentMore1m3ZNE() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getEnvironmentMore1m3ZNE() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getEnvironmentMore1m3ZNE() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Zone non étanche < 159 litres
+                                </td>
+                                <td>
+                                    {{ latestYear.getEnvironmentLess1m3ZNE() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getEnvironmentLess1m3ZNE() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getEnvironmentLess1m3ZNE() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Fuite de produits non mesurables
+                                </td>
+                                <td>
+                                    {{ latestYear.getFuiteNonMesurable() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getFuiteNonMesurable() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getFuiteNonMesurable() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    TOTAL
+                                </td>
+                                <td>
+                                    {{ latestYear.getTotalEnvironment() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getTotalEnvironment() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getTotalEnvironment() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Fuite flexible en cours de réception ou avarie coque
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbFuiteflexible() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbFuiteflexible() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbFuiteflexible() }}
+                                </td>
+                            </tr>                                    
+                            <tr>
+                                <td class="left-align indicator">
+                                    Piezometre: Nbres d'échantillons prélévés
+                                </td>
+                                <td>
+                                    {{ latestYear.getPiezometreNbEchantillonPreleve() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getPiezometreNbEchantillonPreleve() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getPiezometreNbEchantillonPreleve() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Piezometre: Nbres d'échantillons analysés
+                                </td>
+                                <td>
+                                    {{ latestYear.getPiezometreNbEchantillonAnalyse() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getPiezometreNbEchantillonAnalyse() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getPiezometreNbEchantillonAnalyse() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Piezometre: Nbre d'anomalies relevées
+                                </td>
+                                <td>
+                                    {{ latestYear.getPiezometreNbAnomalieReleve() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getPiezometreNbAnomalieReleve() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getPiezometreNbAnomalieReleve() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Piezometre: Taux de non-conformité
+                                </td>
+                                <td>
+                                    {{ latestYear.getPiezometreTauxNonConformite() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getPiezometreTauxNonConformite() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getPiezometreTauxNonConformite() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Décanteur: Nbres d'échantillons prélévés
+                                </td>
+                                <td>
+                                    {{ latestYear.getDecanteurNbEchantillonPreleve() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getDecanteurNbEchantillonPreleve() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getDecanteurNbEchantillonPreleve() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Décanteur: Nbres d'échantillons analysés
+                                </td>
+                                <td>
+                                    {{ latestYear.getDecanteurNbEchantillonAnalyse() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getDecanteurNbEchantillonAnalyse() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getDecanteurNbEchantillonAnalyse() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Décanteur: Nbre d'anomalies relevées
+                                </td>
+                                <td>
+                                    {{ latestYear.getDecanteurNbAnomalieReleve() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getDecanteurNbAnomalieReleve() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getDecanteurNbAnomalieReleve() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Décanteur: Taux de non-conformité
+                                </td>
+                                <td>
+                                    {{ latestYear.getDecanteurTauxNonConformite() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getDecanteurTauxNonConformite() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getDecanteurTauxNonConformite() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Laboratoire: Nbre d'échantillons prélévés
+                                </td>
+                                <td>
+                                    {{ latestYear.getLaboratoireNbEchantillonPreleve() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getLaboratoireNbEchantillonPreleve() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getLaboratoireNbEchantillonPreleve() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Laboratoire: Nbre d'échantillons analysés
+                                </td>
+                                <td>
+                                    {{ latestYear.getLaboratoireNbEchantillonAnalyse() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getLaboratoireNbEchantillonAnalyse() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getLaboratoireNbEchantillonAnalyse() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Laboratoire: Nbre d'anomalies relevées
+                                </td>
+                                <td>
+                                    {{ latestYear.getLaboratoireNbAnomalieReleve() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getLaboratoireNbAnomalieReleve() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getLaboratoireNbAnomalieReleve() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Laboratoire: Taux de non-conformité
+                                </td>
+                                <td>
+                                    {{ latestYear.getLaboratoireTauxNonConformite() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getLaboratoireTauxNonConformite() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getLaboratoireTauxNonConformite() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Laboratoire: Résultats Essais Circulaires 
+                                </td>
+                                <td>
+                                    {{ latestYear.getLaboratoireResultatEssaiCirculaire() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getLaboratoireResultatEssaiCirculaire() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getLaboratoireResultatEssaiCirculaire() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre de non-conformités clôturées 
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbreNonConformiteCloture() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbreNonConformiteCloture() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbreNonConformiteCloture() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre de non-conformités non-échues 
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbreNonConformiteNonEchue() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbreNonConformiteNonEchue() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbreNonConformiteNonEchue() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Nombre OVERDUE
+                                </td>
+                                <td>
+                                    {{ latestYear.getNbreOVERDUE() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getNbreOVERDUE() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getNbreOVERDUE() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left-align indicator">
+                                    Pourcentage OVERDUE
+                                </td>
+                                <td>
+                                    {{ latestYear.getPourcentageOVERDUE() }}
+                                </td>
+                                {% for kpihse in aKpihse %} 
+                                <td>
+                                    {{ kpihse.getPourcentageOVERDUE() }}
+                                </td>
+                                {% endfor %}
+                                <td>
+                                    {{ currentCumul.getPourcentageOVERDUE() }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block others_javascripts %}
+    {{ parent() }}
+    <script>
+    $(document).ready(function(){
+        $('#lpsa_kpihse_filter_btnReset').click(function(){
+            $('#lpsa_kpihse_filter_dateStart').val('');
+            $('#lpsa_kpihse_filter_dateEnd').val('');
+        });
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalAbstractEvent">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hitden="true">&times;</span></button>
+                <h4 class="modal-title">{{ 'form_label.evenement.modal.title'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <table border="1" class="table-modal">
+                    <tr>
+                        <td>{{ 'form_label.evenement.redacteur'|trans }}</td>
+                        <td id="tdRedacteur">{{ app.request.get('redacteur') }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenement.userDeclarant'|trans }}</td>
+                        <td id="tdUserDeclarant"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenement.site'|trans }}</td>
+                        <td id="tdDepot"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenement.numeroEnregistrement'|trans }}:</td>
+                        <td id="tdNumeroEnregistrement"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenement.dateDesFaits'|trans }}:</td>
+                        <td id="tdDateDesFaits"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenement.categorie'|trans }}:</td>
+                        <td id="tdCategorie"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenement.categorieCommentaire'|trans }}:</td>
+                        <td id="tdCategorieComm"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenement.dateAction'|trans }}:</td>
+                        <td id="tdDateAction"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenement.narration'|trans }}:</td>
+                        <td id="tdNarration"></td>
+                    </tr>
+                    <tr>
+                        <td id="tdCorporelLabel"></td>
+                        <td id="tdCorporel"></td>
+                        <td id="tdCorporelValue"></td>
+                    </tr>
+                    <tr>
+                        <td id="tdMaterielLabel"></td>
+                        <td id="tdMateriel"></td>
+                    </tr>
+                    <tr>
+                        <td id="tdEnvironnementLabel"></td>
+                        <td id="tdEnvironnement"></td>
+                        <td>{{ 'form_label.evenement.environnementValue'|trans }}</td>
+                        <td id="tdEnvironnementValue"></td>
+                        <td>{{ 'form_label.evenement.m3'|trans }}</td>
+                    </tr>
+                    <tr>
+                        <td id="tdMediatiqueLabel"></td>
+                        <td id="tdMediatique"></td>
+                    </tr>
+                    <tr>
+                        <td id="tdQualiteLabel"></td>
+                        <td id="tdQualite"></td>
+                    </tr>
+                    <tr>
+                        <td id="tdDysfonctionnementLabel"></td>
+                        <td id="tdDysfonctionnement"></td>
+                    </tr>
+                    <tr>
+                        <td id="tdGraviteLabel"></td>
+                        <td id="tdGravite"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenementEnquete.date'|trans }}</td>
+                        <td id="tdEvenementEnqueteDate"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenementEnquete.commentaire'|trans }}</td>
+                        <td id="tdEvenementEnqueteComm"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenementEnquete.causesImmediates'|trans }}</td>
+                        <td id="tdEvenementEnqueteCausesImmediates"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_label.evenementEnquete.causesFondamentales'|trans }}</td>
+                        <td id="tdEvenementEnqueteCausesFondamentales"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'form_title_group_field.evenement.actionProgres'|trans }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <table class='table-details'>
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'form_label.evenement.table.actions'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.responsable'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.delai'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.avancement'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.observation'|trans }}</th>
+                                        <th>{{ 'form_label.evenement.table.etat'|trans }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tdActionProgres">
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_piezometre.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Piezometre\AbstractPiezometreFormHandlerStrategy
+    app.piezometre.form.handler.class: Lpsa\AppBundle\Form\Handler\Piezometre\PiezometreFormHandler
+    app.new_piezometre.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Piezometre\NewPiezometreFormHandlerStrategy
+    app.update_piezometre.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Piezometre\UpdatePiezometreFormHandlerStrategy
+    app.piezometre.form.type.class: Lpsa\AppBundle\Form\Type\Piezometre\PiezometreType
+    
+services:
+    app.abstract_piezometre.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_piezometre.form.handler.strategy.class%
+        arguments:
+           - @app.piezometre.form.type
+        calls:
+           - [setPiezometreManager, ['@app.piezometre.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.piezometre.form.handler:
+        class: %app.piezometre.form.handler.class%
+        calls:
+           - [setNewPiezometreFormHandlerStrategy, ['@app.new_piezometre.form.handler.strategy']]
+           - [setUpdatePiezometreFormHandlerStrategy, ['@app.update_piezometre.form.handler.strategy']]
+
+    app.new_piezometre.form.handler.strategy:
+        class: %app.new_piezometre.form.handler.strategy.class%
+        parent: app.abstract_piezometre.form.handler.strategy
+
+    app.update_piezometre.form.handler.strategy:
+        class: %app.update_piezometre.form.handler.strategy.class%
+        parent: app.abstract_piezometre.form.handler.strategy
+
+    app.piezometre.form.type:
+        class: %app.piezometre.form.type.class%
+        arguments:
+            - @translator
+            - @app.piezometre.manager
+        tags:
+            - { name: form.type, alias: PiezometreType}

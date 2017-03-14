@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Groupes utilisateurs</h1>
+    </div>
+    <div style="float: right" class="btn-action">
+        <a class="btn btn-default" href="{{ path('fos_user_group_new') }}">Ajout</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Listes des groupes
+            </div>
+            <div class="panel-body">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-groups">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>groupe</th>
+                            <th>dépot</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for group in groups %}
+                            <tr>
+                                <td class="id-td"><a href="{{ path('fos_user_group_edit',{'groupname' : group.getName() }) }}" title="Editer">{{ group.id }}</a></td>
+                                <td><a href="{{ path('fos_user_group_show', {'groupname': group.getName()} ) }}">{{ group.getName() }}</a></td>
+                                <td>{{ group.depot }}</td>
+                                <td class="btn-action-table">
+                                    <div class="btn-content">
+                                        <a href="{{ path('fos_user_group_edit', { 'groupname': group.getName() }) }}" class="btn btn-default left"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ path('fos_user_group_delete',{'groupname' : group.getName() }) }}" title="Editer" class="btn btn-default left group-delete"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

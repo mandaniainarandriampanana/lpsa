@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_objectifKpihse.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ObjectifKpihse\AbstractObjectifKpihseFormHandlerStrategy
+    app.objectifKpihse.form.handler.class: Lpsa\AppBundle\Form\Handler\ObjectifKpihse\ObjectifKpihseFormHandler
+    app.new_objectifKpihse.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ObjectifKpihse\NewObjectifKpihseFormHandlerStrategy
+    app.update_objectifKpihse.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ObjectifKpihse\UpdateObjectifKpihseFormHandlerStrategy
+    app.objectifKpihse.form.type.class: Lpsa\AppBundle\Form\Type\ObjectifKpihse\ObjectifKpihseType
+    
+services:
+    app.abstract_objectifKpihse.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_objectifKpihse.form.handler.strategy.class%
+        arguments:
+           - @app.objectifKpihse.form.type
+        calls:
+           - [setObjectifKpihseManager, ['@app.objectifKpihse.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.objectifKpihse.form.handler:
+        class: %app.objectifKpihse.form.handler.class%
+        calls:
+           - [setNewObjectifKpihseFormHandlerStrategy, ['@app.new_objectifKpihse.form.handler.strategy']]
+           - [setUpdateObjectifKpihseFormHandlerStrategy, ['@app.update_objectifKpihse.form.handler.strategy']]
+
+    app.new_objectifKpihse.form.handler.strategy:
+        class: %app.new_objectifKpihse.form.handler.strategy.class%
+        parent: app.abstract_objectifKpihse.form.handler.strategy
+
+    app.update_objectifKpihse.form.handler.strategy:
+        class: %app.update_objectifKpihse.form.handler.strategy.class%
+        parent: app.abstract_objectifKpihse.form.handler.strategy
+
+    app.objectifKpihse.form.type:
+        class: %app.objectifKpihse.form.type.class%
+        arguments:
+            - @translator
+            - @app.objectifKpihse.manager
+        tags:
+            - { name: form.type, alias: ObjectifKpihseType}

@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_evenementstatut.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\EvenementStatut\AbstractEvenementStatutFormHandlerStrategy
+    app.evenementstatut.form.handler.class: Lpsa\AppBundle\Form\Handler\EvenementStatut\EvenementStatutFormHandler
+    app.new_evenementstatut.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\EvenementStatut\NewEvenementStatutFormHandlerStrategy
+    app.update_evenementstatut.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\EvenementStatut\UpdateEvenementStatutFormHandlerStrategy
+    
+services:
+    app.abstract_evenementstatut.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_evenementstatut.form.handler.strategy.class%
+        calls:
+           - [setEvenementStatutManager, ['@app.evenementstatut.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.evenementstatut.form.handler:
+        class: %app.evenementstatut.form.handler.class%
+        calls:
+           - [setNewEvenementStatutFormHandlerStrategy, ['@app.new_evenementstatut.form.handler.strategy']]
+           - [setUpdateEvenementStatutFormHandlerStrategy, ['@app.update_evenementstatut.form.handler.strategy']]
+
+    app.new_evenementstatut.form.handler.strategy:
+        class: %app.new_evenementstatut.form.handler.strategy.class%
+        parent: app.abstract_evenementstatut.form.handler.strategy
+
+    app.update_evenementstatut.form.handler.strategy:
+        class: %app.update_evenementstatut.form.handler.strategy.class%
+        parent: app.abstract_evenementstatut.form.handler.strategy

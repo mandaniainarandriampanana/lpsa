@@ -1,0 +1,75 @@
+{% extends "base_admin.html.twig" %}
+
+{% trans_default_domain "LpsaAppBundle" %}
+{% block content %}
+    <div class="row">
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{ message|trans({}, 'LpsaAppBundle') }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ 'evenementcategorie.page_header'|trans }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'evenementcategorie.panel_heading'|trans }}
+                </div>
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-evenementCategories">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{{ 'evenementcategorie.table.label'|trans }}</th>
+                                <th>{{ 'evenementcategorie.table.actions'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for evenementCategorie in evenementCategories %}
+                                <tr>
+                                    <td><a href="{{ path('evenementcategorie_edit',{'id' : evenementCategorie.id }) }}" title="{{ 'form.edit'|trans }}">{{ evenementCategorie.id }}</a></td>
+                                    <td>{{ evenementCategorie.libelle }}</td>
+                                    <td> 
+                                        <a href="{{ path('evenementcategorie_edit', { 'id': evenementCategorie.id }) }}" class="btn btn-default left"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ path('evenementcategorie_delete', { 'id': evenementCategorie.id }) }}" class="btn btn-default left evenementCategorie-delete"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block others_stylesheets %}
+    {{ parent() }}
+    <style>
+        .left{
+            float: left;
+        }
+    </style>
+{% endblock %}
+
+{% block others_javascripts %}
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','.evenementCategorie-delete',function(e){
+                var r = confirm("{{ 'whishes.delete'|trans }}");
+                if (r !== true) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+{% endblock %}

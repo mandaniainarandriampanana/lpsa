@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_depot.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Depot\AbstractDepotFormHandlerStrategy
+    app.depot.form.handler.class: Lpsa\AppBundle\Form\Handler\Depot\DepotFormHandler
+    app.new_depot.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Depot\NewDepotFormHandlerStrategy
+    app.update_depot.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Depot\UpdateDepotFormHandlerStrategy
+    
+services:
+    app.abstract_depot.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_depot.form.handler.strategy.class%
+        calls:
+           - [setDepotManager, ['@app.depot.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.depot.form.handler:
+        class: %app.depot.form.handler.class%
+        calls:
+           - [setNewDepotFormHandlerStrategy, ['@app.new_depot.form.handler.strategy']]
+           - [setUpdateDepotFormHandlerStrategy, ['@app.update_depot.form.handler.strategy']]
+
+    app.new_depot.form.handler.strategy:
+        class: %app.new_depot.form.handler.strategy.class%
+        parent: app.abstract_depot.form.handler.strategy
+
+    app.update_depot.form.handler.strategy:
+        class: %app.update_depot.form.handler.strategy.class%
+        parent: app.abstract_depot.form.handler.strategy

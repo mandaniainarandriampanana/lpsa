@@ -1,0 +1,20 @@
+admin_responsableservice_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:ResponsableService:index" }
+    methods:  GET
+
+admin_responsableservice_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:ResponsableService:newEdit" }
+    methods:  [GET, POST]
+
+admin_responsableservice_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:ResponsableService:newEdit" }
+    methods:  [GET, PUT]
+
+admin_responsableservice_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:ResponsableService:delete" }
+    requirements:
+       id: \d+

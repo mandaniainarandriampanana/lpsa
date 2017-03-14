@@ -1,0 +1,39 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+<table width="100%" class="table table-striped table-bordered table-hover" id="event-category-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            {% for evenementCategorie in evenementCategories %}
+            <th>{{ evenementCategorie.libelle }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% set aEvenementCategories = [] %}
+        {% set cEventCategories = evenementCategories|length %}
+        {% for entityCategoryEvent in listEntitiesCategoryEventTable %}
+            <tr>
+                <td>{{ entityCategoryEvent }}</td>
+                {% for evenementCategorie in evenementCategories %} 
+                <td>
+                    {% if listTablePerCategories[evenementCategorie.id]|length > 0 %}
+                        {% set hasFound = false %}
+                        {% for catagoryTable in listTablePerCategories[evenementCategorie.id] %}
+                            {% if catagoryTable.nomTable == entitiesTableName[entityCategoryEvent] %}                                
+                                {% set hasFound = true %}
+                                <input type="checkbox" class="category-table checked" value="{{ catagoryTable.id ~ '#' ~ entityCategoryEvent }}" checked="checked">                                                           
+                            {% endif %}
+                        {% endfor %}                        
+                        {% if not hasFound %}
+                            <input type="checkbox" class="category-table" value="{{ evenementCategorie.id ~ '#' ~ entityCategoryEvent }}">
+                        {% endif %}
+                    {% else %}
+                        <input type="checkbox" class="category-table" value="{{ evenementCategorie.id ~ '#' ~ entityCategoryEvent }}">
+                    {% endif %} 
+                </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

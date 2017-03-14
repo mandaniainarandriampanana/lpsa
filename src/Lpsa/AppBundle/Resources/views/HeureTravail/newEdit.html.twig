@@ -1,0 +1,43 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+{% if heureTravail.id is not null %}
+    {% set deleteClassSelector = 'heuretravail' %}
+{% endif %}
+
+{% extends "LpsaAppBundle:Layout:newEdit.html.twig" %}
+
+{% block crud_header_title %}
+    {{ 'heuretravail.crud_header_title'|trans }}
+{% endblock %}
+{% block crud_panel_title %}{% if heureTravail.id is not null %}{{ 'heuretravail.crud_panel_title.edit'|trans }}{% else %}{{ 'heuretravail.crud_panel_title.new'|trans }}{% endif %}{% endblock %} 
+{% block crud_panel_nav %}
+    {% if heureTravail.id is not null %}
+    <ul class="nav nav-pills">
+        <li>
+            <a href="{{ path('heuretravail_index') }}" class="btn btn-default" style="padding: 6px 12px;"><i class="fa fa-mail-reply"></i> {{ 'form.back'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('heuretravail_delete',{'id': heureTravail.id }) }}" class="btn btn-default heuretravail-delete" style="padding: 6px 12px;"><i class="fa fa-trash-o"></i> {{ 'form.delete'|trans }}</a>
+        </li>
+    </ul>
+    {% endif %}
+{% endblock %}
+{% block crud_panel_content %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="{% if heureTravail.id is not null %}{{ 'form.update'|trans }}{% else %}{{ 'form.add'|trans }}{% endif %}" class="btn btn-default" />
+    {{ form_end(form) }}    
+{% endblock %} 
+{% block others_javascripts %}
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.heuretravail-delete', function (e) {
+                var r = confirm("{{ 'whishes.delete'|trans }}");
+                if (r !== true) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_impactmediatique.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ImpactMediatique\AbstractImpactMediatiqueFormHandlerStrategy
+    app.impactmediatique.form.handler.class: Lpsa\AppBundle\Form\Handler\ImpactMediatique\ImpactMediatiqueFormHandler
+    app.new_impactmediatique.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ImpactMediatique\NewImpactMediatiqueFormHandlerStrategy
+    app.update_impactmediatique.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ImpactMediatique\UpdateImpactMediatiqueFormHandlerStrategy
+    
+services:
+    app.abstract_impactmediatique.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_impactmediatique.form.handler.strategy.class%
+        calls:
+           - [setImpactMediatiqueManager, ['@app.impactmediatique.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.impactmediatique.form.handler:
+        class: %app.impactmediatique.form.handler.class%
+        calls:
+           - [setNewImpactMediatiqueFormHandlerStrategy, ['@app.new_impactmediatique.form.handler.strategy']]
+           - [setUpdateImpactMediatiqueFormHandlerStrategy, ['@app.update_impactmediatique.form.handler.strategy']]
+
+    app.new_impactmediatique.form.handler.strategy:
+        class: %app.new_impactmediatique.form.handler.strategy.class%
+        parent: app.abstract_impactmediatique.form.handler.strategy
+
+    app.update_impactmediatique.form.handler.strategy:
+        class: %app.update_impactmediatique.form.handler.strategy.class%
+        parent: app.abstract_impactmediatique.form.handler.strategy

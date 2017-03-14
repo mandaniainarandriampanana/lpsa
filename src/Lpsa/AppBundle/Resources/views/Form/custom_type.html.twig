@@ -1,0 +1,71 @@
+{% block lpsa_progress_bar_widget %}
+    {% spaceless %}
+        <div class="input-avancement-td">
+            {%  set attr = attr|merge({'class': ((attr.class|default('form-control') ~ ' input-avancement')|trim)}) %}
+            <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" style="display:none;"{% endif %} />
+            <div class="links-content-td">
+                <a href="#" class="cancel_icon icon-td">x</a>
+            </div>
+        </div>
+        <div class="progress progress-bar-container-avancement">
+            <div class="progress-bar progress-bar-avancement" role="progressbar" aria-valuenow="{% if value is not empty %}{{ value }}{% endif %}" aria-valuemin="0" aria-valuemax="100" {% if value is not empty %}style="width: {{ value ~ '%' }};"{% endif %}>
+                {% if value is not empty %}{{ value ~ '%' }}{% endif %}
+            </div>
+        </div>
+    {% endspaceless %}    
+{% endblock lpsa_progress_bar_widget %}
+
+{% block lpsa_datepicker_widget %}
+    {% spaceless %}
+        {%  set attr = attr|merge({'class': ((attr.class|default('datepicker') ~ ' form-control')|trim)}) %}
+        <div class="input-group datetime-container">
+            <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+            <span class="input-group-addon calendar-datepicker"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+    {% endspaceless %}    
+{% endblock lpsa_datepicker_widget %}
+
+{% block lpsa_file_widget %}
+    {% spaceless %}
+        {% if value is not empty %}<span class="file-name">{{ value }}</span>{% endif %}
+        {% set subject =  form.parent.vars.value %}
+        {% if subject and  subject.id %}
+            {{ subject.originalName }} <a href="{{ path(route_name,{'id' : subject.id , 'filename' : subject.name}) }}" target="_blank" title="{{ 'form.download'|trans({},'LpsaAppBundle') }}" class="file-download"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></a>
+        {% else %}
+            <span class="file-name"></span>
+        {% endif %}
+        {%  set attr = attr|merge({'class': ((attr.class|default('form-control') ~ ' lpsa-file')|trim)}) %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if not display or (subject and  subject.id) %}style="display:none;"{% endif %}/>        
+    {% endspaceless %}    
+{% endblock lpsa_file_widget %}
+
+{% block lpsa_input_ajax_widget %}
+    {% spaceless %}
+        {%  set attr = attr|merge({'class': ((attr.class|default('form-control'))|trim)}) %}
+        <div class="form-group">
+            <input type="hidden" {{ block('widget_attributes') }} value="{% if view_data %}{{ view_data.id }}{% endif %}"/>
+            <input type="text" class="form-control ui-autocomplete-input" data-id="{{ data_id }}" {% if value is not empty and view_data %}value="{{ view_data.getLabelToPrint }}" {% endif %} {% if isRequired %}required="required"{% endif %} {% if disabled %}disabled="disabled"{% endif %}/>
+        </div>
+        <script type="text/javascript">
+            var {{ js_var }} = {
+            'data_id' : '{{ data_id }}',
+                    'ajax_url' : '{{ ajax_url }}',
+                    'hidden_target' : '{{ hidden_target }}'
+            };        </script>
+    {% endspaceless %}    
+{% endblock lpsa_input_ajax_widget %}
+
+{% block lpsa_select_ajax_widget %}
+    {{ block('choice_widget') }}
+    {% spaceless %}
+        {% if ajax_url %}
+            <script type="text/javascript">
+                    var {{ js_var }} = {
+                    'js_selector' : '{{ js_selector }}',
+                            'ajax_url' : '{{ ajax_url }}',
+                            'js_data' : '{{ js_data }}'
+                    };
+            </script>
+        {% endif %}
+    {% endspaceless %}
+{% endblock lpsa_select_ajax_widget %}

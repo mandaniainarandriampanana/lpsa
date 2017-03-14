@@ -1,0 +1,165 @@
+{% trans_default_domain "LpsaAppBundle" %}
+
+{% if evenement.id is not null %}
+    {% set deleteClassSelector = 'pollutionsol' %}
+{% endif %}
+
+{% extends "LpsaAppBundle:Layout:newEdit.html.twig" %}
+
+{% block crud_header_title %}
+    {% if isPaq3se %}
+        {{ 'PAQSSSE' }}
+    {% else %}
+        {{ 'evenement.crud_header_title'|trans }}
+    {% endif %}   
+{% endblock %}
+{% block crud_panel_title %}{% if evenement.id is not null %}{{ 'evenement.crud_panel_title.edit'|trans }}{% else %}{{ 'evenement.crud_panel_title.new'|trans }}{% endif %}{% endblock %} 
+{% block crud_panel_nav %}
+    {% if evenement.id is not null %}
+    <ul class="nav nav-pills">
+        <li>
+            {% set page = 1 %}
+            {% if(app.session.get('list_event_pager')) %}
+                {% set page = app.session.get('list_event_pager') %}
+            {% endif %}
+            {% if isPaq3se %}
+                <a href="{{ path('admin_paq3se') ~ '?page=' ~ page }}" class="btn btn-default" style="padding: 6px 12px;"><i class="fa fa-mail-reply"></i> {{ 'form.back'|trans }}</a>
+            {% else %}
+                <a href="{{ path('admin_evenement_index') ~ '?page=' ~ page }}" class="btn btn-default" style="padding: 6px 12px;"><i class="fa fa-mail-reply"></i> {{ 'form.back'|trans }}</a>
+            {% endif %}    
+        </li>
+        {% if(is_granted('delete',evenement)) %}
+        <li>
+            {% if isPaq3se %}
+               <a href="{{ path('admin_paq3se_delete',{'id': evenement.id }) }}" class="btn btn-default pollutionsol-delete" style="padding: 6px 12px;"><i class="fa fa-trash-o"></i> {{ 'form.delete'|trans }}</a> 
+            {% else %}
+                <a href="{{ path('admin_evenement_delete',{'id': evenement.id }) }}" class="btn btn-default pollutionsol-delete" style="padding: 6px 12px;"><i class="fa fa-trash-o"></i> {{ 'form.delete'|trans }}</a>
+            {% endif %}
+        </li>
+        {% endif %}
+{#
+        <li>
+            <button class="btn btn-default" style="padding: 6px 12px;" onclick="window.print()"><i class="fa fa-print" aria-hidden="true"></i></button>
+        </li>
+#}
+    </ul>
+    {% endif %}
+{% endblock %}
+{% block crud_panel_content %}
+    <script>
+        var typecorporelIds = [];
+        {% for key,val in lpsa_typecorporel_ids %}
+            typecorporelIds[{{ val['id'] }}] = '{{ key }}';
+        {% endfor %}
+    </script>
+    {{ include('LpsaAppBundle:Evenement:_form.html.twig',{'form' : form}) }} 
+    {{ include('LpsaAppBundle:Evenement:_modal.html.twig') }} 
+{% endblock %} 
+{% block others_javascripts %}    
+    <script>
+        var btnSavedForm = '{{ 'form_label.evenement.btnSaved'|trans }}';
+        var evenementCategorieTables = [];
+        {% if evenement.id is not null %}
+        var evenementCategorieId = {{ evenement.categorie.id }};
+        var evenementId = '{{ evenement.id }}';
+        {% else %}
+        var evenementId = '';
+        {% endif %}
+        {% for key,evenementCategorie in evenementCategorieTables %}
+            evenementCategorieTables[{{ key }}] = ["{{ evenementCategorie|join('","')|raw }}"];
+        {% endfor %}
+        var categoriesId = [];
+        {% for key,id in lpsa_categories %}
+            categoriesId[{{ loop.index }}] = {
+                'selector' : '{{ key }}',
+                'id' : {{ id }}
+            };
+        {% endfor %}
+        var ajaxUrlNumeroEnregistrement = '{{ path('ajax_get_numero_enregistrement') }}';
+        var ajaxUrlGetGravity = '{{ path('ajax_get_gravity') }}';
+        var evenementcategorieIds = [];
+        var environment1m3Ids = [{{ environment1m3Ids|join(',') }}];
+        {% for key,val in evenementcategorieIds %}
+            evenementcategorieIds[{{ loop.index }}] = {
+                'selector' : '{{ key }}',
+                'values'   : [{{ val|join(',') }}],
+                'labels'   : {
+                    {% if key == 'consequenceReelle' %}
+                    'select-typeCorporel' : "{{ 'form_label.evenement.typeCorporel'|trans|raw }}",
+                    'select-typeMateriel' : "{{ 'form_label.evenement.typeMateriel'|trans|raw }}",
+                    'select-typeEnvironnement' : "{{ 'form_label.evenement.typeEnvironnement'|trans|raw }}",
+                    'select-impactmediatique' : "{{ 'form_label.evenement.mediatique'|trans|raw }}",
+                    'select-impactclient' : "{{ 'form_label.evenement.impactClient'|trans|raw }}",
+                    'select-dysfonctionnement' : "{{ 'form_label.evenement.dysfonctionnement'|trans|raw }}",
+                    {% else %}
+                    'select-typeCorporel' : "{{ 'form_label.evenement.risque.corporel'|trans|raw }}",
+                    'select-typeMateriel' : "{{ 'form_label.evenement.risque.materiel'|trans|raw }}",
+                    'select-typeEnvironnement' : "{{ 'form_label.evenement.risque.environnemental'|trans|raw }}",
+                    'select-impactmediatique' : "{{ 'form_label.evenement.risque.mediatique'|trans|raw }}",
+                    'select-impactclient' : "{{ 'form_label.evenement.risque.qualite'|trans|raw }}",
+                    'select-dysfonctionnement' : "{{ 'form_label.evenement.risque.dysfonctionnement'|trans|raw }}",
+                    {% endif %}
+                }
+            };
+        {% endfor %}
+        var messageDateFait = '{{ 'evenement.message.alertDateFaits'|trans }}';
+        var messageDateAction = '{{ 'evenement.message.alertDateAction'|trans }}';
+        var narrationPJsCount = {{ form.narrationPJs|length }};
+        var descriptionFaitPJsCount = {{ form.descriptionFaitPJs|length }};
+        var evenementEnquetePJsCount = {{ form.evenementEnquete.evenementEnquetePJs|length }};
+        var nbMaxFileUpload = {{ lpsa_nb_max_file_upload }};
+        {% if paqssseGravity %}
+        var paq3seGravity = {{ paqssseGravity.gravite.valeur }};
+        {% else %}
+        var paq3seGravity = 0;
+        {% endif %}
+        {% if evenement.gravite %}
+        var abstractGravityValue = {{ evenement.gravite.valeur }};
+        {% else %}
+        var abstractGravityValue = 0;
+        {% endif %}
+        var isEditEvent = false;
+        {% if evenement.id %}
+        isEditEvent = true;
+        {% endif %}
+    </script> 
+    {{ parent() }}
+    <script src="{{ asset('bundles/lpsaapp/js/Evenement/appEvent.js') }}"></script>
+    <script src="{{ asset('bundles/lpsaapp/js/Evenement/paqssse.js') }}"></script>
+    {% if( evenement.id is null or is_granted('edit',evenement)) %}
+        <script src="{{ asset('bundles/lpsaapp/js/Evenement/evenement.js') }}"></script>
+    {% else %}
+        <script src="{{ asset('bundles/lpsaapp/js/Evenement/eventReadOnly.js') }}"></script>
+    {% endif %}    
+    <script>
+        $(document).ready(function(){
+            var evenementDateEmission = $('.input-dateEmission').val();
+            var splitDate = evenementDateEmission.split('/');
+            var dateFaits = new Date(splitDate[2]+'-'+splitDate[1]+'-'+splitDate[0]);
+            $( ".input-dateDesFaits" ).datepicker( "option", "maxDate", dateFaits );
+        });
+    </script>
+    <script>
+    function printDiv(div) {    
+        // Create and insert new print section
+        var elem = document.getElementById(div);
+        var domClone = elem.cloneNode(true);
+        var $printSection = document.createElement("div");
+        $printSection.id = "printSection";
+        $printSection.appendChild(domClone);
+        document.body.insertBefore($printSection, document.body.firstChild);
+
+        window.print(); 
+        // Clean up print section for future use
+        var oldElem = document.getElementById("printSection");
+        if (oldElem != null) { oldElem.parentNode.removeChild(oldElem); } 
+                            //oldElem.remove() not supported by IE
+
+        return true;
+    }
+    </script>
+{% endblock %}
+{% block others_stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/lpsaapp/css/Evenement/evenement.css') }}" />
+{% endblock %}

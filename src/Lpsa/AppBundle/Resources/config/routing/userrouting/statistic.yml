@@ -1,0 +1,9 @@
+statistic_kpihse:
+    path:     /kpihse
+    defaults: { _controller: "LpsaAppBundle:Statistic:kpihse" }
+    methods:  [GET,POST]
+
+statistic_ltir_trir_graph:
+    path:     /graph
+    defaults: { _controller: "LpsaAppBundle:Statistic:graph" }
+    methods:  [GET,POST]

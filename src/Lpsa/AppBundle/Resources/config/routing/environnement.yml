@@ -1,0 +1,23 @@
+environnement_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Environnement:index" }
+    methods:  GET
+
+environnement_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Environnement:newEdit" }
+    methods:  GET|PUT
+    requirements:
+       id: \d+
+
+environnement_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Environnement:newEdit" }
+    methods:  GET|POST
+
+environnement_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Environnement:delete" }
+    requirements:
+       id: \d+
+

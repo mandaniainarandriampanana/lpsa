@@ -1,0 +1,18 @@
+services:
+    lpsa_user.profile.form.type:
+        class: Lpsa\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: lpsa_admin_user_profile }
+
+    lpsa_user.registration.form.type:
+        class: Lpsa\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: lpsa_admin_user_registration }
+    
+    lpsa_user.group.form.type:
+        class: Lpsa\UserBundle\Form\Type\GroupFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: lpsa_admin_user_group }

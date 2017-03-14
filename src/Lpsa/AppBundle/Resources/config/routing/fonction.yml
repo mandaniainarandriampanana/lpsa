@@ -1,0 +1,22 @@
+admin_fonction_index:
+    path:     /
+    defaults: { _controller: "LpsaAppBundle:Fonction:index" }
+    methods:  GET
+
+admin_fonction_new:
+    path:     /new
+    defaults: { _controller: "LpsaAppBundle:Fonction:newEdit" }
+    methods:  [GET, POST]
+
+admin_fonction_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LpsaAppBundle:Fonction:newEdit" }
+    methods:  [GET, PUT]
+    requirements:
+       id: \d+
+
+admin_fonction_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LpsaAppBundle:Fonction:delete" }
+    requirements:
+       id: \d+

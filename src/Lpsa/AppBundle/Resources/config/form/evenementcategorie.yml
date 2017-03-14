@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_evenementcategorie.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\EvenementCategorie\AbstractEvenementCategorieFormHandlerStrategy
+    app.evenementcategorie.form.handler.class: Lpsa\AppBundle\Form\Handler\EvenementCategorie\EvenementCategorieFormHandler
+    app.new_evenementcategorie.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\EvenementCategorie\NewEvenementCategorieFormHandlerStrategy
+    app.update_evenementcategorie.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\EvenementCategorie\UpdateEvenementCategorieFormHandlerStrategy
+    
+services:
+    app.abstract_evenementcategorie.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_evenementcategorie.form.handler.strategy.class%
+        calls:
+           - [setEvenementCategorieManager, ['@app.evenementcategorie.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.evenementcategorie.form.handler:
+        class: %app.evenementcategorie.form.handler.class%
+        calls:
+           - [setNewEvenementCategorieFormHandlerStrategy, ['@app.new_evenementcategorie.form.handler.strategy']]
+           - [setUpdateEvenementCategorieFormHandlerStrategy, ['@app.update_evenementcategorie.form.handler.strategy']]
+
+    app.new_evenementcategorie.form.handler.strategy:
+        class: %app.new_evenementcategorie.form.handler.strategy.class%
+        parent: app.abstract_evenementcategorie.form.handler.strategy
+
+    app.update_evenementcategorie.form.handler.strategy:
+        class: %app.update_evenementcategorie.form.handler.strategy.class%
+        parent: app.abstract_evenementcategorie.form.handler.strategy

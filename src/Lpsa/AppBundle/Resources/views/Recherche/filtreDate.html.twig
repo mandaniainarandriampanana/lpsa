@@ -1,0 +1,69 @@
+
+
+
+
+<div class="row">
+    <div class="col-md-3">
+        <label for="debutEmission">Date d'émission  </label> 
+    </div>
+    <div class="col-md-1">
+        <label>De:</label>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <input class="form-control datepicker dateSearch" type="text" name="debutEmission" value="{% if contenuFormulaire != false and contenuFormulaire['debutEmission'] is defined %}{{ contenuFormulaire['debutEmission'] }}{% endif %}" readonly="readonly">
+        </div>
+    </div>
+    <div class="col-md-1">
+        <label>A:</label>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <input  class="form-control datepicker dateSearch" type="text" name="finEmission" value="{% if contenuFormulaire != false and contenuFormulaire['finEmission'] is defined %}{{ contenuFormulaire['finEmission'] }}{% endif %}" readonly="readonly">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <label for="debutFaits">Date de faits  </label>
+    </div>  
+    <div class="col-md-1">
+        <label>De:</label>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <input  class="form-control datepicker dateSearch" type="text" name="debutFaits" value="{% if contenuFormulaire != false and contenuFormulaire['debutFaits'] %}{{ contenuFormulaire['debutFaits'] }}{% endif %}" readonly="readonly">
+        </div>
+    </div>
+    <div class="col-md-1">
+        <label>A:</label>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <input  class="form-control datepicker dateSearch" type="text" name="finFaits" value="{% if contenuFormulaire != false and contenuFormulaire['finFaits'] is defined %}{{ contenuFormulaire['finFaits'] }}{% endif %}" readonly="readonly">
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <label for="debutEnquete">Date enquete  </label> 
+    </div>
+    <div class="col-md-1">
+        <label>De:</label>
+
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <input  class="form-control datepicker dateSearch" type="text" name="debutEnquete" value="{% if contenuFormulaire != false and contenuFormulaire['debutEnquete'] %}{{ contenuFormulaire['debutEnquete'] }}{% endif %}" readonly="readonly">
+        </div>
+    </div>
+    <div class="col-md-1">
+        <label>A:</label>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <input  class="form-control datepicker dateSearch" type="text" name="finEnquete" value="{% if contenuFormulaire != false and contenuFormulaire['finEnquete'] %}{{ contenuFormulaire['finEnquete'] }}{% endif %}" readonly="readonly">
+        </div>
+    </div>
+</div>

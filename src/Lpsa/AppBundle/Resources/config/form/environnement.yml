@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_environnement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Environnement\AbstractEnvironnementFormHandlerStrategy
+    app.environnement.form.handler.class: Lpsa\AppBundle\Form\Handler\Environnement\EnvironnementFormHandler
+    app.new_environnement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Environnement\NewEnvironnementFormHandlerStrategy
+    app.update_environnement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Environnement\UpdateEnvironnementFormHandlerStrategy
+    
+services:
+    app.abstract_environnement.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_environnement.form.handler.strategy.class%
+        calls:
+           - [setEnvironnementManager, ['@app.environnement.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.environnement.form.handler:
+        class: %app.environnement.form.handler.class%
+        calls:
+           - [setNewEnvironnementFormHandlerStrategy, ['@app.new_environnement.form.handler.strategy']]
+           - [setUpdateEnvironnementFormHandlerStrategy, ['@app.update_environnement.form.handler.strategy']]
+
+    app.new_environnement.form.handler.strategy:
+        class: %app.new_environnement.form.handler.strategy.class%
+        parent: app.abstract_environnement.form.handler.strategy
+
+    app.update_environnement.form.handler.strategy:
+        class: %app.update_environnement.form.handler.strategy.class%
+        parent: app.abstract_environnement.form.handler.strategy

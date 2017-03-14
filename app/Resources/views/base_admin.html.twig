@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}LPSA EVENT{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% stylesheets
+            'bundles/lpsaadmin/vendor/css/bootstrap.min.css'
+            'bundles/lpsaadmin/vendor/css/metisMenu.min.css'
+            'bundles/lpsaadmin/vendor/css/dataTables.bootstrap.css'
+            'bundles/lpsaadmin/vendor/css/dataTables.responsive.css'
+            'bundles/lpsaadmin/vendor/css/font-awesome.min.css'
+            'bundles/lpsaadmin/vendor/css/sb-admin-2.min.css'
+            output='css/built.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% block others_stylesheets %}{% endblock %}
+    <link rel="stylesheet" href="{{ asset('bundles/lpsaapp/css/fonts.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/lpsaapp/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/lpsaapp/css/media.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/lpsaapp/jquery/jquery-ui.css') }}">
+    <style>
+        .icon-option,.caption-option{
+            text-align : center;
+            padding-top: 20px;
+        }
+        .caption-option p{
+            font-family: Arial;
+            font-weight: 600;
+        }
+        .option-list .thumbnail{
+            height: 150px;
+            border-color: #777676!important;
+        }
+        .option-list .thumbnail:focus, .option-list .thumbnail:hover {
+            color: #90A8B1;
+            text-decoration: none!important;
+        }
+    </style>
+    <!--[if lte IE 8]><script type="text/javascript" src="{{ asset('bundles/lpsachart/js/excanvas.js') }}"></script><![endif]-->
+</head>
+<body>
+    {% if app.user is not null %}
+        <div id="wrapper">
+        {% endif %}
+        {% block nav %}
+            <!-- Navigation -->
+            <div class="content-fluid-header">
+                <div class="header-content">
+                    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="{{ path('dashboard_index') }}">
+                                <div class="logo-header-content">
+                                    <div class="logo-header">
+                                        <div class="logo-img"><img src="{{ asset('bundles/lpsaapp/img/logo-header.png') }}" /></div>
+                                        <div class="appli-name"><strong>LPSA</strong> EVENT</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- /.navbar-header -->
+                        <ul class="nav navbar-top-links navbar-right menu-header navbar-collapse">
+                            <li>
+                                <a href="{{ path('admin_evenement_index') }}">
+                                    <div class="icon-menu" ><img src="{{ asset('bundles/lpsaapp/img/icon-incident.png') }}"/></div>
+                                    <label class="label-menu">evènements</label>
+                                </a>
+                                    <ul>
+                                        <li><a href="{{ path('admin_evenement_index') }}"> evènements</a></li>
+                                        {% if is_granted('ROLE_PAQSSSE') or is_granted('ROLE_SUPER_ADMIN') %}
+                                        <li><a href="{{ path('admin_paq3se') }}"> PAQSSSE</a></li>
+                                        {% endif %}
+                                    </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="icon-menu" ><img src="{{ asset('bundles/lpsaapp/img/icon-report.png') }}"/></div>
+                                    <label class="label-menu">Reports</label>
+                                </a>
+                                <ul>
+                                    <li><a href="{{ path('statistic_kpihse') }}"> KPI HSE</a></li>
+                                    <li><a href="{{ path('statistic_ltir_trir_graph') }}"> GRAPHES LTIR - TRIR</a></li>
+                                </ul>
+                            </li>
+                            {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_KPIHSE') %}
+                            <li>
+                                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <a href="{{ path('admin_configuration_index') }}">
+                                {% else %}
+                                <a href="{{ path('admin_configuration_kpihse_index') }}">
+                                {% endif %}
+                                    <div class="icon-menu" ><img src="{{ asset('bundles/lpsaapp/img/icon-option.png') }}"/></div>
+                                    <label class="label-menu">options</label>
+                                </a>
+                            </li>
+                            {% endif %}
+                            <li>
+                                    {% if is_granted('ROLE_SUPER_ADMIN') and not is_granted('ROLE_KPIHSE') and not is_granted('ROLE_PAQSSSE') %}
+                                    <a href="{{ path('lpsa_user_admin_index') }}">
+                                    {% else %}
+                                    <a href="{{ path('fos_user_profile_edit') }}">
+                                    {% endif %}
+                                        <div class="icon-menu" ><img src="{{ asset('bundles/lpsaapp/img/icon-user.png') }}"/></div>
+                                        <label class="label-menu">utilisateur</label>
+                                    </a>
+                                    <ul>
+                                        <li><a href="{{ path('fos_user_profile_edit') }}"> Mon profil</a></li>
+                                        <li><a href="{{ path('fos_user_security_logout') }}"> Deconnexion</a></li>
+                                    </ul>
+                            </li>
+                        </ul>
+                    </nav>       
+                </div>
+            </div>
+        {% endblock %}
+        {% if app.user is not null %}
+            <div id="page-wrapper">
+            {% else %}
+                <div class="container">
+                {% endif %}
+            {% block content %}{% endblock content %}                
+        </div>
+    </div>
+    {% if app.user is not null %}
+    </div>
+{% endif %}  
+{% javascripts
+        'bundles/lpsaadmin/vendor/js/jquery.min.js'
+        'bundles/lpsaadmin/vendor/js/bootstrap.min.js'
+        'bundles/lpsaadmin/vendor/js/metisMenu.min.js'
+        'bundles/lpsaadmin/vendor/js/jquery.dataTables.min.js'
+        'bundles/lpsaadmin/vendor/js/dataTables.bootstrap.min.js'
+        'bundles/lpsaadmin/vendor/js/dataTables.responsive.js'
+        'bundles/lpsaadmin/vendor/js/sb-admin-2.min.js'
+        'bundles/lpsaadmin/vendor/js/autocomplete.min.js'
+        output='js/built.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script>
+    var msgErrorsForm = {
+        'blank' : '{{ 'form.errors.blank'|trans({},'LpsaAppBundle') }}'
+    };
+</script>
+<script src="{{ asset('bundles/lpsaapp/jquery/jquery-ui.js') }}"></script>
+<script src="{{ asset('bundles/lpsaapp/js/main.js') }}"></script>
+<script src="{{ asset('bundles/lpsaapp/js/app.js') }}"></script>
+{% block others_javascripts %}
+{% endblock %}
+</body>
+</html>

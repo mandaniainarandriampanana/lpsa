@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_corporel.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Corporel\AbstractCorporelFormHandlerStrategy
+    app.corporel.form.handler.class: Lpsa\AppBundle\Form\Handler\Corporel\CorporelFormHandler
+    app.new_corporel.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Corporel\NewCorporelFormHandlerStrategy
+    app.update_corporel.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Corporel\UpdateCorporelFormHandlerStrategy
+    
+services:
+    app.abstract_corporel.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_corporel.form.handler.strategy.class%
+        calls:
+           - [setCorporelManager, ['@app.corporel.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.corporel.form.handler:
+        class: %app.corporel.form.handler.class%
+        calls:
+           - [setNewCorporelFormHandlerStrategy, ['@app.new_corporel.form.handler.strategy']]
+           - [setUpdateCorporelFormHandlerStrategy, ['@app.update_corporel.form.handler.strategy']]
+
+    app.new_corporel.form.handler.strategy:
+        class: %app.new_corporel.form.handler.strategy.class%
+        parent: app.abstract_corporel.form.handler.strategy
+
+    app.update_corporel.form.handler.strategy:
+        class: %app.update_corporel.form.handler.strategy.class%
+        parent: app.abstract_corporel.form.handler.strategy

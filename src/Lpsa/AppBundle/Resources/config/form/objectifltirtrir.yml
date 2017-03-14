@@ -1,0 +1,40 @@
+parameters:
+    app.abstract_objectifltirtrir.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ObjectifLtirTrir\AbstractObjectifLtirTrirFormHandlerStrategy
+    app.objectifltirtrir.form.handler.class: Lpsa\AppBundle\Form\Handler\ObjectifLtirTrir\ObjectifLtirTrirFormHandler
+    app.new_objectifltirtrir.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ObjectifLtirTrir\NewObjectifLtirTrirFormHandlerStrategy
+    app.update_objectifltirtrir.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\ObjectifLtirTrir\UpdateObjectifLtirTrirFormHandlerStrategy
+    app.objectifltirtrir.form.type.class: Lpsa\AppBundle\Form\Type\ObjectifLtirTrir\ObjectifLtirTrirType
+    
+services:
+    app.abstract_objectifltirtrir.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_objectifltirtrir.form.handler.strategy.class%
+        arguments:
+           - @app.objectifltirtrir.form.type
+        calls:
+           - [setObjectifLtirTrirManager, ['@app.objectifltirtrir.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.objectifltirtrir.form.handler:
+        class: %app.objectifltirtrir.form.handler.class%
+        calls:
+           - [setNewObjectifLtirTrirFormHandlerStrategy, ['@app.new_objectifltirtrir.form.handler.strategy']]
+           - [setUpdateObjectifLtirTrirFormHandlerStrategy, ['@app.update_objectifltirtrir.form.handler.strategy']]
+
+    app.new_objectifltirtrir.form.handler.strategy:
+        class: %app.new_objectifltirtrir.form.handler.strategy.class%
+        parent: app.abstract_objectifltirtrir.form.handler.strategy
+
+    app.update_objectifltirtrir.form.handler.strategy:
+        class: %app.update_objectifltirtrir.form.handler.strategy.class%
+        parent: app.abstract_objectifltirtrir.form.handler.strategy
+
+    app.objectifltirtrir.form.type:
+        class: %app.objectifltirtrir.form.type.class%
+        arguments:
+            - @translator
+            - @app.objectifltirtrir.manager
+        tags:
+            - { name: form.type, alias: ObjectifLtirTrirType}

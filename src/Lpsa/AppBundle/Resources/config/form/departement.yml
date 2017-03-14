@@ -1,0 +1,29 @@
+parameters:
+    app.abstract_departement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Departement\AbstractDepartementFormHandlerStrategy
+    app.departement.form.handler.class: Lpsa\AppBundle\Form\Handler\Departement\DepartementFormHandler
+    app.new_departement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Departement\NewDepartementFormHandlerStrategy
+    app.update_departement.form.handler.strategy.class: Lpsa\AppBundle\Form\Handler\Departement\UpdateDepartementFormHandlerStrategy
+    
+services:
+    app.abstract_departement.form.handler.strategy:
+        abstract:  true
+        class: %app.abstract_departement.form.handler.strategy.class%
+        calls:
+           - [setDepartementManager, ['@app.departement.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.departement.form.handler:
+        class: %app.departement.form.handler.class%
+        calls:
+           - [setNewDepartementFormHandlerStrategy, ['@app.new_departement.form.handler.strategy']]
+           - [setUpdateDepartementFormHandlerStrategy, ['@app.update_departement.form.handler.strategy']]
+
+    app.new_departement.form.handler.strategy:
+        class: %app.new_departement.form.handler.strategy.class%
+        parent: app.abstract_departement.form.handler.strategy
+
+    app.update_departement.form.handler.strategy:
+        class: %app.update_departement.form.handler.strategy.class%
+        parent: app.abstract_departement.form.handler.strategy
